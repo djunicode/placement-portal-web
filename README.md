@@ -14,6 +14,7 @@
 .
 ├── LICENSE
 ├── README.md
+├── placementfrontend/ -> Frontend for the project
 ├── placementApp/ -> Django app for endpoints
 ├── placementPortal -> Project configurations
 ├── manage.py
@@ -27,6 +28,9 @@
 - Django REST Framework
 - Djoser authentication library
 
+#### Frontend
+- React 16.13.0
+- Axios for API calls to Django
 
 ## Build Instructions
 
@@ -38,11 +42,22 @@
   python3 manage.py runserver
 ```
 
+#### Frontend
+```bash
+  cd placementfrontend
+  npm install
+  npm start
+```
+
 ## Development Instructions
 
 1. Before adding or commiting to git, please run `black .` inside this directory. This is important because we are using Black code formatter for this project
 
 2. The database we are using is sqlite3 for the prototype. We may change it to PostgreSQL later.
+
+3. Please follow the directory structure for React JS.
+
+4. You can optionally prettify React code using `npm run pretty` in `placementfrontend/`.
 
 #### Developers
 
@@ -50,12 +65,18 @@
 2. Kanishk Shah (Backend)
 3. Rayyan Merchant (Backend)
 4. Sakshi Uppoor (Backend)
+5. Siddhi Jhunjhunwala (Frontend)
+6. Vanshay Gupta (Frontend)
+7. Deep Nanda (Frontend)
+8. Rutu (Frontend)
 
 
 #### Mentors
 
 1. Parag Vaid (Backend)
 2. Preet Shah (Backend)
+3. Palash Rathod (Frontend)
+4. Manav Shah (Frontend)
 
 
 ## License
