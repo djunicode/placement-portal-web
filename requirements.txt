@@ -5,13 +5,11 @@ black==19.10b0
 Click==7.0
 Django==3.0.3
 django-templated-mail==1.1.1
-djangorestframework==3.11.0
-djoser==2.0.3
-pathspec==0.7.0
-pep8==1.7.0
 Pillow==7.0.0
 pytz==2019.3
 regex==2020.2.20
 sqlparse==0.3.0
 toml==0.10.0
 typed-ast==1.4.1
+djoser==2.0.3
+black
