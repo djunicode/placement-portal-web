@@ -5,7 +5,7 @@ from .models import User, Student, Coordinator
 class UserAdmin(admin.ModelAdmin):
     list_display = ("email", "role")
     search_fields = ('email', 'username',)
-    readonly_fields = ('date_joined', 'last_login')
+    readonly_fields = ('date_joined', 'last_login','password')
 
     filter_horizontal = ()
     list_filter = ()

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
-
+from  .choices import *
 
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email, username, password=None):
@@ -41,7 +41,6 @@ class User(AbstractBaseUser):
 	is_active = models.BooleanField(default=True)
 	is_staff = models.BooleanField(default=False)
 	is_superuser = models.BooleanField(default=False)
-	ROLE_CHOICES = [("STUDENT", "Student"), ("CO", "Co-ordinator"), ("TPO", "TPO")]
 	role = models.CharField(max_length=7, blank=False, choices=ROLE_CHOICES)
 
 	def __str__(self):
@@ -65,18 +64,6 @@ class User(AbstractBaseUser):
 
 
 class Student(User):
-	DEPARTMENT_CHOICES = [
-	    ("COMPS", "Computer"),
-	    ("IT", "Information Technology"),
-	    ("EXTC", "Electronics & Telecommunication"),
-	    ("PROD", "Production"),
-	    ("MECH", "Mechanical"),
-	    ("BIO", "Biomedical"),
-	    ("ELEX", "Electronics"),
-	    ("CHEM", "Chemical"),
-	]
-	YEAR_CHOICES = [("TE", "Third Year"), ("BE", "Fourth Year")]
-
 	sap_regex = RegexValidator(
 	    regex=r"^\+?6?\d{10,12}$", message="SAP ID must be valid"
 	)
@@ -96,16 +83,4 @@ class Student(User):
 
 
 class Coordinator(User):
-    DEPARTMENT_CHOICES = [
-        ("COMPS", "Computer"),
-        ("IT", "Information Technology"),
-        ("EXTC", "Electronics & Telecommunication"),
-        ("PROD", "Production"),
-        ("MECH", "Mechanical"),
-        ("BIO", "Biomedical"),
-        ("ELEX", "Electronics"),
-        ("CHEM", "Chemical"),
-        ("HUM", "Science & Humanities"),
-    ]
-
-    department = models.CharField(max_length=5, blank=False, choices=DEPARTMENT_CHOICES)
+    department = models.CharField(max_length=5, blank=False, choices=DEPARTMENT_CHOICES_COORD)
