@@ -113,7 +113,7 @@ class Position(models.Model):
     vacancies = models.IntegerField(default=0)
     interview_date = models.DateTimeField()
     deadline = models.DateTimeField()
-    package = models.IntegerField(default=0)
+    package = models.CharField(max_length=128)
     details = models.TextField(null=True, blank=True)
 
     def __str__(self):
