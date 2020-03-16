@@ -60,6 +60,15 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    def is_student(self):
+        return self.role == "STUDENT"
+
+    def is_coordinator(self):
+        return self.role == "CO"
+
+    def is_tpo(self):
+        return self.role == "TPO"
+
 
 class Student(User):
     sap_regex = RegexValidator(
