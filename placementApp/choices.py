@@ -28,8 +28,8 @@ ROLE_CHOICES = [("STUDENT", "Student"), ("CO", "Co-ordinator"), ("TPO", "TPO")]
 CATEGORY_CHOICES = [("S", "Super Dream"), ("D", "Dream"), ("R", "Regular")]
 
 STATUS_CHOICES = [
-    ("1", "Schedule Interview"),
-    ("2", "Put Under Review"),
+    ("1", "Put Under Review"),
+    ("2", "Scheduled For Interview"),
     ("3", "Selected"),
     ("4", "Rejected"),
 ]

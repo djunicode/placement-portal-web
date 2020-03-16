@@ -128,4 +128,3 @@ class Application(models.Model):
 
     def __str__(self):
         return self.student.username + ", " + self.position.title
-
