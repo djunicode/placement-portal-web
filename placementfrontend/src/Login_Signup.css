@@ -1,0 +1,697 @@
+*{
+  margin: 0;
+  padding: 0;
+  /* width: 100%;
+  height: 100%; */
+  font-family: sans-serif;
+}
+.input2:focus,.input1:focus,.button1:focus,.button2:focus,.input3:focus,.button3:focus{
+  outline:none;
+
+}
+
+.inputBox::-webkit-outer-spin-button,
+.inputBox::-webkit-inner-spin-button,
+.input1::-webkit-outer-spin-button,
+.input1::-webkit-inner-spin-button,
+.input2::-webkit-outer-spin-button,
+.input2::-webkit-inner-spin-button,
+.input3::-webkit-outer-spin-button,
+.input3::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.inputBox ,.input1{
+  -moz-appearance:textfield;
+}
+
+option{
+  color:#565656
+}
+
+body{
+  height: 60vh;
+}
+
+.height{
+  height: 10%;
+}
+/* Login */
+.form1{
+  z-index:5;
+  position: fixed;
+  top:30%;
+  left:15%;
+  width:calc((68%))
+  
+}
+
+.nav1{
+  position: absolute ;
+  left: 0 ;
+  top: 0 ;
+  margin: 0 ;
+  padding: 0 ;
+  background: rgba(147,213,201) ;
+  width: 100% ;
+  height: 7% 
+}
+.green1{
+  background:  rgba(147,213,201) ;
+  width: 550px ;
+  height: 500px ;
+  position: absolute ;
+  left: 50% ;
+  top: 57% ;
+  transform: translate(-50%,-50%) ;
+  z-index: 1 ;
+  border-radius: 20px 
+}
+.grey1{
+  background:  rgba(153,153,153,0.8) ;
+  width: 550px ;
+  height: 500px;
+  position: absolute ;
+  left: 54% ;
+  top: 50% ;
+  transform: translate(-50%,-50%) ;
+  z-index: 2 ;
+  border-radius: 20px 
+}
+.title1{
+  text-align: center ;
+  color: white ;
+  text-transform: uppercase ;
+  font-size: 2em ;
+  margin-top: 68px ;
+  font-weight: 200 
+}
+.input1{
+  height: 45px ;
+  border-radius: 20px ;
+  border: none ;
+  margin-top: 20px ;
+  font-size: 1em ;
+  padding: 0px 10px ;
+
+  width: 100% 
+}
+.button1{
+  text-align: center ;
+  color: white ;
+  font-weight: bold ;
+  
+  width: calc((105%)) ;
+  z-index: 5 ;
+  background:  rgba(147,213,201) ;
+  height: 55px ;
+  border-radius: 20px ;
+  border: none ;
+  font-size: 1.5em ;
+  text-transform: uppercase ;
+  margin-top: 55px 
+}
+.register1{
+  text-align: center ;
+  font-size: 1em ;
+  margin-top: 15px ;
+  color: white ;
+  height: 10% 
+}
+.reg1{
+  cursor: pointer ;
+  font-weight: bold ;
+  text-align: center ;
+  color: white ;
+  text-decoration: none ;
+  padding-top: 5px 
+}
+
+/* Student Signup */
+
+.grey2{
+  background-color:   rgb(153 ,153 ,153)    ;
+  width:  550px    ;
+  height:  630px    ;
+  position:  absolute    ;
+  left:  50%    ;
+  top:  55%    ;
+  transform:  translate(-50%  ,-50%)    ;
+  z-index:  1    ;
+
+}  
+.white2{
+  background-color:white;
+  width:  490px    ;
+  height:  570px    ;
+  position: absolute; ;
+  left:50%    ;
+  top:50%    ;
+  transform:translate(-50% ,-50%)    ;
+  z-index: 3 ;
+  border-radius:  20px  ;
+  
+  
+}
+.nav2{
+  position:  absolute    ;
+  left:  0    ;
+  top:  0    ;
+  margin:  0    ;
+  padding:  0    ;
+  background-color:  rgba(147,213,201)    ;
+  width:  100%    ;
+  height:  7%  
+}
+
+ .form2{
+  z-index:  5    ;
+  position:  fixed    ;
+  top:  20%    ;
+  left:  6%    ;
+  width:  calc(90%)  ;
+
+  height: 75%;
+}
+.title2{
+  text-align:  center    ;
+  color:  rgba(74 ,74 ,74)    ;
+  text-transform:  uppercase    ;
+  font-size:  2em    ;
+  margin-top:  40px    ;
+  font-weight:  200  
+}
+.input2{
+  height:  45px    ;
+  width:  90%    ;
+  
+  border:  none    ;
+  border-bottom:  1px solid rgba(153,153,153)    ;
+  font-size:  1em    ;
+  padding:  0px 5px    ;
+  box-sizing:  borderBox;
+  margin: 15px 0px;
+}
+
+.button2{
+  text-align:  center    ;
+  color:  rgba(74 ,74 ,74)    ;
+  font-weight:  200    ;
+  
+  width:  calc((100%))    ;
+  z-index:  5    ;
+  background-color:   rgba(147 ,213,201,0.5)    ;
+  height:  55px    ;
+  border-radius:  20px    ;
+  border:  none    ;
+  font-size:  1.5em    ;
+  text-transform:  uppercase    ;
+  margin-top:  55px    ;
+  position:  absolute    ;
+  top:  60%    ;
+  letter-spacing:  1px  
+}
+.register2{
+  text-align:  center    ;
+  font-size:  1em    ;
+  margin-top:  15px    ;
+  margin-left: 140px;
+  color:  rgb(153 ,153 ,153)    ;
+  position:  absolute    ;
+  top: 85%;
+}
+.reg2{
+  cursor:  pointer    ;
+  font-weight:  bold    ;
+  color:  black  ;
+
+}
+.g1{
+  display:   grid    ;
+  grid-template-columns:   1fr 1fr    ;
+  height:   10px    ;
+
+}
+.g2{
+  display:   grid    ;
+  grid-template-columns:   2fr 1fr    ;
+  height:   10px    ;
+  position: fixed;
+  top: 30%;
+  margin-right: -5px;;
+}
+.g3{
+  
+  display:   grid    ;
+  grid-template-columns:   1fr 1fr    ;
+  height:   10px  ;
+  position: fixed;
+  top: 40%;
+  width: 80%;
+}
+.email2{
+  position:  absolute    ;
+  top:  40%  ;
+  width: 100%;
+}
+.pass2{
+  position:  absolute    ;
+  top:  54% ; 
+  width: 100%;
+}
+.dis2{
+  color:  #565656  
+} 
+
+
+/* Staff Signup */
+
+.white3{
+  background-color:white;
+  width:  490px    ;
+  height:  570px    ;
+  position: absolute; ;
+  left:50%    ;
+  top:55%    ;
+  transform:translate(-50% ,-50%)    ;
+  z-index: 3 ;
+  border-radius:  20px ;
+}
+.title3{
+  text-align: center  ;
+  color: rgba(74 ,74 ,74)  ;
+  text-transform: uppercase  ;
+  font-size: 2em  ;
+  margin-top: 60px  ;
+  font-weight: 200 ;
+}
+.input3{
+  height: 45px  ;
+  width: 90%  ;
+  float: left  ;
+  border: none  ;
+  border-bottom: 1px solid rgba(153 ,153 ,153)  ;
+  font-size: 1em  ;
+  padding: 0px 5px  ;
+  box-sizing: borderBox  ;
+}
+.button3{
+  text-align: center  ;
+  color: rgba(74 ,74 ,74)  ;
+  font-weight: 200  ;
+  width: calc((100%))  ;
+  z-index: 5  ;
+  background-color:  rgba(147 ,213 ,201 ,0.5)  ;
+  height: 55px  ;
+  border-radius: 20px  ;
+  border: none  ;
+  font-size: 1.5em  ;
+  text-transform: uppercase  ;
+  margin-top: 55px  ;
+  position: absolute  ;
+  top: 60%  ;
+  letter-spacing: 1px 
+}
+.register3{
+  text-align: center  ;
+  font-size: 1em  ;
+  margin-top: 15px  ;
+  color: rgb(153 ,153,153)  ;
+  position: absolute  ;
+  top: 85% ;
+  margin-left: 130px;
+}
+.reg3{
+  cursor: pointer  ;
+  font-weight: bold  ;
+  color: black 
+}
+.G1{
+  display:  grid  ;
+  grid-template-columns:  1fr 1fr  ;
+  height:  10px  ;
+  position: absolute  ;
+  top: 5% 
+}
+
+.G3{
+  position: absolute  ;
+  top: 21%  ;
+  height:  10px  ;
+  width: 50% 
+}
+.email3{
+  position: absolute  ;
+  top: 33%;
+  width: 100%; 
+}
+.pass3{
+  position: absolute  ;
+  top: 47% ;
+  width: 100%; 
+}
+
+
+
+
+@media(max-width:600px){
+  /* Login */
+   .height{
+    height: 10%;
+  }
+  
+  .form1{
+    z-index:5;
+    position: fixed;
+    top:30%;
+    left:15%;
+    width:calc((68%))
+    
+  }
+  
+  .nav1{
+    position: absolute ;
+    left: 0 ;
+    top: 0 ;
+    margin: 0 ;
+    padding: 0 ;
+    background: rgba(147,213,201) ;
+    width: 100% ;
+    height: 7% 
+  }
+  .green1{
+    background:  rgba(147,213,201) ;
+    width: 80% ;
+    height: 67% ;
+    position: absolute ;
+    left: 50% ;
+    top: 57% ;
+    transform: translate(-50%,-50%) ;
+    z-index: 1 ;
+    border-radius: 20px 
+  }
+  .grey1{
+    background:  rgba(153,153,153,0.8) ;
+    width: 80% ;
+    height: 67% ;
+    position: absolute ;
+    left: 54% ;
+    top: 50% ;
+    transform: translate(-50%,-50%) ;
+    z-index: 2 ;
+    border-radius: 20px 
+  }
+  .title1{
+    text-align: center ;
+    color: white ;
+    text-transform: uppercase ;
+    font-size: 2em ;
+    margin-top: 68px ;
+    font-weight: 200 
+  }
+  .input1{
+    height: 45px ;
+    border-radius: 20px ;
+    border: none ;
+    margin-top: 20px ;
+    font-size: 1em ;
+    padding: 0px 10px ;
+    border-sizing: borderBox ;
+    width: 100% 
+  }
+  .button1{
+    text-align: center ;
+    color: white ;
+    font-weight: bold ;
+    background:  ;
+    width: calc((105%)) ;
+    z-index: 5 ;
+    background:  rgba(147,213,201) ;
+    height: 55px ;
+    border-radius: 20px ;
+    border: none ;
+    font-size: 1.5em ;
+    text-transform: uppercase ;
+    margin-top: 55px 
+  }
+  .register1{
+    text-align: center ;
+    font-size: 1em ;
+    margin-top: 15px ;
+    color: white ;
+    height: 10% 
+  }
+  .reg1{
+    cursor: pointer ;
+    font-weight: bold ;
+    text-align: center ;
+    color: white ;
+    text-decoration: none ;
+    padding-top: 5px 
+  } 
+    /* Student Signup */
+
+.grey2{
+  background-color:   rgb(153 ,153 ,153)    ;
+  width:  80%    ;
+  height:  70%   ;
+  position:  absolute    ;
+  left:  50%    ;
+  top:  55%    ;
+  transform:  translate(-50%  ,-50%)    ;
+  z-index:  1    ;
+
+}  
+.white2{
+  background-color:white;
+  width:  80%    ;
+  height:  80%    ;
+  position: absolute; ;
+  left:50%    ;
+  top:50%    ;
+  transform:translate(-50% ,-50%)    ;
+  z-index: 3 ;
+  border-radius:  20px  ;
+  
+  
+}
+.nav2{
+  position:  absolute    ;
+  left:  0    ;
+  top:  0    ;
+  margin:  0    ;
+  padding:  0    ;
+  background-color:  rgba(147,213,201)    ;
+  width:  100%    ;
+  height:  7%  
+}
+
+ .form2{
+  z-index:  5    ;
+  position:  fixed    ;
+  top:  15%    ;
+  left:  6%    ;
+  width:  calc(90%)  ;
+
+  height: 75%;
+}
+.title2{
+  text-align:  center    ;
+  color:  rgba(74 ,74 ,74)    ;
+  text-transform:  uppercase    ;
+  font-size:  1.5em    ;
+  margin-top:  40px    ;
+  font-weight:  200  
+}
+.input2{
+  height:  45px    ;
+  width:  90%    ;
+  
+  border:  none    ;
+  border-bottom:  1px solid rgba(153,153,153)    ;
+  font-size:  0.7em    ;
+  padding:  0px 3px    ;
+  box-sizing:  borderBox;
+  margin: 15px 0px;
+}
+
+.button2{
+  text-align:  center    ;
+  color:  rgba(74 ,74 ,74)    ;
+  font-weight:  200    ;
+  
+  width:  calc((100%))    ;
+  z-index:  5    ;
+  background-color:   rgba(147 ,213,201,0.5)    ;
+  height:35px    ;
+  border-radius:  20px    ;
+  border:  none    ;
+  font-size:  1em    ;
+  text-transform:  uppercase    ;
+  margin-top:  55px    ;
+  position:  absolute    ;
+  top:70%    ;
+  letter-spacing:  1px  
+}
+.register2{
+  
+  font-size:  0.7em    ;
+  margin:15px auto    ;
+  
+  color:  rgb(153 ,153 ,153)    ;
+  position:  absolute    ;
+  top: 95%;
+}
+.reg2{
+  cursor:  pointer    ;
+  font-weight:  bold    ;
+  color:  black  ;
+
+}
+.g1{
+  display:   grid    ;
+  grid-template-columns:   1fr 1fr    ;
+  height:   10px    ;
+  
+
+}
+.g2{
+  display:   grid    ;
+  grid-template-columns:   2fr 1fr    ;
+  height:   10px    ;
+  position: fixed;
+  top: 26%;
+  margin-right: -5px;
+  
+}
+.g3{
+  
+  display:   grid    ;
+  grid-template-columns:   1fr 1fr    ;
+  height:   10px  ;
+  position: fixed;
+  top: 38%;
+  width: 80%;
+}
+.email2{
+  position:  absolute    ;
+  top:  46%  ;
+  width: 100%;
+  
+  padding: 0px 3px;
+}
+.pass2{
+  position:  absolute    ;
+  top:  63% ; 
+  width: 100%;
+  padding: 0px 3px;
+}
+.dis2{
+  color:  #565656  
+} 
+
+
+
+/* Staff Signup */
+
+.white3{
+  background-color:white;
+  width:  70%    ;
+  height:  60%  ;
+  position: absolute; ;
+  left:50%    ;
+  top:55%    ;
+  transform:translate(-50% ,-50%)    ;
+  z-index: 3 ;
+  border-radius:  20px ;
+}
+.title3{
+  text-align: center  ;
+  color: rgba(74 ,74 ,74)  ;
+  text-transform: uppercase  ;
+  font-size: 1.5em  ;
+  margin-top: 40px  ;
+  font-weight: 200 ;
+}
+.input3{
+  height: 45px  ;
+  width: 90%  ;
+  float: left  ;
+  border: none  ;
+  border-bottom: 1px solid rgba(153 ,153 ,153)  ;
+  font-size: 0.9em  ;
+  padding: 0px 3px  ;
+  box-sizing: borderBox  ;
+}
+.button3{
+  text-align: center  ;
+  color: rgba(74 ,74 ,74)  ;
+  font-weight: 200  ;
+  width: calc((100%))  ;
+  z-index: 5  ;
+  background-color:  rgba(147 ,213 ,201 ,0.5)  ;
+  height: 40px  ;
+  border-radius: 20px  ;
+  border: none  ;
+  font-size: 1.3em  ;
+  text-transform: uppercase  ;
+  margin-top: 55px  ;
+  position: absolute  ;
+  top: 60%  ;
+  letter-spacing: 1px 
+}
+.register3{
+  
+  font-size: 0.8em  ;
+  margin-top: 10px  ;
+  color: rgb(153 ,153,153)  ;
+  position: absolute  ;
+  top: 90% ;
+  margin-left: 90px;
+}
+.reg3{
+  cursor: pointer  ;
+  font-weight: bold  ;
+  color: black 
+}
+.G1{
+  display:  grid  ;
+  grid-template-columns:  1fr 1fr  ;
+  height:  10px  ;
+  position: absolute  ;
+  top: 5% 
+}
+
+.G3{
+  position: absolute  ;
+  top: 21%  ;
+  height:  10px  ;
+  width: 50% 
+}
+.email3{
+  position: absolute  ;
+  top: 33%;
+  width: 100%; 
+  font-size: 1.2em;
+}
+.pass3{
+  position: absolute  ;
+  top: 48% ;
+  width: 100%; 
+  font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+}
