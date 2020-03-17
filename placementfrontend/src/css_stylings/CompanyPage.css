@@ -1,0 +1,51 @@
+.background{
+    background-color: rgb(240, 240, 240);
+    height: 100%;
+    margin-top: 100px;
+}
+.card{
+    border-radius: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#left-card{
+    margin-right: 20px;
+    margin-left: 50px;
+}
+#right-card{
+    margin-left: 20px;
+}
+.profile_pic{
+    width: 150px;
+    height: 150px;
+}
+.studentCard{
+    margin-bottom: 20px;
+}
+#changeStatus{
+    width: 75%;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+.select{
+    color: rgb(247, 212, 116);
+}
+.interview{
+    color: lightgreen;
+}
+.review{
+    color: darkred;
+}
+.reject{
+    color: red;
+}
+.profile{
+    background-color: darkred;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+a, a:visited, a:hover{
+    color: white;
+    text-decoration: none;
+}
