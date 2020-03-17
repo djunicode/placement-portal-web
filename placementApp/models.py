@@ -109,7 +109,9 @@ class Company(models.Model):
 
 class Position(models.Model):
     title = models.CharField(max_length=128)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, related_name="positions"
+    )
     vacancies = models.IntegerField(default=0)
     interview_date = models.DateTimeField()
     deadline = models.DateTimeField()
@@ -122,7 +124,9 @@ class Position(models.Model):
 
 class Application(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    position = models.ForeignKey(
+        Position, on_delete=models.CASCADE, related_name="applications"
+    )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1")
     submitted_at = models.DateTimeField(auto_now_add=True)
 
