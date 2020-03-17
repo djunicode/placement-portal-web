@@ -10,7 +10,7 @@ from .serializers import StudentSerializer, PositionSerializer
 class StudentViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
@@ -18,7 +18,7 @@ class StudentViewSet(
 class PositionViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
 
