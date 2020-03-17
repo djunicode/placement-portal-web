@@ -1,0 +1,330 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  * {box-sizing: border-box;}
+  
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .header
+  {
+    height: 60px;
+    background-color: rgb(147, 213, 201);
+  }
+    
+    /* .topnav {
+      overflow: hidden;
+      background-color: white;
+    }
+    
+    .topnav a {
+      float: left;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 30px 14px 16px;
+      text-decoration: none;
+     
+      font-size: 18px;
+      font-weight: 500 !important;
+    }
+    
+    .topnav a:hover {
+      color: #f16f6f;
+      text-decoration: none;
+    }
+    
+    .topnav a.active {
+     
+      color: #f16f6f;
+    }
+    
+    .topnav .search-container {
+      float: right;
+    }
+    .search-container
+    {
+      display: -webkit-inline-box;
+      margin: 10px 50px 5px 10px !important;
+      border-radius: 25px !important;
+      border-bottom: 2px solid rgba(153,153,153,0.8);
+      padding: 0px 12px 1px 15px !important;
+      
+    
+    }
+    .search-container input
+    {
+      width:78% !important;
+      margin: 3px !important;
+      margin-right: 20px !important;
+      border: none !important;
+      height: auto !important;
+      
+      
+    }
+    .search-container .svg-inline--fa.fa-w-16 {
+    
+     padding-right: 2px;
+     font-size: 20px !important;
+    
+     color: rgba(153,153,153,0.8);
+    } */
+    
+  .grid-main
+  {
+    display: grid;
+    grid-template-columns: 15% 85%;
+  }
+  .imgno
+  {
+    margin: 30px 10px 30px 20px;
+    width: 80%;
+  }
+  
+  .center{
+    display: flex;
+    justify-content: center;
+  }
+  .bgw
+  {
+    
+    background-color: white;
+    padding: 30px;
+    margin: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+  .editGreen
+  {
+    background-color: rgb(147, 213, 201);
+    padding: 40px 90px 40px 60px !important;
+    margin: 60px 25px 0px 50px !important;
+    width: 60%;
+    border-radius: 10px !important;
+    z-index: 1;
+    position: absolute;
+  }
+  .hello2
+  {
+    padding: 5px 5px 30px 50px !important;
+    background-color: #f3f3f3;
+    width: 100%;
+    margin-bottom: 0px;
+    height: 81vh;
+   
+  }
+  .compName
+  {
+    margin-left: 120px;
+    margin-top: 2%;
+    margin-bottom: 0px !important;
+    position: absolute;
+    z-index: 2;
+    font-weight: 500;
+    
+  }
+  
+  .addCompGrid
+  {
+    display: grid;
+    grid-template-columns: auto auto ;
+    grid-column-gap:25px !important;
+  }
+   input 
+  {
+    padding-bottom: 0px !important;
+    margin: 20px 5px 20px 5px !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid #000;
+    width: 100%;
+  
+    
+  }
+  input:focus {
+    border-color:#000 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+      outline: none !important;
+  }
+  #exampleFormControlSelect1
+  {
+    padding-bottom: 0px !important;
+    margin: 10px 5px 10px 5px !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid #000;
+    width: 100%;
+  }
+  #exampleFormControlSelect1:focus {
+    border-color:#000 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+      outline: none !important;
+  }
+  
+  .submit{
+    border: 1px solid #fff;
+    border-radius: 25px;
+    padding: 5px 5px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.6s ease;
+    font-family:'Dosis', sans-serif;
+    font-weight:600; 
+    letter-spacing: 2px;
+    font-size: 2em;
+    width: 100%;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .imdgrid
+  {
+    height: 110px;
+    width: 110px;
+    border-radius: 55px;
+    background-image: url(../assets/default.png);
+   background-repeat: no-repeat;
+   background-size: cover;
+   position: absolute;
+   z-index: 2;
+   margin-right: 100px !important;
+   margin-bottom: 100px !important;
+  }
+  .editProf
+  
+    {
+      display: -webkit-inline-box;
+      height: 40px;
+      border-radius: 20px;
+      width: 150px;
+     background-color: #b87875;
+     margin-left: 55%;
+     margin-top: 40px;
+     padding: 6px;
+     position: absolute;
+   z-index: 2;
+   cursor: pointer;
+  
+  }
+  .fa-pencil-alt
+  {
+    color: #fff !important;
+    font-size: 25px !important;
+    margin: 0px 5px !important;
+  }
+  .fontEdit
+  {
+    font-size:1.3rem;
+    font-weight: 500;
+    color: #fff;
+  }
+  
+  @media screen and (max-width: 779px) {
+    .topnav .search-container {
+      float: none;
+    }
+    .topnav a, .topnav input[type=text], .topnav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+   
+    .search-container
+    {
+      width: 90% !important;
+    }
+     .search-container input
+    {
+      width:82% !important;
+     border:none !important;
+     margin-right: 20%;
+     
+   
+   }
+   .search-container .svg-inline--fa.fa-w-16 {
+    
+    padding:0px !important;
+    margin:20px 0px 0px 0px !important;
+    font-size: 20px;
+    position: relative;
+    }
+    .grid-main
+    {
+      display: inline;
+    }
+    .imgno
+  {
+    margin-left: 25%;
+    width: 50%;
+    padding-right: 10px !important;
+  }
+  .gridComp
+  {
+    overflow: hidden;
+   
+  }
+  .bgw{
+    margin: 20px 30px 20px 30px;
+  
+  }
+  .bgw1{
+    margin:20px 30px 20px 30px;
+  }
+  .info
+  {
+   font-size:medium;
+  }
+  .editGreen
+  {
+    background-color: rgb(147, 213, 201);
+    padding: 40px 80px 40px 40px !important;
+    margin: 40px 20px 20px 40px !important;
+    width: 80% !important;
+    border-radius: 10px !important;
+    z-index: 1;
+    position: absolute;
+  }
+  .editProf
+  
+    {
+      display: -webkit-inline-box;
+      height: 40px;
+      border-radius: 20px;
+      width: 150px;
+     background-color: #b87875;
+     margin-left: 55%;
+     margin-top: 20px;
+     padding: 6px;
+     position: absolute;
+   z-index: 2;
+  
+  }
+  .compName
+  {
+   font-size: medium;
+    position: absolute;
+    z-index: 2;
+    font-weight: 500;
+    
+  }
+  
+    
+  }
