@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  * {box-sizing: border-box;}
+  
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .topnav {
+    background-color: white;
+  }
+  
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .topnav a:hover {
+    color: #df2e21;
+    text-decoration: none;
+  }
+  
+  .topnav a.active {
+   
+    color: #df2e21;
+  }
+  
+  .grid-main
+  {
+    display: grid;
+    grid-template-columns: 15% 85%;
+  }
+  
+  .center{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .collection-item
+  {
+    border: 3px solid rgb(147, 213, 201);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: auto auto ;
+  }
+  .collection-item p{
+    margin: 2px;
+    letter-spacing: 2px;
+  }
+  .bgw1
+  {
+    background-color: white;
+    margin: 40px 5px 20px 30px;
+    border-radius: 10px !important;
+  
+  }
+  .list
+  {
+    padding-top: 10px;
+  }
+  .gridComp img
+  {
+  height: 70px;
+  width: 70px;
+  }
+  
+  .bgw
+  {
+    background-color: white;
+    padding: 50px;
+    margin: 40px 30px 20px 5px;
+    border-radius: 10px !important;  
+  }
+  .addCompGrid
+  {
+    display: grid;
+    grid-template-columns: auto auto ;
+    grid-column-gap:8px !important;
+  }
+  
+  
+  .rectangle2{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    left: 0px;
+    top: 0px;
+    background: #88E7C8;
+  }
+  
+  .inner_box2{
+    background:  white;
+    border-radius: 30px;
+  
+  }
+  .box2{
+    position: absolute;
+    background: #F3F3F3;
+    width: 95%;
+    left:2%;
+   
+  }
+  
+  .inp2{
+    position: relative;
+    left:-95%;
+    width: 195%;
+    height: 40px;
+    padding: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border:none;
+    z-index:-1;
+  }
+  .lb{
+    font-size:18px;
+    padding-right: 5px;
+  }
+  .show{
+    text-align: center;
+  }
+  .glass2{
+    position: relative;
+    left: 150px;
+    top:-37px;
+    font-size: 110%;
+    color: #DADADA;
+  }
+  
+   .pic1{
+     margin: 30px 10px 30px 20px;
+     width: 60%;
+     border-radius:50%;
+     position: relative;
+   }
+  .side2{
+    text-align: center;
+  }
+  
