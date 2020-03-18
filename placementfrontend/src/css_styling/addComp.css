@@ -135,7 +135,7 @@ body {
    {
      background-color: white;
     
-     margin: 35px 5px 0px 20px;
+     margin: 35px 5px 35px 20px;
      border-radius: 10px !important;
      padding: 20px;
    }
@@ -157,6 +157,7 @@ body {
      margin-top: 10%;
      border: 1px solid black;
      background-color: #fff;
+     padding: 3px 6px;
    }
    button:focus {
      outline: 1px dotted;
@@ -168,7 +169,7 @@ body {
    {
      background-color: white;
      padding: 20px;
-     margin: 35px 20px 0px 5px;
+     margin: 35px 20px 35px 5px;
      border-radius: 10px !important;
    }
    .addCompGrid
@@ -198,7 +199,7 @@ body {
    }
    .addMore input{
      background-color: #f3f3f3 !important;
-     width: 97%;
+     width: 90%;
      padding: 0px !important;
      margin: 15px !important;
    }
@@ -211,7 +212,7 @@ body {
      color: #fff;
      background-color: rgb(147, 213, 201);
      border: 1px solid #fff;
-     font-size: 20px;
+     font-size: 25px;
      font-weight: 700;
      text-align: center;
      padding-bottom: 8px !important; 

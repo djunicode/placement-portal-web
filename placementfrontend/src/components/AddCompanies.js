@@ -4,13 +4,16 @@ class AddCompanies extends Component {
     state = {
       name: null,
       category:null,
-      position:null,
-      noOfPos:null,
-      date:null,
-      deadline:null,
-      package:null,
       link:null,
-      addDets:null,
+      addFields:[{
+        position:"",
+        noOfPos:"",
+        Interviewdate:"",
+        deadline:"",
+        package:"",
+        addDets:""}
+      ]
+      
     }
  
   // state = {
@@ -19,16 +22,49 @@ class AddCompanies extends Component {
   // }
  
   handleChange = (e) => {
-    this.setState({
-      [e.target.name] : e.target.value
-    });
- 
+    if(["position","noOfPos","Interviewdate","deadline","package","addDets"].includes(e.target.name)){
+      let addFields = [...this.state.addFields]
+      addFields[e.target.name] = e.target.value;
+      this.setState({
+        addFields:addFields
+      })
+    }
+    else{
+      this.setState({
+        [e.target.name] : e.target.value
+      });
+    }
+   
+    console.log(this.state)
   }
+  // handleChange2(e,index)
+  // {
+  //   this.setState({
+  //     [e.target.name[index]] : e.target.value
+  //   });
+  //   // this.state.addFields[index]=e.target.value
+  //   // this.setState(
+  //   //   {
+  //   //     addFields: this.state.addFields
+  //   //   }
+      
+  //   // )
+  //   console.log(this.state)
+  // }
 handleAddMore=(e)=>
 {
-  e.preventDefault();
-  var text= document.getElementById('wrapper').innerHTML
-document.getElementById('wrapper').innerHTML += text; 
+  {
+    this.setState((prevState) =>({addFields:[...prevState.addFields,{
+      position:"",
+      noOfPos:"",
+      Interviewdate:"",
+      deadline:"",
+      package:"",
+      addDets:""}]}));
+  }
+//   e.preventDefault();
+//   var text= document.getElementById('wrapper').innerHTML
+// document.getElementById('wrapper').innerHTML += text; 
 }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +81,7 @@ onBlur=(e)=>{
   render() {
     return (
       <div className="bgwAdd">
-        <h4 class="leftalign">ADD COMPANY</h4>
+        <h4 className="leftalign">ADD COMPANY</h4>
        <div className="grid-item"><form onSubmit={this.handleSubmit}>
          <div className="addCompGrid">
           <input type="text"  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
@@ -55,22 +91,40 @@ onBlur=(e)=>{
       <option>Dream</option>
       <option>Regular</option>
     </select></div>
-    <div class="addMore" id="wrapper">
-    <div class="addMoreGrid">
-          <input type="text" className="addInput"placeholder="Position:"  onChange={this.handleChange} name="position" required/>
- <input type="number" className="addInput"placeholder="Number Of Position:" onChange={this.handleChange} name="noOfPos" required min="0" />
-         <input type="text"className="addInput"placeholder="Interview Date:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="date" required />
+    <div className="addMore" >
+    {
+          this.state.addFields.map((field,index)=>{
+          
+            return(
+              
+              <div key={index}>
+                 
+    <div className="addMoreGrid">
+          <input type="text" className="addInput"placeholder="Position:"  onChange={this.handleChange}  name="position" required/>
+ <input type="number" className="addInput"placeholder="Number Of Position:"  onChange={this.handleChange} name="noOfPos" required min="0" />
+         <input type="text"className="addInput"placeholder="Interview Date:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="Interviewdate" required />
          <input type="text"className="addInput"placeholder="Deadline:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="deadline"  required />
 <input type="text"className="addInput" placeholder="Package:" onChange={this.handleChange} name="package"  required/>
 </div>
-<input type="text" className="addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" required /> 
-<button className="addMoreBtn" onClick={this.handleAddMore}><span class="center" style={{marginBottom:'5px'}}>+</span></button> 
+<input type="text" className="addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" required />  
+
 
 </div> 
+
+                
+             
+            )
+
+          })
+        }
+  
+<button className="addMoreBtn" onClick={this.handleAddMore}><span className="center" style={{marginBottom:'5px'}}>+</span></button>  </div>
 <input type="text"className="addInput" placeholder="Link:" onChange={this.handleChange} name="link"  required/> 
         <button className="submit ">ADD</button>
-        </form></div>
-       
+     
+       </form>
+       </div>
+
       </div>
 
     )
