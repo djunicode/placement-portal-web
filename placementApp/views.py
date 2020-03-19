@@ -7,11 +7,21 @@ from .models import Student, Position, Company
 from .serializers import StudentSerializer, PositionSerializer
 
 
-class StudentViewSet(
+class ListStudentViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class UpdateStudentViewSet(
+    mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet,
+):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = (
+        Student.objects.filter()
+    )  # Requires current user instance for further progress
     serializer_class = StudentSerializer
 
 
