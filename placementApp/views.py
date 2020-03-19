@@ -1,10 +1,43 @@
-from rest_framework import viewsets, permissions, mixins
 import xlwt
 import datetime
 from django.shortcuts import HttpResponse
-
 from .models import Student, Position, Company
-from .serializers import StudentSerializer, PositionSerializer
+from .serializers import *
+from django.contrib.auth import get_user_model
+from rest_framework import viewsets, permissions, status,mixins,generics
+from django.contrib.auth.hashers import make_password
+from rest_framework.response import Response
+
+
+class StudentSignUpView(generics.CreateAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Student.objects.all()
+    serializer_class = StudentSignupSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.validated_data["role"] = "STUDENT"
+        hashed_password = make_password(serializer.validated_data["password"])
+        serializer.validated_data["password"] = hashed_password
+        print(self.perform_create(serializer))
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CoordinatorSignUpView(generics.CreateAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Coordinator.objects.all()
+    serializer_class = CoordinatorSignupSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.validated_data["role"] = "CO"
+        hashed_password = make_password(serializer.validated_data["password"])
+        serializer.validated_data["password"] = hashed_password
+        print(self.perform_create(serializer))
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 
 class StudentViewSet(

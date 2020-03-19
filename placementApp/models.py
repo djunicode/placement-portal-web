@@ -99,6 +99,16 @@ def create_auth_token(sender,instance=None,created=False, **kwargs):
 	if created:
 		Token.objects.create(user=instance)
 
+@receiver(post_save, sender=Coordinator)
+def create_auth_token(sender,instance=None,created=False, **kwargs):
+	if created:
+		Token.objects.create(user=instance)
+
+@receiver(post_save, sender=Student)
+def create_auth_token(sender,instance=None,created=False, **kwargs):
+	if created:
+		Token.objects.create(user=instance)
+
 
 class Company(models.Model):
     name = models.CharField(max_length=128)
