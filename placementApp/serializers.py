@@ -23,3 +23,11 @@ class PositionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Position
         fields = "__all__"
+
+
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = "__all__"
+
+

@@ -26,7 +26,7 @@ class CoordinatorAdmin(admin.ModelAdmin):
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ("name", "category", "link")
+    list_display = ("name", "category", "link", "id")
     search_fields = ("name", "category")
 
 

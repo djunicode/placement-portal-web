@@ -4,7 +4,7 @@ import datetime
 from django.shortcuts import HttpResponse
 
 from .models import Student, Position, Company
-from .serializers import StudentSerializer, PositionSerializer
+from .serializers import StudentSerializer, PositionSerializer, CompanySerializer
 
 
 class StudentViewSet(
@@ -22,6 +22,20 @@ class PositionViewSet(
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
 
+class CompanyViewSet(
+    mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet,
+):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    def patch(self, request, pk):
+        obj = Company.objects.filter(id=pk)
+        print(obj)
+        serializer = CompanySerializer(obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(code=201, data=serializer.data)
+        return JsonResponse(code=400, data="wrong parameters")
 
 #############################
 #   EXCEL SHEET GENERATION  #
