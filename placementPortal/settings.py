@@ -88,24 +88,11 @@ DATABASES = {
 }
 
 DJOSER = {
-<<<<<<< HEAD
-    'LOGIN_FIELD':'email',
-    'USER_CREATE_PASSWORD_RETYPE':True,
-    'SERIALIZERS': {
-        'user_create':'placementApp.serializers.CustomUserCreateSerializer'
-    },
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-
-=======
     "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
     "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
     "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {},
->>>>>>> 50f0c0ad10965cac0165139674d909aef09057a3
 }
 
 # Password validation
@@ -122,19 +109,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
-<<<<<<< HEAD
     'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
                 'rest_framework.authentication.TokenAuthentication',
 
     )
-=======
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    ),
->>>>>>> 50f0c0ad10965cac0165139674d909aef09057a3
 }
 
 

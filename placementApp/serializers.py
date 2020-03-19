@@ -1,6 +1,6 @@
 from djoser.serializers import UserCreateSerializer,UserSerializer
 from rest_framework import serializers
-from .models import User,Student,Coordinator
+from .models import *
 
 
 class StudentSignupSerializer(serializers.ModelSerializer):
@@ -12,21 +12,38 @@ class StudentSignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = (
+            "id",
             "first_name",
             "last_name",
             "email",
+            "sap_ID",
             "division",
             "department",
             "year",
-            "sap_ID",
             "pointer",
             "password",
         )
-        read_only_fields = ("is_student", "is_teacher", "is_banned")
 
 
-
-class CustomUserCreateSerializer(UserCreateSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
-        model=User
-        fields=('email','f_name','l_name','role','password')
+        model = Student
+        fields = (
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "sap_ID",
+            "department",
+            "year",
+        )
+
+
+
+class PositionSerializer(serializers.ModelSerializer):
+    company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
+
+    class Meta:
+        model = Position
+        fields = "__all__"
