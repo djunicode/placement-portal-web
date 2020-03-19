@@ -10,13 +10,13 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('password', models.CharField(max_length=128, verbose_name='password')),
                 ('email', models.EmailField(max_length=60, unique=True, verbose_name='email')),
@@ -30,34 +30,145 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False)),
                 ('is_superuser', models.BooleanField(default=False)),
                 ('role', models.CharField(choices=[('STUDENT', 'Student'), ('CO', 'Co-ordinator'), ('TPO', 'TPO')], max_length=7)),
+=======
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "email",
+                    models.EmailField(max_length=60, unique=True, verbose_name="email"),
+                ),
+                ("username", models.CharField(max_length=30, unique=True)),
+                (
+                    "date_joined",
+                    models.DateTimeField(auto_now_add=True, verbose_name="date joined"),
+                ),
+                (
+                    "last_login",
+                    models.DateTimeField(auto_now=True, verbose_name="last login"),
+                ),
+                ("is_admin", models.BooleanField(default=False)),
+                ("is_active", models.BooleanField(default=True)),
+                ("is_staff", models.BooleanField(default=False)),
+                ("is_superuser", models.BooleanField(default=False)),
+                (
+                    "role",
+                    models.CharField(
+                        choices=[
+                            ("STUDENT", "Student"),
+                            ("CO", "Co-ordinator"),
+                            ("TPO", "TPO"),
+                        ],
+                        max_length=7,
+                    ),
+                ),
+>>>>>>> 50f0c0ad10965cac0165139674d909aef09057a3
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='Coordinator',
+            name="Coordinator",
             fields=[
-                ('user_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('department', models.CharField(choices=[('COMPS', 'Computer'), ('IT', 'Information Technology'), ('EXTC', 'Electronics & Telecommunication'), ('PROD', 'Production'), ('MECH', 'Mechanical'), ('BIO', 'Biomedical'), ('ELEX', 'Electronics'), ('CHEM', 'Chemical'), ('HUM', 'Science & Humanities')], max_length=5)),
+                (
+                    "user_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "department",
+                    models.CharField(
+                        choices=[
+                            ("COMPS", "Computer"),
+                            ("IT", "Information Technology"),
+                            ("EXTC", "Electronics & Telecommunication"),
+                            ("PROD", "Production"),
+                            ("MECH", "Mechanical"),
+                            ("BIO", "Biomedical"),
+                            ("ELEX", "Electronics"),
+                            ("CHEM", "Chemical"),
+                            ("HUM", "Science & Humanities"),
+                        ],
+                        max_length=5,
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('placementApp.user',),
+            options={"abstract": False,},
+            bases=("placementApp.user",),
         ),
         migrations.CreateModel(
-            name='Student',
+            name="Student",
             fields=[
+<<<<<<< HEAD
                 ('user_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
                 ('sap_ID', models.CharField(default=None, max_length=12, unique=True, validators=[django.core.validators.RegexValidator(message='SAP ID must be valid', regex='^\\+?6?\\d{10,12}$')])),
                 ('department', models.CharField(choices=[('COMPS', 'Computer'), ('IT', 'Information Technology'), ('EXTC', 'Electronics & Telecommunication'), ('PROD', 'Production'), ('MECH', 'Mechanical'), ('BIO', 'Biomedical'), ('ELEX', 'Electronics'), ('CHEM', 'Chemical')], max_length=5)),
                 ('year', models.CharField(choices=[('TE', 'Third Year'), ('BE', 'Fourth Year')], max_length=2)),
                 ('pointer', models.DecimalField(decimal_places=2, default=0.0, max_digits=5)),
+=======
+                (
+                    "user_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "sap_ID",
+                    models.CharField(
+                        default=None,
+                        max_length=12,
+                        unique=True,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                message="SAP ID must be valid",
+                                regex="^\\+?6?\\d{10,12}$",
+                            )
+                        ],
+                    ),
+                ),
+                (
+                    "department",
+                    models.CharField(
+                        choices=[
+                            ("COMPS", "Computer"),
+                            ("IT", "Information Technology"),
+                            ("EXTC", "Electronics & Telecommunication"),
+                            ("PROD", "Production"),
+                            ("MECH", "Mechanical"),
+                            ("BIO", "Biomedical"),
+                            ("ELEX", "Electronics"),
+                            ("CHEM", "Chemical"),
+                        ],
+                        max_length=5,
+                    ),
+                ),
+                (
+                    "year",
+                    models.CharField(
+                        choices=[("TE", "Third Year"), ("BE", "Fourth Year")],
+                        max_length=2,
+                    ),
+                ),
+>>>>>>> 50f0c0ad10965cac0165139674d909aef09057a3
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('placementApp.user',),
+            options={"abstract": False,},
+            bases=("placementApp.user",),
         ),
     ]

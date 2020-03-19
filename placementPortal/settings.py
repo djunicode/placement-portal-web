@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL='placementApp.User'
+AUTH_USER_MODEL = "placementApp.User"
 
 # Application definition
 
@@ -38,12 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    #My APPS
+    # My APPS
     "placementApp",
     "rest_framework",
-    'djoser',
-    'rest_framework.authtoken',
+    "djoser",
+    "rest_framework.authtoken",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -88,6 +88,7 @@ DATABASES = {
 }
 
 DJOSER = {
+<<<<<<< HEAD
     'LOGIN_FIELD':'email',
     'USER_CREATE_PASSWORD_RETYPE':True,
     'SERIALIZERS': {
@@ -98,6 +99,13 @@ DJOSER = {
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
 
+=======
+    "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": True,
+    "SERIALIZERS": {},
+>>>>>>> 50f0c0ad10965cac0165139674d909aef09057a3
 }
 
 # Password validation
@@ -113,13 +121,20 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 REST_FRAMEWORK = {
+<<<<<<< HEAD
     'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
                 'rest_framework.authentication.TokenAuthentication',
 
     )
+=======
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+>>>>>>> 50f0c0ad10965cac0165139674d909aef09057a3
 }
 
 
