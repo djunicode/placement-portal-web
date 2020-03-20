@@ -1,28 +1,33 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
+from django.contrib.auth.forms import UserCreationForm
 from .models import User, Student, Coordinator, Company, Position, Application
 
-# Register your models here.
-class UserAdmin(admin.ModelAdmin):
+class CustomUserAdmin(UserAdmin):
     list_display = ("email", "role")
-    search_fields = (
-        "email",
-        "username",
-    )
-    readonly_fields = ("date_joined", "last_login", "password")
+    search_fields = ('email',)
+    readonly_fields = ('date_joined', 'last_login',)
 
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
 
 
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ("sap_ID", "email", "department", "year")
-    search_fields = ("username", "sap_ID")
+class StudentAdmin(UserAdmin):
+    list_display = ("sap_ID",  "department", "year")
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
 
 
-class CoordinatorAdmin(admin.ModelAdmin):
-    list_display = ("email", "department")
-    search_fields = ("username",)
+class CoordinatorAdmin(UserAdmin):
+    list_display = ( "email", "department")
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -47,7 +52,8 @@ class ApplicationAdmin(admin.ModelAdmin):
     search_fields = ("student", "position")
 
 
-admin.site.register(User, UserAdmin)
+admin.site.unregister(Group)
+admin.site.register(User, CustomUserAdmin)
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Coordinator, CoordinatorAdmin)
 admin.site.register(Company, CompanyAdmin)
