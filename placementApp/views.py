@@ -64,6 +64,17 @@ class StudentViewSet(
     serializer_class = StudentSerializer
 
 
+class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = "id"
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+    )  # Temporarily till auth is done
+    queryset = (
+        Student.objects.filter()
+    )  # Requires current user instance for further progress
+    serializer_class = StudentSerializer
+
+
 class PositionViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
