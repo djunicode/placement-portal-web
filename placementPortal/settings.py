@@ -117,29 +117,19 @@ REST_FRAMEWORK = {
 }
 
 SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
-            'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
-        }
+    "SECURITY_DEFINITIONS": {
+        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
     },
-    'DOC_EXPANSION': 'none',
-    'APIS_SORTER': 'alpha',
-    'OPERATIONS_SORTER': None,
-    'JSON_EDITOR': False,
-    'SHOW_REQUEST_HEADERS': False,
-    'SUPPORTED_SUBMIT_METHODS': [
-        'get',
-        'post',
-        'put',
-        'delete',
-        'patch'
-    ],
+    "DOC_EXPANSION": "none",
+    "APIS_SORTER": "alpha",
+    "OPERATIONS_SORTER": None,
+    "JSON_EDITOR": False,
+    "SHOW_REQUEST_HEADERS": False,
+    "SUPPORTED_SUBMIT_METHODS": ["get", "post", "put", "delete", "patch"],
 }
 
 REDOC_SETTINGS = {
-    'LAZY_RENDERING': True,
+    "LAZY_RENDERING": True,
 }
 
 # Internationalization
@@ -155,8 +145,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = '/api/auth/token/login/'
-LOGOUT_URL = '/api/auth/token/logout/'
+LOGIN_URL = "/api/auth/token/login/"
+LOGOUT_URL = "/api/auth/token/logout/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

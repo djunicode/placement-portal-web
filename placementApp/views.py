@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, mixins
+from rest_framework import viewsets, permissions, mixins, generics
 import xlwt
 import datetime
 from django.shortcuts import HttpResponse
@@ -15,9 +15,7 @@ class ListStudentViewSet(
     serializer_class = StudentSerializer
 
 
-class UpdateStudentViewSet(
-    mixins.UpdateModelMixin, viewsets.GenericViewSet,
-):
+class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
     )  # Temporarily till auth is done
