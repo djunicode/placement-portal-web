@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponse
 from .models import Student, Position, Company
 from .serializers import *
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets, permissions, status,mixins,generics
+from rest_framework import viewsets, permissions, status, mixins, generics
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 
@@ -18,11 +18,19 @@ class StudentSignUpView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["role"] = "STUDENT"
-        serializer.validated_data.pop("password2")
-        hashed_password = make_password(serializer.validated_data["password"])
-        serializer.validated_data["password"] = hashed_password
-        print(self.perform_create(serializer))
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if (
+            serializer.validated_data["password2"]
+            == serializer.validated_data["password"]
+        ):
+            serializer.validated_data.pop("password2")
+            hashed_password = make_password(serializer.validated_data["password"])
+            serializer.validated_data["password"] = hashed_password
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(
+            {"error": "Could not create Student"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
 
 class CoordinatorSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -33,13 +41,19 @@ class CoordinatorSignUpView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["role"] = "CO"
-        serializer.validated_data.pop("password2")
-        hashed_password = make_password(serializer.validated_data["password"])
-        serializer.validated_data["password"] = hashed_password
-        print(self.perform_create(serializer))
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
+        if (
+            serializer.validated_data["password2"]
+            == serializer.validated_data["password"]
+        ):
+            serializer.validated_data.pop("password2")
+            hashed_password = make_password(serializer.validated_data["password"])
+            serializer.validated_data["password"] = hashed_password
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(
+            {"error": "Could not create Coordinator"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
 
 class StudentViewSet(

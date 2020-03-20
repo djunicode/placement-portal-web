@@ -1,15 +1,14 @@
-from djoser.serializers import UserCreateSerializer,UserSerializer
+from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 from .models import *
 
 
 class StudentSignupSerializer(serializers.ModelSerializer):
-    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    password2 = serializers.CharField(style={"input_type": "password"}, write_only=True)
     password = serializers.CharField(
-        write_only=True,
-        required=True,
-        style={'input_type': 'password'},
+        write_only=True, required=True, style={"input_type": "password"},
     )
+
     class Meta:
         model = Student
         fields = (
@@ -22,17 +21,16 @@ class StudentSignupSerializer(serializers.ModelSerializer):
             "year",
             "pointer",
             "password",
-            "password2"
+            "password2",
         )
 
 
 class CoordinatorSignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
-        write_only=True,
-        required=True,
-        style={'input_type': 'password'},
+        write_only=True, required=True, style={"input_type": "password"},
     )
-    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    password2 = serializers.CharField(style={"input_type": "password"}, write_only=True)
+
     class Meta:
         model = Coordinator
         fields = (
@@ -42,8 +40,8 @@ class CoordinatorSignupSerializer(serializers.ModelSerializer):
             "email",
             "department",
             "password",
+            "password2",
         )
-
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -59,7 +57,6 @@ class StudentSerializer(serializers.ModelSerializer):
             "department",
             "year",
         )
-
 
 
 class PositionSerializer(serializers.ModelSerializer):
