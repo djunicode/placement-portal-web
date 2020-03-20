@@ -3,7 +3,7 @@ function Search(){
     return(
         <div className="float-right">                  
             <form className="form-group float-right">
-               <input className="form-control inp" type="search" placeholder="Search"/>
+               <input className="form-control inp" type="text" placeholder="Search"/>
                 <button className="btn "><i className="fa fa-search glass"></i></button>       
             </form>
          </div> 

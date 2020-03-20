@@ -6,16 +6,7 @@
     top: 0px;
     background: #88E7C8;
   }
-  .inner_details{
-    position: relative;
-    width:100%;
-    transform: translate(15px,-100px);
-  
-  }
-  .inner_blocks{
-    background: #F3F3F3;
-    position: relative;
-  }
+
   .inner_box{
     background: #88E7C8;
     border-radius: 30px;
@@ -26,23 +17,18 @@
     background: #F3F3F3;
     top:-25px;
   }
+  .details{
+    transform: translateY(-20%);
+    text-align: center;
+  }
+  .studentdisplay{
+    margin-top: 3px;
+    border: none;
+    padding: 10px;
+    width: 80%;
+    background:#FAFAFA;
+  }
   
-  .inp{
-    position: absolute;
-    left: 62%;
-    width: 35%;
-    height: 40px;
-    padding: 15px;
-    background-color:white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    border:none;
-    z-index:-1;
-  }
-  .lb{
-    font-size:18px;
-    padding-right: 5px;
-  }
   .glass{
     position: absolute;
     left: 92%;
@@ -66,19 +52,20 @@
     height: 115px;
   }
   .head{
-    font-size: 125%;
+    font-size: 150%;
     padding-top: 5px;
-    transform: translate(52px,-165px);
+    transform: translate(85px,-150px);
   
   }
   .edit{
-    transform: translateY(-170px);
     background: #B87575;
     border-radius: 30px; 
     border: none;
     padding: 10px;
     color: #FAFAFA;
-    font-size: 12px;
+    font-size: 16px;
+    width: 85px;
+    
   
   }
   .side{

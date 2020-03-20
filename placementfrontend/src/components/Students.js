@@ -19,7 +19,7 @@ const Students = ({students,showItems,handleShowMore}) => {
         {list}
         </div>
         <div className="show">
-        <button  onClick={handleShowMore}><i className="fa fa-chevron-down"></i></button>
+        <button className="button_display" onClick={handleShowMore}><i className="fa fa-chevron-down"></i></button>
         </div>
       </div>
     </div>
