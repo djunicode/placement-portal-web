@@ -1,4 +1,3 @@
-from rest_framework import viewsets, permissions, mixins, generics
 import xlwt
 import datetime
 from django.shortcuts import HttpResponse
@@ -57,21 +56,11 @@ class CoordinatorSignUpView(generics.CreateAPIView):
         )
 
 
-class ListStudentViewSet(
+class StudentViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Student.objects.all()
-    serializer_class = StudentSerializer
-
-
-class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-    )  # Temporarily till auth is done
-    queryset = (
-        Student.objects.filter()
-    )  # Requires current user instance for further progress
     serializer_class = StudentSerializer
 
 
