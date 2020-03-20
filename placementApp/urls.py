@@ -11,8 +11,13 @@ urlpatterns = [
     path("", include(router.urls)),
     path("get_xls/<int:company_id>", views.get_xls, name="get_xls"),
     path(
-        "student_profile/<int:pk>/",
+        "student_profile/",
         views.UpdateStudentViewSet.as_view(),
-        name="student_profile",
+        name="student_profile"),
+    path("student_signup/", views.StudentSignUpView.as_view(), name="student_signup"),
+    path(
+        "coordinator_signup/",
+        views.CoordinatorSignUpView.as_view(),
+        name="coordinator_signup",
     ),
 ]
