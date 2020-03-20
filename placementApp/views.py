@@ -16,9 +16,11 @@ class ListStudentViewSet(
 
 
 class UpdateStudentViewSet(
-    mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet,
+    mixins.UpdateModelMixin, viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+    )  # Temporarily till auth is done
     queryset = (
         Student.objects.filter()
     )  # Requires current user instance for further progress
