@@ -52,8 +52,8 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "username",
-            "first_name",
-            "last_name",
+            "f_name",
+            "l_name",
             "email",
             "sap_ID",
             "department",

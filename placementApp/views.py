@@ -18,6 +18,7 @@ class StudentSignUpView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["role"] = "STUDENT"
+        serializer.validated_data.pop("password2")
         hashed_password = make_password(serializer.validated_data["password"])
         serializer.validated_data["password"] = hashed_password
         print(self.perform_create(serializer))
@@ -32,6 +33,7 @@ class CoordinatorSignUpView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["role"] = "CO"
+        serializer.validated_data.pop("password2")
         hashed_password = make_password(serializer.validated_data["password"])
         serializer.validated_data["password"] = hashed_password
         print(self.perform_create(serializer))
