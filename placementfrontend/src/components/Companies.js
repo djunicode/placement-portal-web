@@ -29,7 +29,7 @@ const Companies = ({companies, showMore,showItems}) => {
   return (
     <div className="bgw1">
       <div className="grid-item">
-        <h4>COMPANIES</h4>
+        <h4 style={{fontWeight:700}}>COMPANIES</h4>
         <div className="list">
         {companyList}
         <div className="more center">

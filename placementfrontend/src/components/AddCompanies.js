@@ -22,12 +22,12 @@ class AddCompanies extends Component {
   // }
  
   handleChange = (e) => {
-    if(["position","noOfPos","Interviewdate","deadline","package","addDets"].includes(e.target.name)){
+    if(["position","noOfPos","Interviewdate","deadline","packages","addDets"].includes(e.target.name)){
       let addFields = [...this.state.addFields]
-      addFields[e.target.name] = e.target.value;
+      addFields[e.target.dataset.id][e.target.name] = e.target.value;
       this.setState({
-        addFields:addFields
-      })
+        addFields  : addFields
+      });
     }
     else{
       this.setState({
@@ -37,20 +37,8 @@ class AddCompanies extends Component {
    
     console.log(this.state)
   }
-  // handleChange2(e,index)
-  // {
-  //   this.setState({
-  //     [e.target.name[index]] : e.target.value
-  //   });
-  //   // this.state.addFields[index]=e.target.value
-  //   // this.setState(
-  //   //   {
-  //   //     addFields: this.state.addFields
-  //   //   }
-      
-  //   // )
-  //   console.log(this.state)
-  // }
+   
+   
 handleAddMore=(e)=>
 {
   {
@@ -81,7 +69,7 @@ onBlur=(e)=>{
   render() {
     return (
       <div className="bgwAdd">
-        <h4 className="leftalign">ADD COMPANY</h4>
+        <h4 className="leftalign" style={{fontWeight:700}}>ADD COMPANY</h4>
        <div className="grid-item"><form onSubmit={this.handleSubmit}>
          <div className="addCompGrid">
           <input type="text"  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
@@ -94,19 +82,19 @@ onBlur=(e)=>{
     <div className="addMore" >
     {
           this.state.addFields.map((field,index)=>{
-          
+            let position = `position-${index}`, addDets = `addDets-${index}` ,packages = `packages-${index}`,deadline = `deadline-${index}`,Interviewdate = `Interviewdate-${index}` , noOfPos = `noOfPos-${index}`  
             return(
               
               <div key={index}>
                  
     <div className="addMoreGrid">
-          <input type="text" className="addInput"placeholder="Position:"  onChange={this.handleChange}  name="position" required/>
- <input type="number" className="addInput"placeholder="Number Of Position:"  onChange={this.handleChange} name="noOfPos" required min="0" />
-         <input type="text"className="addInput"placeholder="Interview Date:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="Interviewdate" required />
-         <input type="text"className="addInput"placeholder="Deadline:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="deadline"  required />
-<input type="text"className="addInput" placeholder="Package:" onChange={this.handleChange} name="package"  required/>
+          <input type="text" className="addInput"placeholder="Position:"  onChange={this.handleChange}  data-id={index} id={position} name="position" required/>
+ <input type="number" className="addInput"placeholder="Number Of Position:"  onChange={this.handleChange} data-id={index} id={noOfPos} name="noOfPos" required min="0" />
+         <input type="text"className="addInput"placeholder="Interview Date:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={Interviewdate} name="Interviewdate" required />
+         <input type="text"className="addInput"placeholder="Deadline:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={deadline} name="deadline"  required />
+<input type="text"className="addInput" placeholder="Package:" onChange={this.handleChange} name="package" data-id={index} id={packages} required/>
 </div>
-<input type="text" className="addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" required />  
+<input type="text" className="addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" data-id={index}  id={addDets} required />  
 
 
 </div> 

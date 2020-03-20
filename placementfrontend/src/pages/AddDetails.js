@@ -45,9 +45,9 @@ class AddDetails extends Component{
         <div className="grid-2">
           <Nav/>
           <div className="row">
-            <div className="hello col-12 col-lg-6 left" >
+            <div className="mainGrid col-12 col-lg-6 left" >
           <Companies companies={this.state.companies} showMore={this.showMore} showItems={this.state.showItems} /></div>  
-          <div className="hello col-12 col-lg-6 right" >
+          <div className="mainGrid col-12 col-lg-6 right" >
         <AddCompanies addCompanies={this.addCompanies} /></div> 
           </div> 
           </div>

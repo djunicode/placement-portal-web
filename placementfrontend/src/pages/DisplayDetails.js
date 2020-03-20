@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import EditDetail from '../components/EditDetail';
-import Nav from '../components/navbar';
+import Nav2 from '../components/navbar2';
 import Sidenav from '../components/Sidenav';
 import '../css_styling/display.css';
 
@@ -17,8 +17,8 @@ class DisplayDetails extends Component{
        <Sidenav/>
       </div>
       <div className="grid-2">
-        <Nav/>
-        <div className="hello2">
+        <Nav2/>
+        <div className="mainGrid2">
        <EditDetail/></div>
       </div>
     </div>

@@ -94,7 +94,7 @@ body {
     margin: 3px !important;
     margin-right: 20px !important;
   }
-  .svg-inline--fa.fa-w-16 {
+  .fa-search {
    width: 1em;
    margin-right: 9px;
    color: rgba(153,153,153,0.8);
@@ -177,11 +177,12 @@ body {
      display: grid;
      grid-template-columns: auto auto ;
      grid-column-gap:10px !important;
+
    }
    .addCompGrid input
    {
     padding: 0px !important;
-     margin: 15px !important;
+     width: 90% !important;
    }
    .addMore
    {
@@ -277,7 +278,7 @@ body {
      align-items: center !important;
      
    }
-   .hello
+   .mainGrid
    {
    display: grid;
      padding: 10px !important;
@@ -346,7 +347,7 @@ body {
     margin-right: 20%;
   
   }
-  .svg-inline--fa.fa-w-16 {
+  .fa-search {
     width: 1em;
    padding:0px !important;
    margin:20px 0px 0px 0px !important;

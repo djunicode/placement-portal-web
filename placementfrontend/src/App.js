@@ -20,9 +20,9 @@ function App() {
         <Route exact path='/studentSignup' component={StudentSU}>
         </Route>
         <Route path='/staffSignup' component={StaffSU}>
-        </Route>*/} 
-        <AddDetails/> 
-      <DisplayDetails/>  
+        </Route> */} 
+        <AddDetails/>
+       <DisplayDetails/>  
       </div>
 
     </BrowserRouter>

@@ -1,14 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import '../css_styling/addComp.css'
+import '../css_styling/display.css'
 
 
-function Nav(){
+function Nav2(){
     return(
         <div className="topnav">
-  <a className="active" href="#home">RECRUITERS</a>
-  <a href="#about">STUDENTS</a>
+  <a className="active" href="#home">NAME</a>
+  <a href="#about">APPLICANTS</a>
   
   <form>
 
@@ -30,5 +30,4 @@ function Nav(){
 </div>
 
     )}
-    export default Nav;
-  
+    export default Nav2;
