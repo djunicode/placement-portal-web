@@ -34,7 +34,6 @@ class StudentTab extends Component {
                                 <h4>{p.student_pointer}</h4>
                                 <h4>{p.student_experience}</h4> <br></br>
                                 <button className="student_button btn btn-lg"><img src="https://image.flaticon.com/icons/svg/61/61456.svg" id="edit_icon"></img>EDIT PROFILE</button> <br></br><br></br>
-                                <button className="student_button btn btn-lg">UPLOAD RESUME</button>
                             </div>
                         )
                     })

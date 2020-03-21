@@ -74,6 +74,56 @@ class CompanyPage extends Component {
         });
     }
 
+    rejectUnderReview=(student) =>{
+        selectedList.map(p =>{
+            if(p.status=="PUT UNDER REVIEW")
+            {
+                p.status="REJECTED";
+            }
+        })
+       this.setState({
+           studentList: selectedList
+       })
+    }
+
+    rejectInterview=(student) =>{
+        selectedList.map(p =>{
+            if(p.status=="INTERVIEW SCHEDULED")
+            {
+                p.status="REJECTED";
+            }
+        })
+       this.setState({
+           studentList: selectedList
+       })
+    }
+
+    filterList=(student) => {
+        if(student.target.value!="")
+        {
+        if(student.target.value=="ALL")
+        {
+            this.setState({
+                studentList: selectedList
+            })
+        }
+        else
+        {
+        let reviewedList=selectedList.filter(function(user){
+            return user.status!="REJECTED"
+        })
+        console.log(reviewedList)
+        let filteredList=selectedList.filter(function(user){
+                return user.status==student.target.value
+        })
+        console.log(filteredList)
+        this.setState({
+            studentList: filteredList
+        })
+        }
+    }
+    }
+
     render() {
         return (
             <div className="background">
@@ -105,13 +155,29 @@ class CompanyPage extends Component {
                                 </div>
                                 )})
                         }
+                        <button className="btn btn-large excel">EXCEL</button>
                     </div>
                     <div className="col-lg-5 card" id="right-card">
                         <br></br>
-                        <h2>ALREADY REVIEWED APPLICATIONS</h2>
+                        <h2 id="reviewedApps">ALREADY REVIEWED APPLICATIONS</h2>
+                        <div className="row">
+                            <div className="col-lg-3">
+                            <img src="https://lh3.googleusercontent.com/proxy/B8_TumXhbc-MCEWERSz_lOzIxKuvjHk9yqvGjJ5ipGHl7zqtRg1jt9tclw4V_MvXmiMR3tozCOdnKXfMQVEKNgRlYjuRA3QcM72QgpEhrdcFnfJYA1RRIoGMFac0f2Gbpw" class="filterIcon"></img>
+                            </div>
+                            <div className="col-lg-9">
+                            <select className="form-control" id="filterStudents" onChange={this.filterList} status={this.status}>
+                                <option value="ALL">ALL</option>
+                                <option vlaue="ACCEPTED" className="select">ACCEPTED</option>
+                                <option value="INTERVIEW SCHEDULED" className="interview">INTERVIEW SCHEDULED</option>
+                                <option value="PUT UNDER REVIEW" className="review">PUT UNDER REVIEW</option>
+                            </select>
+                            </div>
+                            </div>
                         <hr></hr>
                         {
-                            this.state.studentList.map(p => {
+                            this.state.studentList.filter(function(user){
+                                return user.status!="REJECTED"
+                            }).map(p =>{
                                 return (
                                     <div className="row studentCard" key={p.id}>
                                                 <div className="col-lg-5">
@@ -127,6 +193,9 @@ class CompanyPage extends Component {
                                 )
                             })
                         }
+                        <button className="rejectButton rejectReview btn btn-small" onClick={this.rejectUnderReview}>Reject All Under Review</button>
+                        <button className="rejectButton btn btn-small" onClick={this.rejectInterview}>Reject All Scheduled For Interview</button>
+                        <button className="btn btn-large excel">EXCEL</button>
                     </div>
                 </div>
             </div>

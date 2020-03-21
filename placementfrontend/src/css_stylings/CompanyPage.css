@@ -49,3 +49,32 @@ a, a:visited, a:hover{
     color: white;
     text-decoration: none;
 }
+.rejectButton{
+    background-color: darkred;
+    border-radius: 20px;
+    color: white;
+    width: 70%;
+    margin: 10px auto;
+}    
+.rejectReview{
+    margin-top: auto;
+}
+#filterStudents{
+    width: 75%;
+    margin-left: 0px;
+}
+.filterIcon{
+    width: 30px;
+    height: 30px;
+    margin-left: 70%;
+}
+.excel{
+    background-color: green;
+    width: 20%;
+    border-radius: 20px;
+    margin: 10px auto;
+    color: white;
+}
+#reviewedApps{
+    margin-bottom: 0px;
+}

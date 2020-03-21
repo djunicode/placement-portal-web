@@ -11,9 +11,7 @@ import '../css_stylings/StudentDashboardMain.css';
 function StudentDashboardMain() {
   return (
     <div className="App">
-        <div className="top-nav">
-          <Navbar></Navbar>
-        </div>
+        <div className="top-nav fixed-top"></div>
       <div className="row">
         <div className="col-lg-9">
           <StudentDashboard></StudentDashboard>
