@@ -36,6 +36,12 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=40, blank=True, null=True)
     f_name = models.CharField(max_length=20)
     l_name = models.CharField(max_length=20)
+    profile_image = models.ImageField(
+        default="profile_images/default.png",
+        upload_to="profile_images",
+        blank=True,
+        null=True,
+    )
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin = models.BooleanField(default=False)

@@ -55,6 +55,7 @@ class StudentSerializer(serializers.ModelSerializer):
             "email",
             "sap_ID",
             "pointer",
+            "profile_image",
             "department",
             "year",
         )
