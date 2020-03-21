@@ -59,10 +59,12 @@ class StudentSerializer(serializers.ModelSerializer):
             "year",
         )
 
+
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = "__all__"
+
 
 class PositionSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
