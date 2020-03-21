@@ -54,13 +54,18 @@ class StudentSerializer(serializers.ModelSerializer):
             "l_name",
             "email",
             "sap_ID",
+            "pointer",
             "department",
             "year",
         )
 
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = "__all__"
 
 class PositionSerializer(serializers.ModelSerializer):
-    company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
+    company = CompanySerializer()
 
     class Meta:
         model = Position
