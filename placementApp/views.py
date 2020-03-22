@@ -15,27 +15,18 @@ class StudentViewSet(
     serializer_class = StudentSerializer
 
 
-class PositionViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
-):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+class PositionViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
 
-class CompanyViewSet(
-    mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet,
-):
+class CompanyViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
-    def patch(self, request, pk):
-        obj = Company.objects.filter(id=pk)
-        print(obj)
-        serializer = CompanySerializer(obj, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(code=201, data=serializer.data)
-        return JsonResponse(code=400, data="wrong parameters")
+
+
+    
 
 #############################
 #   EXCEL SHEET GENERATION  #

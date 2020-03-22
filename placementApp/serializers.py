@@ -17,17 +17,15 @@ class StudentSerializer(serializers.ModelSerializer):
         )
 
 
-class PositionSerializer(serializers.ModelSerializer):
-    company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
-
-    class Meta:
-        model = Position
-        fields = "__all__"
-
-
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = "__all__"
 
 
+class PositionSerializer(serializers.ModelSerializer):
+    company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
+    class Meta:
+        model = Position
+        fields = "__all__"
+    
