@@ -6,7 +6,25 @@
     top: 0px;
     background: #88E7C8;
   }
-
+  
+ .align1{
+   transform: translateX(12px);
+ }
+ .align2{
+  transform: translateX(12px);
+}
+.align3{
+  transform: translateX(-3px);
+}
+.align4{
+  transform: translateX(22px);
+}
+.align5{
+  transform: translateX(10px);
+}
+label{
+  padding: 2px;
+}
   .inner_box{
     background: #88E7C8;
     border-radius: 30px;
@@ -25,8 +43,8 @@
     margin-top: 3px;
     border: none;
     padding: 10px;
-    width: 80%;
-    background:#FAFAFA;
+    width:60%;
+    background:#FAFAFA;  
   }
   
   .glass{

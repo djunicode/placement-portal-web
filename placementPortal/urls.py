@@ -42,5 +42,9 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("api/auth/", include("djoser.urls.authtoken")),
+<<<<<<< HEAD
+=======
+    path("api/auth/", include("djoser.urls")),
+>>>>>>> upstream/master
     path("", include("placementApp.urls")),
 ]

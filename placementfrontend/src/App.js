@@ -20,8 +20,8 @@ function App() {
         </Route>
         <Route path='/staffSignup' component={StaffSU}>
   </Route>*/}
-      {/*<Studentprofile />*/}
-      <Tpo2 />
+      {/*<Tpo2 />*/}
+      <Studentprofile />
       </div>
     </BrowserRouter>
 
