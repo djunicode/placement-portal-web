@@ -1,13 +1,17 @@
 import xlwt
 import datetime
 from django.shortcuts import HttpResponse
-from .models import Student, Position, Company
+from .models import Student, Position, Company, Application
 from .serializers import *
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, permissions, status, mixins, generics
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 
+class ApplicationViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,mixins.RetrieveModelMixin, mixins.ListModelMixin,viewsets.GenericViewSet):
+    permission_classes= (permissions.AllowAny,)
+    queryset=Application.objects.all()
+    serializer_class = ApplicationSerializer
 
 class StudentSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
