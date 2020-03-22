@@ -65,8 +65,7 @@ class StudentViewSet(
     serializer_class = StudentSerializer
 
 
-class PositionViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.AllowAny,)
+
 class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
     permission_classes = (
