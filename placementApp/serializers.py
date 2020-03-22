@@ -1,7 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from rest_framework import serializers
 from .models import Student, Position, Company
 =======
+=======
+
+from rest_framework import serializers
+from .models import Student, Position, Company
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 from .models import *
@@ -46,9 +52,13 @@ class CoordinatorSignupSerializer(serializers.ModelSerializer):
             "password",
             "password2",
         )
+<<<<<<< HEAD
 >>>>>>> upstream/master
 
 
+=======
+        
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
@@ -56,18 +66,22 @@ class StudentSerializer(serializers.ModelSerializer):
             "id",
             "username",
 <<<<<<< HEAD
+<<<<<<< HEAD
             # "first_name",
             # "last_name",
 =======
             "f_name",
             "l_name",
 >>>>>>> upstream/master
+=======
+            "f_name",
+            "l_name",
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
             "email",
             "sap_ID",
             "department",
             "year",
         )
-
 
 class PositionSerializer(serializers.ModelSerializer):
     company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())

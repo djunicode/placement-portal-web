@@ -117,6 +117,7 @@ REST_FRAMEWORK = {
 
 SWAGGER_SETTINGS = {
 <<<<<<< HEAD
+<<<<<<< HEAD
     'SECURITY_DEFINITIONS': {
         'api_key': {
             'type': 'apiKey',
@@ -141,6 +142,8 @@ SWAGGER_SETTINGS = {
 REDOC_SETTINGS = {
     'LAZY_RENDERING': True,
 =======
+=======
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
     "SECURITY_DEFINITIONS": {
         "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
     },
@@ -154,7 +157,10 @@ REDOC_SETTINGS = {
 
 REDOC_SETTINGS = {
     "LAZY_RENDERING": True,
+<<<<<<< HEAD
 >>>>>>> upstream/master
+=======
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 }
 
 # Internationalization
@@ -171,12 +177,17 @@ USE_L10N = True
 USE_TZ = True
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 LOGIN_URL = '/api/auth/token/login/'
 LOGOUT_URL = '/api/auth/token/logout/'
 =======
 LOGIN_URL = "/api/auth/token/login/"
 LOGOUT_URL = "/api/auth/token/logout/"
 >>>>>>> upstream/master
+=======
+LOGIN_URL = "/api/auth/token/login/"
+LOGOUT_URL = "/api/auth/token/logout/"
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

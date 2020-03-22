@@ -10,7 +10,10 @@ urlpatterns = [
     path("", include(router.urls)),
     path("get_xls/<int:company_id>", views.get_xls, name="get_xls"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
     path("student_signup/", views.StudentSignUpView.as_view(), name="student_signup"),
     path(
         "student_profile/<int:id>",
@@ -22,5 +25,8 @@ urlpatterns = [
         views.CoordinatorSignUpView.as_view(),
         name="coordinator_signup",
     ),
+<<<<<<< HEAD
 >>>>>>> upstream/master
+=======
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 ]

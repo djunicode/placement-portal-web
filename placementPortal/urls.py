@@ -43,8 +43,12 @@ urlpatterns = [
     ),
     path("api/auth/", include("djoser.urls.authtoken")),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     path("api/auth/", include("djoser.urls")),
 >>>>>>> upstream/master
+=======
+    path("api/auth/", include("djoser.urls")),
+>>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
     path("", include("placementApp.urls")),
 ]
