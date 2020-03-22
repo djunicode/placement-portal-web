@@ -46,6 +46,19 @@ class CoordinatorSignupSerializer(serializers.ModelSerializer):
             "password2",
         )
         
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = (
+            "id",
+            "username",
+            "f_name",
+            "l_name",
+            "email",
+            "sap_ID",
+            "department",
+            "year",
+        )
 
 class PositionSerializer(serializers.ModelSerializer):
     company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
