@@ -15,14 +15,12 @@ class ApplicationViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
     def perform_create(self, serializer):
-        serializer.save(student=Student.objects.get(pk=2))
-        # Currently saves it for the User with pk = 2 ,
-        # Later will change it to currently authenticated student
+        serializer.save(student=Student.objects.get(pk=self.request.user.pk))
 
 
 class StudentSignUpView(generics.CreateAPIView):

@@ -44,7 +44,6 @@ class CoordinatorSignupSerializer(serializers.ModelSerializer):
             "f_name",
             "l_name",
             "email",
-            "poniter",
             "department",
             "password",
             "password2",
@@ -77,7 +76,7 @@ class PositionSerializer(serializers.ModelSerializer):
 
 class ApplicationSerializer(serializers.ModelSerializer):
     position = serializers.PrimaryKeyRelatedField(queryset=Position.objects.all())
-    student = StudentSerializer(read_only=True)
+    student = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Application
