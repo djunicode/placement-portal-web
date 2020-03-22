@@ -76,8 +76,8 @@ class PositionSerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    position = PositionSerializer()
-    student = StudentSerializer()
+    position = serializers.PrimaryKeyRelatedField(queryset=Position.objects.all())
+    student = StudentSerializer(read_only=True)
 
     class Meta:
         model = Application

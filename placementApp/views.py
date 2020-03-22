@@ -19,6 +19,11 @@ class ApplicationViewSet(
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(student=Student.objects.get(pk=2))
+        # Currently saves it for the User with pk = 2 ,
+        # Later will change it to currently authenticated student
+
 
 class StudentSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
