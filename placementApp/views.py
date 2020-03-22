@@ -8,10 +8,17 @@ from rest_framework import viewsets, permissions, status, mixins, generics
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 
-class ApplicationViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,mixins.RetrieveModelMixin, mixins.ListModelMixin,viewsets.GenericViewSet):
-    permission_classes= (permissions.AllowAny,)
-    queryset=Application.objects.all()
+
+class ApplicationViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
+
 
 class StudentSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
