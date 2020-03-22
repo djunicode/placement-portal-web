@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-from rest_framework import viewsets, permissions, mixins
-import xlwt
-import datetime
-from django.shortcuts import HttpResponse
-
-from .models import Student, Position, Company
-from .serializers import StudentSerializer, PositionSerializer
-=======
-=======
->>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 import xlwt
 import datetime
 from django.shortcuts import HttpResponse
@@ -66,10 +54,6 @@ class CoordinatorSignUpView(generics.CreateAPIView):
             {"error": "Could not create Coordinator"},
             status=status.HTTP_400_BAD_REQUEST,
         )
-<<<<<<< HEAD
->>>>>>> upstream/master
-=======
->>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 
 
 class StudentViewSet(
@@ -80,12 +64,6 @@ class StudentViewSet(
     serializer_class = StudentSerializer
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-
->>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
     permission_classes = (
@@ -97,10 +75,6 @@ class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = StudentSerializer
 
 
-<<<<<<< HEAD
->>>>>>> upstream/master
-=======
->>>>>>> 5c806daf244428047ffa3c99a99bf115c6e3014b
 class PositionViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
