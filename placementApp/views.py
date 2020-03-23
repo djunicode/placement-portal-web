@@ -88,7 +88,9 @@ def get_xls(request, company_id):
 
     name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
     response = HttpResponse(content_type="application/ms-excel")
-    response["Content-Disposition"] = "attachment; filename=" + name_of_workbook
+    response["Content-Disposition"] = (
+        "attachment; filename=" + '"' + name_of_workbook + '"'
+    )
 
     wb = generate_xls(company)
     wb.save(response)
