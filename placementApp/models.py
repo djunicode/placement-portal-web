@@ -68,6 +68,15 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    def is_student(self):
+        return self.role == "STUDENT"
+        
+    def is_co(self):
+        return self.role == "CO"
+
+    def is_tpo(self):
+        return self.role == "TPO"
+
 
 class Student(User):
     sap_regex = RegexValidator(
@@ -99,12 +108,14 @@ class Coordinator(User):
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
+    print("hello :)")
     if created:
         Token.objects.create(user=instance)
 
 
 @receiver(post_save, sender=Coordinator)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
+    print("hello :))")
     if created:
         Token.objects.create(user=instance)
 
