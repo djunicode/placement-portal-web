@@ -9,20 +9,6 @@ from rest_framework.response import Response
 from .utils import generate_xls, get_curent_year
 
 
-class ApplicationViewSet(
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.ListModelMixin,
-    viewsets.GenericViewSet,
-):
-    permission_classes = (permissions.IsAuthenticated,)
-    queryset = Application.objects.all()
-    serializer_class = ApplicationSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(student=Student.objects.get(pk=self.request.user.pk))
-
-
 class StudentSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Student.objects.all()
@@ -45,6 +31,24 @@ class StudentSignUpView(generics.CreateAPIView):
             {"error": "Could not create Student"}, status=status.HTTP_400_BAD_REQUEST
         )
 
+class StudentViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
+):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+
+class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = "id"
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+    )  # Temporarily till auth is done
+    queryset = (
+        Student.objects.filter()
+    )  # Requires current user instance for further progress
+    serializer_class = StudentSerializer
 
 class CoordinatorSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -69,25 +73,18 @@ class CoordinatorSignUpView(generics.CreateAPIView):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-
-class StudentViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
+class ApplicationViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
 
-
-
-class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
-    lookup_field = "id"
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-    )  # Temporarily till auth is done
-    queryset = (
-        Student.objects.filter()
-    )  # Requires current user instance for further progress
-    serializer_class = StudentSerializer
+    def perform_create(self, serializer):
+        serializer.save(student=Student.objects.get(pk=self.request.user.pk))
 
 
 class PositionViewSet(viewsets.ModelViewSet):
