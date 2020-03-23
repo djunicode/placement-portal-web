@@ -1,12 +1,25 @@
 from django.shortcuts import HttpResponse
+from .models import Student, Position, Company, Application
+from .serializers import *
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework import viewsets, permissions, status, mixins, generics
 from rest_framework.response import Response
-
-from .models import Student, Position, Company
-from .serializers import *
 from .utils import generate_xls, get_curent_year
+
+
+class ApplicationViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(student=Student.objects.get(pk=self.request.user.pk))
 
 
 class StudentSignUpView(generics.CreateAPIView):

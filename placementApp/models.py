@@ -154,3 +154,4 @@ class Application(models.Model):
         return (
             self.student.f_name + " " + self.student.l_name + ", " + self.position.title
         )
+
