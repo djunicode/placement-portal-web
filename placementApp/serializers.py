@@ -66,9 +66,14 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = "__all__"
 
-class PositionSerializer(serializers.ModelSerializer):
+class PositionReadSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
-    #company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
+    class Meta:
+        model = Position
+        fields = "__all__"
+
+class PositionWriteSerializer(serializers.ModelSerializer):
+    company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
     class Meta:
         model = Position
         fields = "__all__"
