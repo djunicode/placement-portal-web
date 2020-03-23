@@ -88,8 +88,7 @@ class ApplicationViewSet(
 
 
 class PositionViewSet(viewsets.ModelViewSet):
-    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Position.objects.all()
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:
@@ -98,8 +97,7 @@ class PositionViewSet(viewsets.ModelViewSet):
         return PositionWriteSerializer
 
 class CompanyViewSet(viewsets.ModelViewSet):
-    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
