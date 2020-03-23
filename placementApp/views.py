@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from .models import Student, Position, Company
 from .serializers import *
 from .utils import generate_xls, get_curent_year
+from .permissions import IsStaffOrOwner
 
 
 class StudentSignUpView(generics.CreateAPIView):
@@ -59,7 +60,7 @@ class CoordinatorSignUpView(generics.CreateAPIView):
 class StudentViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsStaffOrOwner,)
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
