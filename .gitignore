@@ -29,6 +29,9 @@ yarn-error.log*
 
 .DS_store
 
+# migrations
+**/migrations
+
 # C extensions
 *.so
 
@@ -135,5 +138,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-#media files
+# media files
 placementPortal/media/
+
