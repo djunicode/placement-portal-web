@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponse
 from .models import Student, Position, Company, Application
-from .serializers import StudentSerializer, PositionSerializer, CompanySerializer
+from .serializers import StudentSerializer, PositionReadSerializer, PositionWriteSerializer, CompanySerializer
 from .serializers import *
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
@@ -88,12 +88,18 @@ class ApplicationViewSet(
 
 
 class PositionViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Position.objects.all()
-    serializer_class = PositionSerializer
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:
+            return PositionReadSerializer
+        print("here")
+        return PositionWriteSerializer
 
 class CompanyViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
