@@ -145,4 +145,4 @@ class Application(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.student.username + ", " + self.position.title
+        return self.student.email + ", " + self.position.title
