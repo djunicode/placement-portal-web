@@ -1,5 +1,6 @@
 from django.shortcuts import HttpResponse
 from .models import Student, Position, Company, Application
+from .serializers import StudentSerializer, PositionSerializer, CompanySerializer
 from .serializers import *
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
@@ -77,6 +78,7 @@ class StudentViewSet(
     serializer_class = StudentSerializer
 
 
+
 class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
     permission_classes = (
@@ -88,13 +90,18 @@ class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = StudentSerializer
 
 
-class PositionViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
-):
+class PositionViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
 
+class CompanyViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+
+    
 
 def get_xls(request, company_id):
     company = Company.objects.get(id=company_id)

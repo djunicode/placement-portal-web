@@ -81,7 +81,7 @@ class Student(User):
         default=None,
         unique=True,
     )
-
+    
     department = models.CharField(max_length=5, blank=False, choices=DEPARTMENT_CHOICES)
     year = models.CharField(max_length=2, blank=False, choices=YEAR_CHOICES)
     Stud_req = ["department", "year", "sap_ID"]
