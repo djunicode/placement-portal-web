@@ -47,6 +47,7 @@ class PositionAdmin(admin.ModelAdmin):
         "package",
         "interview_date",
         "deadline",
+        "id",
     )
     search_fields = ("title", "company")
 
