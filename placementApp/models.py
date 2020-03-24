@@ -57,6 +57,10 @@ class User(AbstractBaseUser):
 
     objects = MyAccountManager()
 
+    def save(self, *args, **kwargs): 
+        self.username = self.email
+        super(User, self).save(*args, **kwargs) 
+
     def __str__(self):
         return self.email
 
@@ -104,27 +108,6 @@ class Coordinator(User):
     department = models.CharField(
         max_length=5, blank=False, choices=DEPARTMENT_CHOICES_COORD
     )
-
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    print("hello :)")
-    if created:
-        Token.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Coordinator)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    print("hello :))")
-    if created:
-        Token.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Student)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-
 
 class Company(models.Model):
     name = models.CharField(max_length=128)
