@@ -70,7 +70,7 @@ class User(AbstractBaseUser):
 
     def is_student(self):
         return self.role == "STUDENT"
-        
+
     def is_co(self):
         return self.role == "CO"
 
@@ -90,7 +90,7 @@ class Student(User):
         default=None,
         unique=True,
     )
-    
+
     department = models.CharField(max_length=5, blank=False, choices=DEPARTMENT_CHOICES)
     year = models.CharField(max_length=2, blank=False, choices=YEAR_CHOICES)
     Stud_req = ["department", "year", "sap_ID"]
@@ -165,4 +165,3 @@ class Application(models.Model):
         return (
             self.student.f_name + " " + self.student.l_name + ", " + self.position.title
         )
-
