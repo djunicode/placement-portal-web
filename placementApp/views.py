@@ -99,7 +99,6 @@ class PositionViewSet(viewsets.ModelViewSet):
         print("here")
         return PositionWriteSerializer
 
-
 class CompanyViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Company.objects.all()
