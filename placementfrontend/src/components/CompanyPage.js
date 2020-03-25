@@ -155,14 +155,16 @@ class CompanyPage extends Component {
                                 </div>
                                 )})
                         }
-                        <button className="btn btn-large excel">EXCEL</button>
+                        <button className="rejectButton rejectReview btn btn-small" onClick={this.rejectUnderReview}>Reject All Under Review</button>
+                        <button className="rejectButton btn btn-small" onClick={this.rejectInterview}>Reject All Scheduled For Interview</button>
+                        <button className="btn btn-large excel-left">EXCEL</button>
                     </div>
                     <div className="col-lg-5 card" id="right-card">
                         <br></br>
                         <h2 id="reviewedApps">ALREADY REVIEWED APPLICATIONS</h2>
                         <div className="row">
                             <div className="col-lg-3">
-                            <img src="https://lh3.googleusercontent.com/proxy/B8_TumXhbc-MCEWERSz_lOzIxKuvjHk9yqvGjJ5ipGHl7zqtRg1jt9tclw4V_MvXmiMR3tozCOdnKXfMQVEKNgRlYjuRA3QcM72QgpEhrdcFnfJYA1RRIoGMFac0f2Gbpw" class="filterIcon"></img>
+                            <img src="https://image.flaticon.com/icons/svg/1159/1159641.svg" class="filterIcon"></img>
                             </div>
                             <div className="col-lg-9">
                             <select className="form-control" id="filterStudents" onChange={this.filterList} status={this.status}>
@@ -193,9 +195,7 @@ class CompanyPage extends Component {
                                 )
                             })
                         }
-                        <button className="rejectButton rejectReview btn btn-small" onClick={this.rejectUnderReview}>Reject All Under Review</button>
-                        <button className="rejectButton btn btn-small" onClick={this.rejectInterview}>Reject All Scheduled For Interview</button>
-                        <button className="btn btn-large excel">EXCEL</button>
+                        <button className="btn btn-large excel-right">EXCEL</button>
                     </div>
                 </div>
             </div>

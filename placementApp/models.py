@@ -36,6 +36,15 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=40, blank=True, null=True)
     f_name = models.CharField(max_length=20)
     l_name = models.CharField(max_length=20)
+<<<<<<< HEAD
+=======
+    profile_image = models.ImageField(
+        default="profile_images/default.png",
+        upload_to="profile_images",
+        blank=True,
+        null=True,
+    )
+>>>>>>> upstream/master
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -45,7 +54,7 @@ class User(AbstractBaseUser):
     role = models.CharField(max_length=7, blank=False, choices=ROLE_CHOICES)
 
     def __str__(self):
-        return self.user.username
+        return self.f_name + " " + self.l_name
 
     USERNAME_FIELD = "email"
 
@@ -75,7 +84,7 @@ class Student(User):
         default=None,
         unique=True,
     )
-
+    
     department = models.CharField(max_length=5, blank=False, choices=DEPARTMENT_CHOICES)
     year = models.CharField(max_length=2, blank=False, choices=YEAR_CHOICES)
     Stud_req = ["department", "year", "sap_ID"]
@@ -145,4 +154,7 @@ class Application(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.student.username + ", " + self.position.title
+        return (
+            self.student.f_name + " " + self.student.l_name + ", " + self.position.title
+        )
+

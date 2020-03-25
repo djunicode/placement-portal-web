@@ -68,11 +68,19 @@ a, a:visited, a:hover{
     height: 30px;
     margin-left: 70%;
 }
-.excel{
+.excel-left{
     background-color: green;
     width: 20%;
     border-radius: 20px;
     margin: 10px auto;
+    color: white;
+}
+.excel-right{
+    background-color: green;
+    width: 20%;
+    border-radius: 20px;
+    margin: 10px auto;
+    margin-top: auto;
     color: white;
 }
 #reviewedApps{

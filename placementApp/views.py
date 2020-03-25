@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import xlwt
 import datetime
 from django.shortcuts import HttpResponse
@@ -7,6 +8,17 @@ from django.contrib.auth import get_user_model
 from rest_framework import viewsets, permissions, status, mixins, generics
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
+=======
+from django.shortcuts import HttpResponse
+from .models import Student, Position, Company, Application
+from .serializers import StudentSerializer, PositionReadSerializer, PositionWriteSerializer, CompanySerializer
+from .serializers import *
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
+from rest_framework import viewsets, permissions, status, mixins, generics
+from rest_framework.response import Response
+from .utils import generate_xls, get_curent_year
+>>>>>>> upstream/master
 
 
 class StudentSignUpView(generics.CreateAPIView):
@@ -31,6 +43,27 @@ class StudentSignUpView(generics.CreateAPIView):
             {"error": "Could not create Student"}, status=status.HTTP_400_BAD_REQUEST
         )
 
+<<<<<<< HEAD
+=======
+class StudentViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
+):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+
+class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = "id"
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+    )  # Temporarily till auth is done
+    queryset = (
+        Student.objects.filter()
+    )  # Requires current user instance for further progress
+    serializer_class = StudentSerializer
+>>>>>>> upstream/master
 
 class CoordinatorSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -55,6 +88,7 @@ class CoordinatorSignUpView(generics.CreateAPIView):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+<<<<<<< HEAD
 
 class StudentViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
@@ -87,18 +121,57 @@ class PositionViewSet(
 #   EXCEL SHEET GENERATION  #
 #############################
 
+=======
+class ApplicationViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(student=Student.objects.get(pk=self.request.user.pk))
+
+
+class PositionViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Position.objects.all()
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:
+            return PositionReadSerializer
+        print("here")
+        return PositionWriteSerializer
+
+class CompanyViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+
+    
+>>>>>>> upstream/master
 
 def get_xls(request, company_id):
     company = Company.objects.get(id=company_id)
 
     name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
     response = HttpResponse(content_type="application/ms-excel")
+<<<<<<< HEAD
     response["Content-Disposition"] = "attachment; filename=" + name_of_workbook
+=======
+    response["Content-Disposition"] = (
+        "attachment; filename=" + '"' + name_of_workbook + '"'
+    )
+>>>>>>> upstream/master
 
     wb = generate_xls(company)
     wb.save(response)
 
     return response
+<<<<<<< HEAD
 
 
 def generate_xls(company):
@@ -181,3 +254,5 @@ def generate_sheet(wb, position):
 
 def get_curent_year():
     return datetime.date.today().year
+=======
+>>>>>>> upstream/master
