@@ -7,11 +7,12 @@ from .serializers import (
 )
 from .serializers import *
 from .utils import generate_xls, get_curent_year
-from .permissions import IsTPOOrOwner, IsTPOOrReadOnly
+from .permissions import IsTPOOrOwner, IsTPOOrReadOnly, IsStaff
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import viewsets, permissions, status, mixins, generics
 from rest_framework.response import Response
 
@@ -112,24 +113,19 @@ class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
 
 
+@api_view(
+    ["GET",]
+)
+@permission_classes((IsStaff,))
 def get_xls(request, company_id):
-    if request.user.is_authenticated and (
-        request.user.is_tpo() or request.user.is_tpo()
-    ):
-        company = Company.objects.get(id=company_id)
+    company = Company.objects.get(id=company_id)
 
-        name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
-        response = HttpResponse(content_type="application/ms-excel")
-        response["Content-Disposition"] = (
-            "attachment; filename=" + '"' + name_of_workbook + '"'
-        )
+    name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
+    response = HttpResponse(content_type="application/ms-excel")
+    response["Content-Disposition"] = (
+        "attachment; filename=" + '"' + name_of_workbook + '"'
+    )
 
-        wb = generate_xls(company)
-        wb.save(response)
-
-    else:
-        response = JsonResponse(
-            {"error": "You do not have the permission to perform this action."}
-        )
-
+    wb = generate_xls(company)
+    wb.save(response)
     return response
