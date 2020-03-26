@@ -25,10 +25,22 @@ class StudentSignupSerializer(serializers.ModelSerializer):
         )
 
 
-class CompanySerializer:
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Company
-        fields = "__all__"
+        model = Student
+        fields = (
+            "id",
+            "username",
+            "f_name",
+            "l_name",
+            "email",
+            "sap_ID",
+            "pointer",
+            "profile_image",
+            "department",
+            "year",
+        )
+
 
 
 class CoordinatorSignupSerializer(serializers.ModelSerializer):
@@ -49,26 +61,19 @@ class CoordinatorSignupSerializer(serializers.ModelSerializer):
             "password2",
         )
 
-
-class StudentSerializer(serializers.ModelSerializer):
+class CompanySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Student
-        fields = (
-            "id",
-            "username",
-            "f_name",
-            "l_name",
-            "email",
-            "sap_ID",
-            "department",
-            "year",
-        )
+        model = Company
+        fields = "__all__"
 
-
-class PositionSerializer(serializers.ModelSerializer):
-    #    company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
+class PositionReadSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
+    class Meta:
+        model = Position
+        fields = "__all__"
 
+class PositionWriteSerializer(serializers.ModelSerializer):
+    company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
     class Meta:
         model = Position
         fields = "__all__"
