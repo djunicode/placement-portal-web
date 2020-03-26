@@ -57,9 +57,9 @@ class User(AbstractBaseUser):
 
     objects = MyAccountManager()
 
-    def save(self, *args, **kwargs): 
+    def save(self, *args, **kwargs):
         self.username = self.email
-        super(User, self).save(*args, **kwargs) 
+        super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.email
@@ -108,6 +108,7 @@ class Coordinator(User):
     department = models.CharField(
         max_length=5, blank=False, choices=DEPARTMENT_CHOICES_COORD
     )
+
 
 class Company(models.Model):
     name = models.CharField(max_length=128)

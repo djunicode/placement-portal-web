@@ -1,4 +1,3 @@
-from django.shortcuts import HttpResponse
 from .models import Student, Position, Company, Application
 from .serializers import (
     StudentSerializer,
@@ -7,12 +6,14 @@ from .serializers import (
     CompanySerializer,
 )
 from .serializers import *
+from .utils import generate_xls, get_curent_year
+from .permissions import IsTPOOrOwner, IsTPOOrReadOnly
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse
 from rest_framework import viewsets, permissions, status, mixins, generics
 from rest_framework.response import Response
-from .utils import generate_xls, get_curent_year
-from .permissions import IsStaffOrOwner, IsStaffOrReadOnly
 
 
 class StudentSignUpView(generics.CreateAPIView):
@@ -41,7 +42,7 @@ class StudentSignUpView(generics.CreateAPIView):
 class StudentViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
-    permission_classes = (IsStaffOrOwner,)
+    permission_classes = (IsTPOOrOwner,)
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
@@ -96,7 +97,7 @@ class ApplicationViewSet(
 
 
 class PositionViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsStaffOrReadOnly,)
+    permission_classes = (IsTPOOrReadOnly,)
     queryset = Position.objects.all()
 
     def get_serializer_class(self):
@@ -106,21 +107,29 @@ class PositionViewSet(viewsets.ModelViewSet):
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsTPOOrReadOnly,)
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
 
 def get_xls(request, company_id):
-    company = Company.objects.get(id=company_id)
+    if request.user.is_authenticated and (
+        request.user.is_tpo() or request.user.is_tpo()
+    ):
+        company = Company.objects.get(id=company_id)
 
-    name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
-    response = HttpResponse(content_type="application/ms-excel")
-    response["Content-Disposition"] = (
-        "attachment; filename=" + '"' + name_of_workbook + '"'
-    )
+        name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
+        response = HttpResponse(content_type="application/ms-excel")
+        response["Content-Disposition"] = (
+            "attachment; filename=" + '"' + name_of_workbook + '"'
+        )
 
-    wb = generate_xls(company)
-    wb.save(response)
+        wb = generate_xls(company)
+        wb.save(response)
+
+    else:
+        response = JsonResponse(
+            {"error": "You do not have the permission to perform this action."}
+        )
 
     return response
