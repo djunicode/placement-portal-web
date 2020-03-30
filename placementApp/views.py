@@ -7,7 +7,13 @@ from .serializers import (
 )
 from .serializers import *
 from .utils import generate_xls, get_curent_year
-from .permissions import IsTPOOrOwner, IsTPOOrReadOnly, IsStaff
+from .permissions import (
+    IsTPOOrOwner,
+    IsTPOOrReadOnly,
+    IsStaff,
+    ApplicationPermissions,
+    IsStudentOrReadOnly,
+)
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
@@ -50,12 +56,8 @@ class StudentViewSet(
 
 class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-    )  # Temporarily till auth is done
-    queryset = (
-        Student.objects.filter()
-    )  # Requires current user instance for further progress
+    permission_classes = (IsStudentOrReadOnly,)
+    queryset = Student.objects.filter()
     serializer_class = StudentSerializer
 
 
@@ -86,15 +88,33 @@ class CoordinatorSignUpView(generics.CreateAPIView):
 class ApplicationViewSet(
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.IsAuthenticated,)
-    queryset = Application.objects.all()
+    permission_classes = (ApplicationPermissions,)
     serializer_class = ApplicationSerializer
 
     def perform_create(self, serializer):
         serializer.save(student=Student.objects.get(pk=self.request.user.pk))
+        # Create an application using currently authenticated user
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == "PUT" or self.request.method == "PATCH":
+            # Position will also be read-only for Update operations,
+            # Hence a different serializer is required for Update operations
+            serializer_class = ApplicationSerializerPositionReadOnly
+
+        return serializer_class
+
+    def get_queryset(self):
+        if self.request.user.is_student():
+            return Application.objects.filter(student=self.request.user)
+            # Students should only be able to query their applications
+        return Application.objects.all()
+        # TPO / Co-ordinator can query any Application
 
 
 class PositionViewSet(viewsets.ModelViewSet):

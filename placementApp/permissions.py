@@ -39,3 +39,32 @@ class IsStaff(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return True
+
+
+class ApplicationPermissions(BasePermission):
+    message = "You do not have the permission to perform this action."
+
+    def has_permission(self, request, view):
+        if view.action == "create":
+            return request.user.is_authenticated and request.user.is_student()
+            # Only students can apply
+        return request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        if view.action == "retrieve":
+            return request.user.is_authenticated
+            # All authenticated users can Retrieve applications
+
+        return request.user.is_tpo()
+        # Only TPO can update applications
+
+
+class IsStudentOrReadOnly(BasePermission):
+    message = "You do not have required permission to perform this action"
+
+    def has_permission(self, request, view):
+        return request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        return request.user.is_student() and obj.email == request.user.email
+        # Students can view, update and delete their profiles
