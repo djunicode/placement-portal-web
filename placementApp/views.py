@@ -7,7 +7,13 @@ from .serializers import (
 )
 from .serializers import *
 from .utils import generate_xls, get_curent_year
-from .permissions import IsTPOOrOwner, IsTPOOrReadOnly, IsStaff, ApplicationPermissions, IsStudentOrReadOnly
+from .permissions import (
+    IsTPOOrOwner,
+    IsTPOOrReadOnly,
+    IsStaff,
+    ApplicationPermissions,
+    IsStudentOrReadOnly,
+)
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
@@ -50,9 +56,7 @@ class StudentViewSet(
 
 class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
-    permission_classes = (
-        IsStudentOrReadOnly,
-    )  # Temporarily till auth is done
+    permission_classes = (IsStudentOrReadOnly,)  # Temporarily till auth is done
     queryset = (
         Student.objects.filter()
     )  # Requires current user instance for further progress
