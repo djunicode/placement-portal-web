@@ -7,7 +7,7 @@ from .serializers import (
 )
 from .serializers import *
 from .utils import generate_xls, get_curent_year
-from .permissions import IsTPOOrOwner, IsTPOOrReadOnly, IsStaff
+from .permissions import IsTPOOrOwner, IsTPOOrReadOnly, IsStaff, ApplicationPermissions
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
@@ -90,7 +90,7 @@ class ApplicationViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (ApplicationPermissions,)
     serializer_class = ApplicationSerializer
 
     def perform_create(self, serializer):
