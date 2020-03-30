@@ -55,3 +55,15 @@ class ApplicationPermissions(BasePermission):
             return request.user.is_authenticated
 
         return request.user.is_tpo()
+
+class IsStudentOrReadOnly(BasePermission):
+    message = "You do not have required permission to perform this action"
+
+    def has_permission(self,request,view):
+        return request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        if request.method == "retrieve":
+            return request.user.is_authenticated
+        print(obj)
+        return request.user.is_student() and obj.email==request.user.email
