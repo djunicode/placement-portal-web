@@ -56,10 +56,8 @@ class StudentViewSet(
 
 class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
-    permission_classes = (IsStudentOrReadOnly,)  # Temporarily till auth is done
-    queryset = (
-        Student.objects.filter()
-    )  # Requires current user instance for further progress
+    permission_classes = (IsStudentOrReadOnly,)
+    queryset = Student.objects.filter()
     serializer_class = StudentSerializer
 
 
@@ -99,6 +97,7 @@ class ApplicationViewSet(
 
     def perform_create(self, serializer):
         serializer.save(student=Student.objects.get(pk=self.request.user.pk))
+        # Create an application using currently authenticated user
 
     def get_serializer_class(self):
         serializer_class = self.serializer_class
@@ -113,7 +112,9 @@ class ApplicationViewSet(
     def get_queryset(self):
         if self.request.user.is_student():
             return Application.objects.filter(student=self.request.user)
+            # Students should only be able to query their applications
         return Application.objects.all()
+        # TPO / Co-ordinator can query any Application
 
 
 class PositionViewSet(viewsets.ModelViewSet):

@@ -67,3 +67,4 @@ class IsStudentOrReadOnly(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.user.is_student() and obj.email == request.user.email
+        # Students can view, update and delete their profiles
