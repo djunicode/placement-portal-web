@@ -91,6 +91,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         model = Application
         fields = "__all__"
 
+
 class ApplicationSerializerPositionReadOnly(serializers.ModelSerializer):
     position = serializers.PrimaryKeyRelatedField(read_only=True)
     student = serializers.PrimaryKeyRelatedField(read_only=True)

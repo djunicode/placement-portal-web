@@ -101,8 +101,8 @@ class ApplicationViewSet(
         serializer_class = self.serializer_class
 
         if self.request.method == "PUT" or self.request.method == "PATCH":
-            #Position will also be read-only for Update operations,
-            #Hence a different serializer is required for Update operations
+            # Position will also be read-only for Update operations,
+            # Hence a different serializer is required for Update operations
             serializer_class = ApplicationSerializerPositionReadOnly
 
         return serializer_class
