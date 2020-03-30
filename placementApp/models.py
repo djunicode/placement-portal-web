@@ -57,6 +57,10 @@ class User(AbstractBaseUser):
 
     objects = MyAccountManager()
 
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        super(User, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.email
 
@@ -67,6 +71,15 @@ class User(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+
+    def is_student(self):
+        return self.role == "STUDENT"
+
+    def is_co(self):
+        return self.role == "CO"
+
+    def is_tpo(self):
+        return self.role == "TPO"
 
 
 class Student(User):
@@ -81,7 +94,7 @@ class Student(User):
         default=None,
         unique=True,
     )
-    
+
     department = models.CharField(max_length=5, blank=False, choices=DEPARTMENT_CHOICES)
     year = models.CharField(max_length=2, blank=False, choices=YEAR_CHOICES)
     Stud_req = ["department", "year", "sap_ID"]
@@ -95,24 +108,6 @@ class Coordinator(User):
     department = models.CharField(
         max_length=5, blank=False, choices=DEPARTMENT_CHOICES_COORD
     )
-
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Coordinator)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Student)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
 
 
 class Company(models.Model):
@@ -154,4 +149,3 @@ class Application(models.Model):
         return (
             self.student.f_name + " " + self.student.l_name + ", " + self.position.title
         )
-
