@@ -86,6 +86,7 @@ class CoordinatorSignUpView(generics.CreateAPIView):
 class ApplicationViewSet(
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
@@ -95,6 +96,16 @@ class ApplicationViewSet(
 
     def perform_create(self, serializer):
         serializer.save(student=Student.objects.get(pk=self.request.user.pk))
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == "PUT" or self.request.method == "PATCH":
+            #Position will also be read-only for Update operations,
+            #Hence a different serializer is required for Update operations
+            serializer_class = ApplicationSerializerPositionReadOnly
+
+        return serializer_class
 
 
 class PositionViewSet(viewsets.ModelViewSet):
