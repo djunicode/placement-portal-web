@@ -91,7 +91,6 @@ class ApplicationViewSet(
     viewsets.GenericViewSet,
 ):
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
     def perform_create(self, serializer):
@@ -106,6 +105,11 @@ class ApplicationViewSet(
             serializer_class = ApplicationSerializerPositionReadOnly
 
         return serializer_class
+
+    def get_queryset(self):
+        if self.request.user.is_student():
+            return Application.objects.filter(student=self.request.user)
+        return Application.objects.all()
 
 
 class PositionViewSet(viewsets.ModelViewSet):
