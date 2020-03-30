@@ -12,18 +12,19 @@ class EditDetail extends Component{
     this.saveModalDetails = this.saveModalDetails.bind(this);
 
     this.state={
+      
       modalIsOpen : false,
       name: 'Google',
     category:'Super-Dream',
     link:'www.googleinfo.com',
+  
     addFields:[{
       position:'Computer-engineer',
        noOfPos:5,
        Interviewdate:'24-06-2020',
     deadline:'24-05-2020',
     packages:'Rs.24,00,000',
-    addDets:'The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview'},
-    
+    addDets:'The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview'}, 
   ]
   }
   }
@@ -40,7 +41,6 @@ saveModalDetails=(company)=>{
 toggleModalEdit=()=>{
   this.setState({
       modalIsOpen : ! this.state.modalIsOpen,  
-      
   });
 console.log(this.state)
 }

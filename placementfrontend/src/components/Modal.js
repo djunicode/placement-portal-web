@@ -14,24 +14,22 @@ class Modals extends Component {
     addFields:this.props.addFields
     }
   }
-  // componentDidMount(){
-  //   this.setState({
-  //           name: "",
-  //            category:"",
-  //             modalIsOpen:"",
-  //          link:"",
-  //           addFields:""
-  //                  });
-  // }
-   componentWillReceiveProps(nextProps){
-     this.setState({
-       name: nextProps.name,
-      category:nextProps.category,
-       modalIsOpen:nextProps.modalIsOpen,
-       link:nextProps.link,
-       addFields:nextProps.addFields
-     });
- }
+  
+    componentWillReceiveProps(nextProps){
+      this.setState({
+        name: nextProps.name,
+       category:nextProps.category,
+        modalIsOpen:nextProps.modalIsOpen,
+        link:nextProps.link,
+        addFields:[{
+          position:"",
+          noOfPos:"",
+          Interviewdate:"",
+          deadline:"",
+          packages:"",
+          addDets:""}]
+      });
+  }
     
 handleChange = (e) => {
     if(["position","noOfPos","Interviewdate","deadline","packages","addDets"].includes(e.target.name)){
