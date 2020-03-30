@@ -64,7 +64,4 @@ class IsStudentOrReadOnly(BasePermission):
         return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
-        if request.method == "retrieve":
-            return request.user.is_authenticated
-        print(obj)
         return request.user.is_student() and obj.email == request.user.email
