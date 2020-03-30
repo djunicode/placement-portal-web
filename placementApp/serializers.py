@@ -42,7 +42,6 @@ class StudentSerializer(serializers.ModelSerializer):
         )
 
 
-
 class CoordinatorSignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         write_only=True, required=True, style={"input_type": "password"},
@@ -61,19 +60,24 @@ class CoordinatorSignupSerializer(serializers.ModelSerializer):
             "password2",
         )
 
+
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = "__all__"
 
+
 class PositionReadSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
+
     class Meta:
         model = Position
         fields = "__all__"
 
+
 class PositionWriteSerializer(serializers.ModelSerializer):
     company = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all())
+
     class Meta:
         model = Position
         fields = "__all__"
