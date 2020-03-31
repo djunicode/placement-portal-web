@@ -145,6 +145,9 @@ class Application(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1")
     submitted_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ("student", "position")
+
     def __str__(self):
         return (
             self.student.f_name + " " + self.student.l_name + ", " + self.position.title
