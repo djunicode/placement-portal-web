@@ -21,13 +21,7 @@ class Modals extends Component {
        category:nextProps.category,
         modalIsOpen:nextProps.modalIsOpen,
         link:nextProps.link,
-        addFields:[{
-          position:"",
-          noOfPos:"",
-          Interviewdate:"",
-          deadline:"",
-          packages:"",
-          addDets:""}]
+        addFields:this.props.addFields
       });
   }
     
@@ -73,6 +67,7 @@ handleSave() {
   console.log(this.state);
   this.props.saveModalDetails(this.state);
 }
+
   render() {
         const company=this.state
         const toggleModalEdit=this.props.toggleModalEdit
@@ -84,7 +79,7 @@ handleSave() {
                     Edit Details
                 </ModalHeader>
                 <ModalBody>
-                <div className="grid-item"><form>
+                <div className="grid-item"><form onSubmit={this.handleSave} >
          <div className="editGridModal">
           <input type="text"  defaultValue={company.name}  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
           <select className="form-control"  defaultValue={company.category} id="exampleFormControlSelect1"placeholder="Category:" onChange={this.handleChange} name="category"  required>
@@ -119,12 +114,12 @@ handleSave() {
 
          
         
-<input type="text" className="addInput" defaultValue={company.link} placeholder="Link" onChange={this.handleChange} name="link" required />  
+<input type="text" className="addInput" defaultValue={company.link} placeholder="Link" onChange={this.handleChange} name="link"   required="required" />  
         
         </form></div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className="btnModal"  onClick={() => { this.handleSave()}}>Save</button>
+                    <button type="submit" className="btnModal"  onClick={() => { this.handleSave()}}>Save</button>
                     <button className="btnModal" onClick={() => { toggleModalEdit()}} >cancel</button>
                 </ModalFooter>
             </Modal>
