@@ -55,17 +55,17 @@ label{
     color: #DADADA;
     padding: 5px;
   }
-   img{
-     border-radius:50%;
+   img{  
      position: relative;
-    
    }
    .pic1{
      margin: 30px 10px 30px 20px;
      width: 60%;
+     border-radius:50%;
    }
   .pic2{
     transform: translate(-62px,-65px);
+    border-radius:50%;
     width: 115px;
     height: 115px;
   }

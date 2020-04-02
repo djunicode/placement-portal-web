@@ -5,6 +5,7 @@ import Login from './pages/Login.js'
 import StudentSU from './pages/StudentSU.js'
 import StaffSU from './pages/StaffSU.js'
 import Studentprofile from './pages/Studentprofile';
+import PlacementCoDashboard from './pages/PlacementCoDashboard'
 import Tpo2 from './pages/Tpo2';
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -21,7 +22,7 @@ function App() {
         <Route path='/staffSignup' component={StaffSU}>
   </Route>*/}
       {/*<Tpo2 />*/}
-      <Studentprofile />
+      <Tpo2 />
       </div>
     </BrowserRouter>
 

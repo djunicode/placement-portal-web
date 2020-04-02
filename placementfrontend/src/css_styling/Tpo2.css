@@ -67,6 +67,11 @@ body {
     margin: 2px;
     letter-spacing: 2px;
   }
+  .listpic{
+    height:50px;
+    width: 50px;
+
+  }
   .bgw1
   {
     background-color: white;
@@ -118,6 +123,7 @@ body {
     background: #F3F3F3;
     width: 95%;
     left:2%;
+    transform: translateY(-40px);
    
   }
   .button_display{
