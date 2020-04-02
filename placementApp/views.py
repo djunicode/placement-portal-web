@@ -8,7 +8,7 @@ from .serializers import (
 from .serializers import *
 from .utils import generate_xls, get_curent_year
 from .permissions import (
-    IsTPOOrOwner,
+    IsStaffOrOwner,
     IsTPOOrReadOnly,
     IsStaff,
     ApplicationPermissions,
@@ -49,7 +49,7 @@ class StudentSignUpView(generics.CreateAPIView):
 class StudentViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
 ):
-    permission_classes = (IsTPOOrOwner,)
+    permission_classes = (IsStaffOrOwner,)
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
