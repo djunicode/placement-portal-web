@@ -36,6 +36,12 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=40, blank=True, null=True)
     f_name = models.CharField(max_length=20)
     l_name = models.CharField(max_length=20)
+    profile_image = models.ImageField(
+        default="profile_images/default.png",
+        upload_to="profile_images",
+        blank=True,
+        null=True,
+    )
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -45,11 +51,15 @@ class User(AbstractBaseUser):
     role = models.CharField(max_length=7, blank=False, choices=ROLE_CHOICES)
 
     def __str__(self):
-        return self.user.username
+        return self.f_name + " " + self.l_name
 
     USERNAME_FIELD = "email"
 
     objects = MyAccountManager()
+
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.email
@@ -61,6 +71,15 @@ class User(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+
+    def is_student(self):
+        return self.role == "STUDENT"
+
+    def is_co(self):
+        return self.role == "CO"
+
+    def is_tpo(self):
+        return self.role == "TPO"
 
 
 class Student(User):
@@ -89,24 +108,6 @@ class Coordinator(User):
     department = models.CharField(
         max_length=5, blank=False, choices=DEPARTMENT_CHOICES_COORD
     )
-
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Coordinator)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Student)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
 
 
 class Company(models.Model):
@@ -145,4 +146,6 @@ class Application(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.student.username + ", " + self.position.title
+        return (
+            self.student.f_name + " " + self.student.l_name + ", " + self.position.title
+        )

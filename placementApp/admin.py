@@ -35,7 +35,7 @@ class CoordinatorAdmin(UserAdmin):
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ("name", "category", "link")
+    list_display = ("name", "category", "link", "id")
     search_fields = ("name", "category")
 
 
@@ -47,6 +47,7 @@ class PositionAdmin(admin.ModelAdmin):
         "package",
         "interview_date",
         "deadline",
+        "id",
     )
     search_fields = ("title", "company")
 
