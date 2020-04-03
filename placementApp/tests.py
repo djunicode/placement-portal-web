@@ -42,19 +42,18 @@ class SignUpTestCase(APITestCase):
 
 
 class StudentProfileViewSetTestCase(APITestCase):
+
     def setUp(self):
         self.data = {
             "f_name": "Sakshi",
             "l_name": "Uppoor",
             "password": "pass@123",
         }
-        self.student = User.objects.create_user(
-            **self.data, email="s1@s1.com", role="STUDENT"
-        )
-        self.student2 = User.objects.create_user(
-            **self.data, email="s2@s2.com", role="STUDENT"
-        )
-        self.co = User.objects.create_user(**self.data, email="c@c.com", role="CO")
+        self.student = Student.objects.create_user(
+            **self.data, email="s@s.com", role="STUDENT", sap_ID = "60004180090", pointer= "9.30", department= "COMPS", year= "BE")
+        self.student2 = Student.objects.create_user(
+            **self.data, email="s2@s2.com", role="STUDENT", sap_ID = "60004180091", pointer= "9.30", department= "COMPS", year= "BE")
+        self.co = Coordinator.objects.create_user(**self.data, email="c@c.com", role="CO", department= "COMPS")
         self.tpo = User.objects.create_user(**self.data, email="t@t.com", role="TPO")
         self.student_token = Token.objects.create(user=self.student)
         self.student2_token = Token.objects.create(user=self.student2)
