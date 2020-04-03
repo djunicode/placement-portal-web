@@ -85,3 +85,28 @@ class StudentProfileViewSetTestCase(APITestCase):
         self.api_authentication(self.tpo_token)
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_student_retreive_unauthorized(self):
+        self.client.force_authenticate(user=None)
+        response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_student_retreive_studentowner(self):
+        self.api_authentication(self.student_token)
+        response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_student_retreive_student(self):
+        self.api_authentication(self.student2_token)
+        response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_student_retreive_co(self):
+        self.api_authentication(self.co_token)
+        response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_student_retreive_tpo(self):
+        self.api_authentication(self.tpo_token)
+        response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
