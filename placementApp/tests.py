@@ -42,7 +42,6 @@ class SignUpTestCase(APITestCase):
 
 
 class StudentProfileViewSetTestCase(APITestCase):
-
     def setUp(self):
         self.data = {
             "f_name": "Sakshi",
@@ -52,12 +51,28 @@ class StudentProfileViewSetTestCase(APITestCase):
 
         # Creating students
         self.student = Student.objects.create_user(
-            **self.data, email="s@s.com", role="STUDENT", sap_ID = "60004180090", pointer= "9.30", department= "COMPS", year= "BE")
+            **self.data,
+            email="s@s.com",
+            role="STUDENT",
+            sap_ID="60004180090",
+            pointer="9.30",
+            department="COMPS",
+            year="BE"
+        )
         self.student2 = Student.objects.create_user(
-            **self.data, email="s2@s2.com", role="STUDENT", sap_ID = "60004180091", pointer= "9.30", department= "COMPS", year= "BE")
+            **self.data,
+            email="s2@s2.com",
+            role="STUDENT",
+            sap_ID="60004180091",
+            pointer="9.30",
+            department="COMPS",
+            year="BE"
+        )
 
         # Creating co-ordinator
-        self.co = Coordinator.objects.create_user(**self.data, email="c@c.com", role="CO", department= "COMPS")
+        self.co = Coordinator.objects.create_user(
+            **self.data, email="c@c.com", role="CO", department="COMPS"
+        )
 
         # Creating TPO
         self.tpo = User.objects.create_user(**self.data, email="t@t.com", role="TPO")
@@ -70,7 +85,7 @@ class StudentProfileViewSetTestCase(APITestCase):
 
         # Defining endpoints
         self.list_url = reverse("Students-list")
-        self.retrieve_url = reverse("Students-detail", kwargs={"pk":self.student.id})
+        self.retrieve_url = reverse("Students-detail", kwargs={"pk": self.student.id})
 
     # Authenticating the user
     def api_authentication(self, token):
