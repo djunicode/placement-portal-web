@@ -42,7 +42,6 @@ class SignUpTestCase(APITestCase):
 
 
 class StudentProfileViewSetTestCase(APITestCase):
-
     def setUp(self):
         self.data = {
             "f_name": "Sakshi",
@@ -52,12 +51,28 @@ class StudentProfileViewSetTestCase(APITestCase):
 
         # Creating students
         self.student = Student.objects.create_user(
-            **self.data, email="s@s.com", role="STUDENT", sap_ID = "60004180090", pointer= "9.30", department= "COMPS", year= "BE")
+            **self.data,
+            email="s@s.com",
+            role="STUDENT",
+            sap_ID="60004180090",
+            pointer="9.30",
+            department="COMPS",
+            year="BE"
+        )
         self.student2 = Student.objects.create_user(
-            **self.data, email="s2@s2.com", role="STUDENT", sap_ID = "60004180091", pointer= "9.30", department= "COMPS", year= "BE")
+            **self.data,
+            email="s2@s2.com",
+            role="STUDENT",
+            sap_ID="60004180091",
+            pointer="9.30",
+            department="COMPS",
+            year="BE"
+        )
 
         # Creating co-ordinator
-        self.co = Coordinator.objects.create_user(**self.data, email="c@c.com", role="CO", department= "COMPS")
+        self.co = Coordinator.objects.create_user(
+            **self.data, email="c@c.com", role="CO", department="COMPS"
+        )
 
         # Creating TPO
         self.tpo = User.objects.create_user(**self.data, email="t@t.com", role="TPO")
@@ -70,7 +85,7 @@ class StudentProfileViewSetTestCase(APITestCase):
 
         # Defining endpoints
         self.list_url = reverse("Students-list")
-        self.retrieve_url = reverse("Students-detail", kwargs={"pk":self.student.id})
+        self.retrieve_url = reverse("Students-detail", kwargs={"pk": self.student.id})
 
     # Authenticating the user
     def api_authentication(self, token):
@@ -110,6 +125,7 @@ class StudentProfileViewSetTestCase(APITestCase):
     def test_student_retreive_studentowner(self):
         self.api_authentication(self.student_token)
         response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.data["email"], self.student.email)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     # Testing students detail view for students other than the owner
@@ -122,10 +138,12 @@ class StudentProfileViewSetTestCase(APITestCase):
     def test_student_retreive_co(self):
         self.api_authentication(self.co_token)
         response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.data["email"], self.student.email)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     # Testing students detail view for tpo
     def test_student_retreive_tpo(self):
         self.api_authentication(self.tpo_token)
         response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.data["email"], self.student.email)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
