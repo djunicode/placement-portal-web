@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
-
+# Signup Test Cases
 class SignUpTestCase(APITestCase):
 
     # Testing student signup endpoint
@@ -41,6 +41,7 @@ class SignUpTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
+# Student Endpoints
 class StudentProfileViewSetTestCase(APITestCase):
     def setUp(self):
         self.data = {
