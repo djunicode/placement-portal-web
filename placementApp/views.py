@@ -5,6 +5,7 @@ from .serializers import (
     PositionWriteSerializer,
     CompanySerializer,
 )
+import datetime
 from .serializers import *
 from .utils import generate_xls, get_curent_year
 from .permissions import (
@@ -119,12 +120,16 @@ class ApplicationViewSet(
 
 class PositionViewSet(viewsets.ModelViewSet):
     permission_classes = (IsTPOOrReadOnly,)
-    queryset = Position.objects.all()
 
     def get_serializer_class(self):
         if self.action in ["list", "retrieve"]:
             return PositionReadSerializer
         return PositionWriteSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_student():
+            return Position.objects.filter(deadline__gt=datetime.datetime.now())
+        return Position.objects.all()
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
