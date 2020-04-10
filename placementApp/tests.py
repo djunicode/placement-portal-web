@@ -11,7 +11,7 @@ from rest_framework.test import APITestCase
 class SignUpTestCase(APITestCase):
 
     # Testing student signup endpoint
-    def student_signup(self):
+    def test_student_signup(self):
         data = {
             "f_name": "Sakshi",
             "l_name": "Uppoor",
@@ -27,7 +27,7 @@ class SignUpTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     # Testing coordinator signup endpoint
-    def coordinator_signup(self):
+    def test_coordinator_signup(self):
         data = {
             "f_name": "Sakshi",
             "l_name": "Uppoor",
@@ -37,7 +37,7 @@ class SignUpTestCase(APITestCase):
             "password2": "pass@123",
         }
         response = self.client.post("/coordinator_signup/", data)
-        print(response.content)
+        # print(response.content)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
