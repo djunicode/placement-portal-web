@@ -92,41 +92,18 @@ class StudentProfileViewSetTestCase(APITestCase):
     def api_authentication(self, token):
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
 
-    # Testing students list view for co-ordinators
-    def test_student_list_co(self):
+    # Testing students list view for co and tpo
+    def test_student_list_co_tpo(self):
         self.api_authentication(self.co_token)
+        #self.api_authentication(self.tpo_token)
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    # Testing students list view for tpo
-    def test_student_list_tpo(self):
-        self.api_authentication(self.tpo_token)
-        response = self.client.get(self.list_url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    # Testing students detail view for unauthorized users
-    def test_student_retreive_unauthorized(self):
-        self.client.force_authenticate(user=None)
-        response = self.client.get(self.retrieve_url)
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
-    # Testing students detail view for student who owns the profile
-    def test_student_retreive_studentowner(self):
+    # Testing students detail view for student who owns the profile, co-ordinator and tpo
+    def test_student_retreive_studentowner_co_tpo(self):
         self.api_authentication(self.student_token)
-        response = self.client.get(self.retrieve_url)
-        self.assertEqual(response.data["email"], self.student.email)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    # Testing students detail view for co-ordinator
-    def test_student_retreive_co(self):
-        self.api_authentication(self.co_token)
-        response = self.client.get(self.retrieve_url)
-        self.assertEqual(response.data["email"], self.student.email)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    # Testing students detail view for tpo
-    def test_student_retreive_tpo(self):
-        self.api_authentication(self.tpo_token)
+        #self.api_authentication(self.co_token)
+        #self.api_authentication(self.tpo_token)
         response = self.client.get(self.retrieve_url)
         self.assertEqual(response.data["email"], self.student.email)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
