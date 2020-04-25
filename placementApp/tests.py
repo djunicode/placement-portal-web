@@ -45,7 +45,6 @@ class SignUpTestCase(APITestCase):
             "password2": "pass@123",
         }
         response = self.client.post("/coordinator_signup/", data)
-        # print(response.content)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
@@ -78,16 +77,7 @@ class StudentProfileViewSetTestCase(APITestCase):
             department="COMPS",
             year="BE"
         )
-        self.student2 = Student.objects.create_user(
-            **self.data,
-            email="s2@s2.com",
-            role="STUDENT",
-            sap_ID="60004180091",
-            pointer="9.30",
-            department="COMPS",
-            year="BE"
-        )
-
+        
         # Creating co-ordinator
         self.co = Coordinator.objects.create_user(
             **self.data, email="c@c.com", role="CO", department="COMPS"
@@ -98,7 +88,6 @@ class StudentProfileViewSetTestCase(APITestCase):
 
         # Creating Tokens
         self.student_token = Token.objects.create(user=self.student)
-        self.student2_token = Token.objects.create(user=self.student2)
         self.co_token = Token.objects.create(user=self.co)
         self.tpo_token = Token.objects.create(user=self.tpo)
 
