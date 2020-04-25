@@ -85,8 +85,8 @@ class StudentProfileViewSetTestCase(APITestCase):
         self.tpo_token = Token.objects.create(user=self.tpo)
 
         # Defining endpoints
-        self.list_url = reverse("Students-list")
-        self.retrieve_url = reverse("Students-detail", kwargs={"pk": self.student.id})
+        self.list_url = reverse("Student-list")
+        self.retrieve_url = reverse("Student-detail", kwargs={"pk": self.student.id})
 
     # Authenticating the user
     def api_authentication(self, token):
