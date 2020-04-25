@@ -221,7 +221,7 @@ class CompanyViewSetTestCase(APITestCase):
     
 
     # Testing company detail view for student, co-ordinator and tpo
-    def test_company_retreive_tpo(self):
+    def test_company_retreive_student_co_tpo(self):
         self.api_authentication(self.student_token)
         #self.api_authentication(self.co_token)
         #self.api_authentication(self.tpo_token)
@@ -341,7 +341,7 @@ class PositionViewSetTestCase(APITestCase):
     
 
     # Testing position detail view for student, co-ordinator and tpo
-    def test_position_retreive_tpo(self):
+    def test_position_retreive_student_co_tpo(self):
         self.api_authentication(self.student_token)
         #self.api_authentication(self.co_token)
         #self.api_authentication(self.tpo_token)
@@ -449,7 +449,7 @@ class ApplicationViewSetTestCase(APITestCase):
 
 
     # Testing application create view for student
-    def test_application_create_tpo(self):
+    def test_application_create_student(self):
         self.api_authentication(self.student_token)
         response = self.client.post(self.list_url, self.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -465,7 +465,7 @@ class ApplicationViewSetTestCase(APITestCase):
     
 
     # Testing application detail view for student, co-ordinator and tpo
-    def test_application_retreive_tpo(self):
+    def test_application_retreive_student_co_tpo(self):
         self.api_authentication(self.student_token)
         #self.api_authentication(self.co_token)
         #self.api_authentication(self.tpo_token)
