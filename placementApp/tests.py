@@ -262,7 +262,7 @@ class PositionViewSetTestCase(APITestCase):
             "title": "ML Dev",
             "vacancies": 23,
             "interview_date": timezone.now(),
-            "deadline": timezone.now(),
+            "deadline": timezone.now() + timezone.timedelta(days=1),
             "package": "10 lpa",
         }
 
