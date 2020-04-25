@@ -13,6 +13,11 @@ import pytz
 # Signup Test Cases
 class SignUpTestCase(APITestCase):
 
+    #############################
+    #           Tests           #   
+    #############################
+
+
     # Testing student signup endpoint
     def test_student_signup(self):
         data = {
@@ -47,11 +52,21 @@ class SignUpTestCase(APITestCase):
 # Student Endpoints
 class StudentProfileViewSetTestCase(APITestCase):
     def setUp(self):
+
+        #########################
+        #   Data Dictionaries   #
+        #########################
+
         self.data = {
             "f_name": "Sakshi",
             "l_name": "Uppoor",
             "password": "pass@123",
         }
+
+
+        #########################
+        #   Creating objects    #
+        #########################
 
         # Creating students
         self.student = Student.objects.create_user(
@@ -87,13 +102,27 @@ class StudentProfileViewSetTestCase(APITestCase):
         self.co_token = Token.objects.create(user=self.co)
         self.tpo_token = Token.objects.create(user=self.tpo)
 
-        # Defining endpoints
+
+        #########################
+        #   Defining endpoints  #
+        #########################
+
         self.list_url = reverse("Student-list")
         self.retrieve_url = reverse("Student-detail", kwargs={"pk": self.student.id})
 
-    # Authenticating the user
+
+    ###############################
+    #   Authenticating the user   #
+    ###############################
+
     def api_authentication(self, token):
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+
+
+    #############################
+    #           Tests           #   
+    #############################
+
 
     # Testing students list view for co and tpo
     def test_student_list_co_tpo(self):
@@ -115,6 +144,11 @@ class StudentProfileViewSetTestCase(APITestCase):
 # Company Endpoints
 class CompanyViewSetTestCase(APITestCase):
     def setUp(self):
+
+        #########################
+        #   Data Dictionaries   #
+        #########################
+
         self.student_data = {
             "f_name": "Sakshi",
             "l_name": "Uppoor",
@@ -126,6 +160,11 @@ class CompanyViewSetTestCase(APITestCase):
             "category":"S",
             "link":"http://www.abc.com",
         }
+
+
+        #########################
+        #   Creating objects    #
+        #########################
 
         # Creating students
         self.student = Student.objects.create_user(
@@ -154,14 +193,27 @@ class CompanyViewSetTestCase(APITestCase):
         # Creating position
         self.company = Company.objects.create(**self.data)
 
-        # Defining endpoints
-        #self.create_url = reverse("Company-create")
+
+        #########################
+        #   Defining endpoints  #
+        #########################
+
         self.list_url = reverse("Company-list")
         self.retrieve_url = reverse("Company-detail", kwargs={"pk": self.company.id})
         
-    # Authenticating the user
+
+    ###############################
+    #   Authenticating the user   #
+    ###############################
+
     def api_authentication(self, token):
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+
+
+    #############################
+    #           Tests           #   
+    #############################
+
 
     # Testing company create view for tpo
     def test_company_create_tpo(self):
@@ -169,6 +221,7 @@ class CompanyViewSetTestCase(APITestCase):
         response = self.client.post(self.list_url, self.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
     
+
     # Testing company list view for student, co and tpo
     def test_company_list_student_co_tpo(self):
         self.api_authentication(self.student_token)
@@ -177,6 +230,7 @@ class CompanyViewSetTestCase(APITestCase):
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
+
     # Testing company detail view for student, co-ordinator and tpo
     def test_company_retreive_tpo(self):
         self.api_authentication(self.student_token)
@@ -186,6 +240,7 @@ class CompanyViewSetTestCase(APITestCase):
         self.assertEqual(response.data["name"], self.company.name)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
+
     # Testing company update view for tpo
     def test_company_update_tpo(self):
         self.api_authentication(self.tpo_token)
@@ -197,6 +252,11 @@ class CompanyViewSetTestCase(APITestCase):
 # Position Endpoints
 class PositionViewSetTestCase(APITestCase):
     def setUp(self):
+
+        #########################
+        #   Data Dictionaries   #
+        #########################
+
         self.student_data = {
             "f_name": "Sakshi",
             "l_name": "Uppoor",
@@ -216,6 +276,11 @@ class PositionViewSetTestCase(APITestCase):
             "deadline": timezone.now(),
             "package": "10 lpa",
         }
+
+
+        #########################
+        #   Creating objects    #
+        #########################
 
         # Creating students
         self.student = Student.objects.create_user(
@@ -248,14 +313,27 @@ class PositionViewSetTestCase(APITestCase):
         self.position = Position.objects.create(**self.data, company=self.company)
         self.data["company"] = self.company.id
 
-        # Defining endpoints
-        #self.create_url = reverse("Company-create")
+
+        #########################
+        #   Defining endpoints  #
+        #########################
+
         self.list_url = reverse("Position-list")
         self.retrieve_url = reverse("Position-detail", kwargs={"pk": self.position.id})
-        
-    # Authenticating the user
+
+
+    ###############################
+    #   Authenticating the user   #
+    ###############################
+
     def api_authentication(self, token):
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+
+
+    #############################
+    #           Tests           #   
+    #############################
+
 
     # Testing position create view for tpo
     def test_position_create_tpo(self):
@@ -263,6 +341,7 @@ class PositionViewSetTestCase(APITestCase):
         response = self.client.post(self.list_url, self.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
     
+
     # Testing position list view for student, co and tpo
     def test_position_list_student_co_tpo(self):
         self.api_authentication(self.student_token)
@@ -271,6 +350,7 @@ class PositionViewSetTestCase(APITestCase):
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
+
     # Testing position detail view for student, co-ordinator and tpo
     def test_position_retreive_tpo(self):
         self.api_authentication(self.student_token)
@@ -280,6 +360,7 @@ class PositionViewSetTestCase(APITestCase):
         self.assertEqual(response.data["title"], self.position.title)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
+
     # Testing position update view for tpo
     def test_position_update_tpo(self):
         self.api_authentication(self.tpo_token)
