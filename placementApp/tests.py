@@ -7,6 +7,9 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
+from django.utils import timezone
+import pytz
+
 # Signup Test Cases
 class SignUpTestCase(APITestCase):
 
@@ -148,7 +151,7 @@ class CompanyViewSetTestCase(APITestCase):
         self.co_token = Token.objects.create(user=self.co)
         self.tpo_token = Token.objects.create(user=self.tpo)
 
-        # Creating company
+        # Creating position
         self.company = Company.objects.create(**self.data)
 
         # Defining endpoints
@@ -188,4 +191,98 @@ class CompanyViewSetTestCase(APITestCase):
         self.api_authentication(self.tpo_token)
         response = self.client.patch(self.retrieve_url, {"name":"XYZ"})
         self.assertEqual(response.data["name"], "XYZ")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        
+# Position Endpoints
+class PositionViewSetTestCase(APITestCase):
+    def setUp(self):
+        self.student_data = {
+            "f_name": "Sakshi",
+            "l_name": "Uppoor",
+            "password": "pass@123",
+        }
+
+        self.company_data = {
+            "name":"ABC",
+            "category":"S",
+            "link":"http://www.abc.com",
+        }
+
+        self.data = {
+            "title": "ML Dev",
+            "vacancies": 23,
+            "interview_date": timezone.now(),
+            "deadline": timezone.now(),
+            "package": "10 lpa",
+        }
+
+        # Creating students
+        self.student = Student.objects.create_user(
+            **self.student_data,
+            email="s@s.com",
+            role="STUDENT",
+            sap_ID="60004180090",
+            pointer="9.30",
+            department="COMPS",
+            year="BE"
+        ) 
+
+        # Creating co-ordinator
+        self.co = Coordinator.objects.create_user(
+            **self.student_data, email="c@c.com", role="CO", department="COMPS"
+        )
+
+        # Creating TPO
+        self.tpo = User.objects.create_user(**self.student_data, email="t@t.com", role="TPO")
+
+        # Creating Tokens
+        self.student_token = Token.objects.create(user=self.student)
+        self.co_token = Token.objects.create(user=self.co)
+        self.tpo_token = Token.objects.create(user=self.tpo)
+
+        # Creating company
+        self.company = Company.objects.create(**self.company_data)
+
+        # Creating position
+        self.position = Position.objects.create(**self.data, company=self.company)
+        self.data["company"] = self.company.id
+
+        # Defining endpoints
+        #self.create_url = reverse("Company-create")
+        self.list_url = reverse("Position-list")
+        self.retrieve_url = reverse("Position-detail", kwargs={"pk": self.position.id})
+        
+    # Authenticating the user
+    def api_authentication(self, token):
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+
+    # Testing position create view for tpo
+    def test_position_create_tpo(self):
+        self.api_authentication(self.tpo_token)
+        response = self.client.post(self.list_url, self.data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    
+    # Testing position list view for student, co and tpo
+    def test_position_list_student_co_tpo(self):
+        self.api_authentication(self.student_token)
+        #self.api_authentication(self.co_token)
+        #self.api_authentication(self.tpo_token)
+        response = self.client.get(self.list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+    # Testing position detail view for student, co-ordinator and tpo
+    def test_position_retreive_tpo(self):
+        self.api_authentication(self.student_token)
+        #self.api_authentication(self.co_token)
+        #self.api_authentication(self.tpo_token)
+        response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.data["title"], self.position.title)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+    # Testing position update view for tpo
+    def test_position_update_tpo(self):
+        self.api_authentication(self.tpo_token)
+        response = self.client.patch(self.retrieve_url, {"title":"Web Dev"})
+        self.assertEqual(response.data["title"], "Web Dev")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
