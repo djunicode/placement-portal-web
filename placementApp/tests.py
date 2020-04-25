@@ -356,3 +356,127 @@ class PositionViewSetTestCase(APITestCase):
         response = self.client.patch(self.retrieve_url, {"title":"Web Dev"})
         self.assertEqual(response.data["title"], "Web Dev")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+# Application Endpoints
+class ApplicationViewSetTestCase(APITestCase):
+    def setUp(self):
+
+        #########################
+        #   Data Dictionaries   #
+        #########################
+
+        self.student_data = {
+            "f_name": "Sakshi",
+            "l_name": "Uppoor",
+            "password": "pass@123",
+        }
+
+        self.company_data = {
+            "name":"ABC",
+            "category":"S",
+            "link":"http://www.abc.com",
+        }
+
+        self.position_data = {
+            "title": "ML Dev",
+            "vacancies": 23,
+            "interview_date": timezone.now(),
+            "deadline": timezone.now(),
+            "package": "10 lpa",
+        }
+
+        #########################
+        #   Creating objects    #
+        #########################
+
+        # Creating students
+        self.student = Student.objects.create_user(
+            **self.student_data,
+            email="s@s.com",
+            role="STUDENT",
+            sap_ID="60004180090",
+            pointer="9.30",
+            department="COMPS",
+            year="BE"
+        ) 
+
+        # Creating co-ordinator
+        self.co = Coordinator.objects.create_user(
+            **self.student_data, email="c@c.com", role="CO", department="COMPS"
+        )
+
+        # Creating TPO
+        self.tpo = User.objects.create_user(**self.student_data, email="t@t.com", role="TPO")
+
+        # Creating Tokens
+        self.student_token = Token.objects.create(user=self.student)
+        self.co_token = Token.objects.create(user=self.co)
+        self.tpo_token = Token.objects.create(user=self.tpo)
+
+        # Creating company
+        self.company = Company.objects.create(**self.company_data)
+
+        # Creating position
+        self.position = Position.objects.create(**self.position_data, company=self.company)
+        self.position_data["company"] = self.company.id
+
+        # Creating Application
+        self.application = Application.objects.create(student=self.student, position=self.position)
+        self.data = {}
+        self.data["student"] = self.student.id
+        self.data["position"] = self.position.id
+
+        #########################
+        #   Defining endpoints  #
+        #########################
+
+        self.list_url = reverse("Application-list")
+        self.retrieve_url = reverse("Application-detail", kwargs={"pk": self.application.id})
+
+
+    ###############################
+    #   Authenticating the user   #
+    ###############################
+
+    def api_authentication(self, token):
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+
+
+    #############################
+    #           Tests           #   
+    #############################
+
+
+    # Testing application create view for student
+    def test_application_create_tpo(self):
+        self.api_authentication(self.student_token)
+        response = self.client.post(self.list_url, self.data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    
+
+    # Testing application list view for student, co and tpo
+    def test_application_list_student_co_tpo(self):
+        self.api_authentication(self.student_token)
+        #self.api_authentication(self.co_token)
+        #self.api_authentication(self.tpo_token)
+        response = self.client.get(self.list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+
+    # Testing application detail view for student, co-ordinator and tpo
+    def test_application_retreive_tpo(self):
+        self.api_authentication(self.student_token)
+        #self.api_authentication(self.co_token)
+        #self.api_authentication(self.tpo_token)
+        response = self.client.get(self.retrieve_url)
+        self.assertEqual(response.data["student"], self.application.student.id)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+
+    # Testing application update view for tpo
+    def test_application_update_tpo(self):
+        self.api_authentication(self.tpo_token)
+        response = self.client.patch(self.retrieve_url, {"status":"2"})
+        self.assertEqual(response.data["status"], "2")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
