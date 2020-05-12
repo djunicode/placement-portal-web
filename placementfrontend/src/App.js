@@ -1,8 +1,12 @@
 
 import React from 'react';
 import './Login_Signup.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login.js'
 import StudentSU from './pages/StudentSU.js'
+import StaffSU from './pages/StaffSU';
+import AddDetails from './pages/AddDetails';
+import DisplayDetails from './pages/DisplayDetails';
 import StaffSU from './pages/StaffSU.js'
 import Studentprofile from './pages/Studentprofile';
 import PlacementCoDashboard from './pages/PlacementCoDashboard'
@@ -20,10 +24,13 @@ function App() {
         <Route exact path='/studentSignup' component={StudentSU}>
         </Route>
         <Route path='/staffSignup' component={StaffSU}>
-  </Route>*/}
-      {/*<Tpo2 />*/}
-      <Tpo2 />
+        </Route> */}
+        <AddDetails />
+        <DisplayDetails />
+        {/*<Tpo2 />*/}
+        <Tpo2 />
       </div>
+
     </BrowserRouter>
 
   );
