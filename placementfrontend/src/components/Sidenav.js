@@ -1,19 +1,13 @@
 import React from 'react';
-import Profile from '../assets/default.png';
-import '../css_styling/addComp.css'
-
-
-function Sidenav(){
-    return(
-       
-            <div className="container">
-                 <div className="profimg">
-<img src={Profile} alt="img" className="center imgno" />
-<h4 className="center"> ADMIN</h4>
-<p className="center">........</p>
-</div> 
+import profile from "../assets/dummy.png";
+function Sidenav() {
+    return (
+        <div className="col-lg-2  col-sm-6 my-2 side ">
+            <img src={profile} alt="profile" className="pic1" />
+            <br />
+            <h4>Name</h4>
+            <h4>Other</h4>
         </div>
-       
-    )}
-
-  export default Sidenav;
+    );
+}
+export default Sidenav;
