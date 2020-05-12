@@ -4,6 +4,9 @@ import './Login_Signup.css';
 import Login from './pages/Login.js'
 import StudentSU from './pages/StudentSU.js'
 import StaffSU from './pages/StaffSU.js'
+import Studentprofile from './pages/Studentprofile';
+import PlacementCoDashboard from './pages/PlacementCoDashboard'
+import Tpo2 from './pages/Tpo2';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 function App() {
@@ -11,13 +14,15 @@ function App() {
     <BrowserRouter>
       <div className="App">
 
-        <Route exact path='/' component={Login}>
+        {/*<Route exact path='/' component={Login}>
           <Login />
         </Route>
         <Route exact path='/studentSignup' component={StudentSU}>
         </Route>
         <Route path='/staffSignup' component={StaffSU}>
-        </Route>
+  </Route>*/}
+      {/*<Tpo2 />*/}
+      <Tpo2 />
       </div>
     </BrowserRouter>
 
