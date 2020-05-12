@@ -1,0 +1,73 @@
+.background{
+    background-color: rgb(240, 240, 240);
+    height: 100%;
+    margin-top: 50px;
+}
+.card{
+    border-radius: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#left-card{
+    margin-right: 30px;
+    margin-left: 50px;
+}
+#right-card{
+    margin-left: 30px;
+}
+.profile_pic{
+    width: 150px;
+    height: 150px;
+}
+#apply{
+    background-color:rgb(102, 204, 0);
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 25px;
+}
+.select{
+    color: rgb(247, 212, 116);
+}
+.interview{
+    color: lightgreen;
+}
+.review{
+    color: darkred;
+}
+.reject{
+    color: red;
+}
+.companyProfile{
+    background-color: rgb(247, 212, 116);
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+a, a:visited, a:hover{
+    color: white;
+    text-decoration: none;
+}
+.studentCard{
+    margin-bottom: 30px;
+}
+.position{
+    display: inline;
+}
+.expand{
+    background-color: darkred;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    margin-left: 15px;
+    padding: 1px 8px;
+    margin-bottom: 10px;
+}
+.invisible {
+    display: none;
+}
+    
+.visible {
+    display: block;
+}

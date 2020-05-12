@@ -1,0 +1,88 @@
+.background{
+    background-color: rgb(240, 240, 240);
+    height: 100%;
+    margin-top: 100px;
+}
+.card{
+    border-radius: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#left-card{
+    margin-right: 20px;
+    margin-left: 50px;
+}
+#right-card{
+    margin-left: 20px;
+}
+.profile_pic{
+    width: 150px;
+    height: 150px;
+}
+.studentCard{
+    margin-bottom: 20px;
+}
+#changeStatus{
+    width: 75%;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+.select{
+    color: rgb(247, 212, 116);
+}
+.interview{
+    color: lightgreen;
+}
+.review{
+    color: darkred;
+}
+.reject{
+    color: red;
+}
+.profile{
+    background-color: darkred;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+a, a:visited, a:hover{
+    color: white;
+    text-decoration: none;
+}
+.rejectButton{
+    background-color: darkred;
+    border-radius: 20px;
+    color: white;
+    width: 70%;
+    margin: 10px auto;
+}    
+.rejectReview{
+    margin-top: auto;
+}
+#filterStudents{
+    width: 75%;
+    margin-left: 0px;
+}
+.filterIcon{
+    width: 30px;
+    height: 30px;
+    margin-left: 70%;
+}
+.excel-left{
+    background-color: green;
+    width: 20%;
+    border-radius: 20px;
+    margin: 10px auto;
+    color: white;
+}
+.excel-right{
+    background-color: green;
+    width: 20%;
+    border-radius: 20px;
+    margin: 10px auto;
+    margin-top: auto;
+    color: white;
+}
+#reviewedApps{
+    margin-bottom: 0px;
+}

@@ -1,0 +1,15 @@
+#active-link{
+    color: darkred;
+}
+.nav-link{
+    font-size: large;
+    margin-right: 10px;
+    font-weight: bold;
+}
+#bar{
+    height: 50px;
+    background-color: rgb(128, 255, 204);
+}
+.navbar-light {
+    top: 50px;
+}

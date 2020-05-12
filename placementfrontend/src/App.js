@@ -12,11 +12,16 @@ import Studentprofile from './pages/Studentprofile';
 import PlacementCoDashboard from './pages/PlacementCoDashboard'
 import Tpo2 from './pages/Tpo2';
 import { BrowserRouter, Route } from 'react-router-dom';
+import StudentDashboardMain from './pages/StudentDashboardMain.js';
+import CompanyMain from './pages/CompanyMain.js';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+      <StudentDashboardMain></StudentDashboardMain>
+        {/* <CompanyMain></CompanyMain> 
+        <Route exact path='/' component={Login}>
 
         {/*<Route exact path='/' component={Login}>
           <Login />
