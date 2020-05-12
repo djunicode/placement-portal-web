@@ -3,10 +3,10 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register("students", views.StudentViewSet, basename="Students")
+router.register("students", views.StudentViewSet, basename="Student")
 router.register("applications", views.ApplicationViewSet, basename="Application")
 router.register("positions", views.PositionViewSet, basename="Position")
-router.register("company", views.CompanyViewSet)
+router.register("company", views.CompanyViewSet, basename="Company")
 urlpatterns = [
     path("", include(router.urls)),
     path("get_xls/<int:company_id>", views.get_xls, name="get_xls"),
