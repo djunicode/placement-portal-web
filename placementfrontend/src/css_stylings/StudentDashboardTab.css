@@ -1,0 +1,29 @@
+#main{
+    background-color: #f8f9fa;
+    height: 100%;
+    text-transform: uppercase;
+}
+#content{
+    padding-top: 100px;
+}
+.student_profile_picture{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+h4{
+    margin: 20px 0;
+}
+.student_button{
+    background-color: darkred;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+#edit_icon{
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    filter: invert(100%); 
+    -webkit-filter:invert(100%);
+}

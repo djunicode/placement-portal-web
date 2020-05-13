@@ -3,24 +3,27 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
 from .choices import *
 
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError("Users must have an email address")
-        if not username:
-            raise ValueError("Users must have a username")
+        if not password:
+            raise ValueError("Users must have a password")
 
-        user = self.model(email=self.normalize_email(email), username=username,)
+        user = self.model(email=self.normalize_email(email), **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password):
-        user = self.create_user(
-            email=self.normalize_email(email), password=password, username=username,
-        )
+    def create_superuser(self, email, password):
+        user = self.create_user(email=self.normalize_email(email), password=password,)
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
@@ -30,7 +33,15 @@ class MyAccountManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=40, blank=True, null=True)
+    f_name = models.CharField(max_length=20)
+    l_name = models.CharField(max_length=20)
+    profile_image = models.ImageField(
+        default="profile_images/default.png",
+        upload_to="profile_images",
+        blank=True,
+        null=True,
+    )
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -40,14 +51,15 @@ class User(AbstractBaseUser):
     role = models.CharField(max_length=7, blank=False, choices=ROLE_CHOICES)
 
     def __str__(self):
-        return self.user.username
+        return self.f_name + " " + self.l_name
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = [
-        "username",
-    ]
 
     objects = MyAccountManager()
+
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.email
@@ -63,7 +75,7 @@ class User(AbstractBaseUser):
     def is_student(self):
         return self.role == "STUDENT"
 
-    def is_coordinator(self):
+    def is_co(self):
         return self.role == "CO"
 
     def is_tpo(self):
@@ -87,6 +99,9 @@ class Student(User):
     year = models.CharField(max_length=2, blank=False, choices=YEAR_CHOICES)
     Stud_req = ["department", "year", "sap_ID"]
     REQUIRED_FIELDS = ["username", "department", "year", "sap_ID"]
+    pointer = models.DecimalField(
+        default=0.00, max_digits=5, decimal_places=2, blank=False, null=False
+    )
 
 
 class Coordinator(User):
@@ -109,7 +124,9 @@ class Company(models.Model):
 
 class Position(models.Model):
     title = models.CharField(max_length=128)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, related_name="positions"
+    )
     vacancies = models.IntegerField(default=0)
     interview_date = models.DateTimeField()
     deadline = models.DateTimeField()
@@ -122,9 +139,16 @@ class Position(models.Model):
 
 class Application(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    position = models.ForeignKey(
+        Position, on_delete=models.CASCADE, related_name="applications"
+    )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1")
     submitted_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ("student", "position")
+
     def __str__(self):
-        return self.student.username + ", " + self.position.title
+        return (
+            self.student.f_name + " " + self.student.l_name + ", " + self.position.title
+        )
