@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Nav from '../components/navbar';
-import SideNav from '../components/Sidenav';
-import Companies from '../components/Companies';
+import NavR from '../components/AddDets_navbar';
+import SidenavR from '../components/AddDets_Sidenav';
+import Companies from '../components/AddComp_Companies';
 import AddCompanies from '../components/AddCompanies';
 import '../css_styling/addComp.css'
 
@@ -38,16 +38,16 @@ class AddDetails extends Component{
   render(){
     return(<div className="Main">
       <div className="header"></div>
-      <div className="grid-main">
-        <div className="grid-1">
-          <SideNav/>
+      <div className="addComp_grid-main">
+        <div className="SidenavR_grid-1">
+          <SidenavR/>
         </div>
         <div className="grid-2">
-          <Nav/>
+          <NavR/>
           <div className="row">
-            <div className="mainGrid col-12 col-lg-6 left" >
+            <div className="addComp_hello col-12 col-lg-6 left" >
           <Companies companies={this.state.companies} showMore={this.showMore} showItems={this.state.showItems} /></div>  
-          <div className="mainGrid col-12 col-lg-6 right" >
+          <div className="addComp_hello col-12 col-lg-6 right" >
         <AddCompanies addCompanies={this.addCompanies} /></div> 
           </div> 
           </div>

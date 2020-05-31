@@ -2,29 +2,32 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import EditDetail from '../components/EditDetail';
-import Nav2 from '../components/navbar2';
-import Sidenav from '../components/Sidenav';
+import NavR2 from '../components/AddDets_navbar2';
+import SidenavR from '../components/AddDets_Sidenav';
 import '../css_styling/display.css';
 
 class DisplayDetails extends Component{
- 
 
   render(){
-    return(<div className="main2">
-    <div className="header"></div>
-    <div className="grid-main">
-      <div className="grid-1">
-       <Sidenav/>
-      </div>
-      <div className="grid-2">
-        <Nav2/>
-        <div className="mainGrid2">
-       <EditDetail/></div>
-      </div>
-    </div>
-    
+    return(
+      <div className="Main2">
+      <div className="header"></div>
+      <div className="display_grid-main">
+        <div className="SidenavR_grid-1">
+          <SidenavR/>
+        </div>
+        <div className="grid-2">
+          <NavR2/>
+          <div className="display_row2">
+          <EditDetail/>
+          </div> 
+          </div>
+        </div>
+     
+      
 
-  </div>);
+    </div>
+    );
     
   }
 }

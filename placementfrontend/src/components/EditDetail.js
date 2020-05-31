@@ -3,7 +3,7 @@ import Modals from './Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import '../css_styling/display.css';
-import {Modal,ModalBody,ModalHeader,ModalFooter} from 'reactstrap'
+
 
 class EditDetail extends Component{
   constructor(props)
@@ -49,33 +49,33 @@ console.log(this.state)
       return(
         <div className="EditDetail">
          
-          <div className="imdgrid">
+          <div className="display_imdgrid">
           </div> 
-      <h2 className="compName">{company.name}</h2>
-          <div className="editProf" onClick={this.toggleModalEdit.bind(this)}>
+      <h2 className="display_compName">{company.name}</h2>
+          <div className="display_editProf" onClick={this.toggleModalEdit.bind(this)}>
           <FontAwesomeIcon icon={faPencilAlt} />
-            <p className="center fontEdit">Edit Details</p>
+            <p className="center display_fontEdit">Edit Details</p>
           </div>
-        <div className="editGreen">
-        <div className="bgw">
+        <div className="display_editGreen">
+        <div className="display_bgw">
         <div className="grid-item"><form>
-      <h4 className="dets"><span style={{fontWeight:700}}>Category :</span> {company.category}</h4>
+      <h4 className="display_dets"><span style={{fontWeight:700}}>Category :</span> {company.category}</h4>
       <br/>
-    <div className="edit" >
+    <div className="display_edit" >
     {
           this.state.addFields.map((field,index)=>{
           
             return(
               <div key={index}>
                  
-    <div className="editGrid">
-    <h4 className="dets"><span style={{fontWeight:700}}>Position :</span> {field.position}</h4> 
-    <h4 className="dets"><span style={{fontWeight:700}}>Number Of Position :</span> {field.noOfPos}</h4>
-    <h4 className="dets"><span style={{fontWeight:700}}>Interview Date :</span> {field.Interviewdate}</h4>
-    <h4 className="dets"><span style={{fontWeight:700}}>Deadline :</span> {field.deadline}</h4>
-    <h4 className="dets"><span style={{fontWeight:700}}>Package:</span> {field.packages}</h4>
+    <div className="display_editGrid">
+    <h4 className="display_dets"><span style={{fontWeight:700}}>Position :</span> {field.position}</h4> 
+    <h4 className="display_dets"><span style={{fontWeight:700}}>Number Of Position :</span> {field.noOfPos}</h4>
+    <h4 className="display_dets"><span style={{fontWeight:700}}>Interview Date :</span> {field.Interviewdate}</h4>
+    <h4 className="display_dets"><span style={{fontWeight:700}}>Deadline :</span> {field.deadline}</h4>
+    <h4 className="display_dets"><span style={{fontWeight:700}}>Package:</span> {field.packages}</h4>
 </div>
-<h4 className="dets"><span style={{fontWeight:700}}>Add Details :</span> {field.addDets}</h4>  
+<h4 className="display_dets"><span style={{fontWeight:700}}>Add Details :</span> {field.addDets}</h4>  
 </div>    
              
             )
@@ -95,7 +95,7 @@ console.log(this.state)
       )
   }  
 }
-export default EditDetail
+export default EditDetail;  
 
 
 

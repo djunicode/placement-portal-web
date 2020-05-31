@@ -51,9 +51,9 @@ class App extends Component{
  
   render(){
     return(
-    <div className="App">    
+    <div className="App_Dashboard">    
        <div className="row">
-        <header className="rectangle2"></header>
+        <header className="Tpo2_rectangle2"></header>
        </div>
       < div className="container-fluid">
       <div className="row d-flex py-5">
@@ -63,12 +63,12 @@ class App extends Component{
           <Nav /> 
         </div>
         <div className="row ">
-          <div className="col-12  box2 ">
+          <div className="col-12  Tpo2_box2 ">
             <div className="row d-flex">
-            <div className=" col-10 col-lg-5  ml-5 my-5 mr-4   inner_box2 ">
+            <div className=" col-10 col-lg-5  ml-5 my-5 mr-4   Tpo2_inner_box2 ">
               <Companies companies={this.state.companies} showCompanies={this.state.showCompanies} handleShowMoreCompanies={this.handleShowMoreCompanies} />
             </div>
-            <div className=" col-10 col-lg-5 m-5  inner_box2 ">
+            <div className=" col-10 col-lg-5 m-5  Tpo2_inner_box2 ">
             < Students students={this.state.students}  showItems={this.state.showItems} handleShowMore={this.handleShowMore} />
             </div>
             </div>      

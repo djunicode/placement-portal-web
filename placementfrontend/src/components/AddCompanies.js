@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import '../css_styling/addComp.css'
+import '../css_styling/addComp.css';
+import { withRouter} from 'react-router-dom';
 class AddCompanies extends Component {
     state = {
       name: null,
@@ -41,7 +42,7 @@ class AddCompanies extends Component {
    
 handleAddMore=(e)=>
 {
-  {
+  
     this.setState((prevState) =>({addFields:[...prevState.addFields,{
       position:"",
       noOfPos:"",
@@ -49,7 +50,7 @@ handleAddMore=(e)=>
       deadline:"",
       package:"",
       addDets:""}]}));
-  }
+  
 //   e.preventDefault();
 //   var text= document.getElementById('wrapper').innerHTML
 // document.getElementById('wrapper').innerHTML += text; 
@@ -57,7 +58,8 @@ handleAddMore=(e)=>
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.addCompanies(this.state);
-    console.log(this.state)
+    console.log(this.state);
+    this.props.history.push('/display'); 
   }
   onFocus= (e)=>{
     e.currentTarget.type = "date";
@@ -68,18 +70,18 @@ onBlur=(e)=>{
 }
   render() {
     return (
-      <div className="bgwAdd">
-        <h4 className="leftalign" style={{fontWeight:700}}>ADD COMPANY</h4>
+      <div className="addComp_bgwAdd">
+        <h4 className="leftalign" style={{fontWeight:600}}>ADD COMPANY</h4>
        <div className="grid-item"><form onSubmit={this.handleSubmit}>
-         <div className="addCompGrid">
-          <input type="text"  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
+         <div className="addComp_addCompGrid">
+          <input type="text" className="addComp_addInput"  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
           <select className="form-control" id="exampleFormControlSelect1"placeholder="Category:" onChange={this.handleChange} name="category"  required>
             <option disabled selected hidden>Category:</option>
       <option>Super-Dream</option>
       <option>Dream</option>
       <option>Regular</option>
     </select></div>
-    <div className="addMore" >
+    <div className="addComp_addMore" >
     {
           this.state.addFields.map((field,index)=>{
             let position = `position-${index}`, addDets = `addDets-${index}` ,packages = `packages-${index}`,deadline = `deadline-${index}`,Interviewdate = `Interviewdate-${index}` , noOfPos = `noOfPos-${index}`  
@@ -87,14 +89,14 @@ onBlur=(e)=>{
               
               <div key={index}>
                  
-    <div className="addMoreGrid">
-          <input type="text" className="addInput"placeholder="Position:"  onChange={this.handleChange}  data-id={index} id={position} name="position" required/>
- <input type="number" className="addInput"placeholder="Number Of Position:"  onChange={this.handleChange} data-id={index} id={noOfPos} name="noOfPos" required min="0" />
-         <input type="text"className="addInput"placeholder="Interview Date:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={Interviewdate} name="Interviewdate" required />
-         <input type="text"className="addInput"placeholder="Deadline:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={deadline} name="deadline"  required />
-<input type="text"className="addInput" placeholder="Package:" onChange={this.handleChange} name="package" data-id={index} id={packages} required/>
+    <div className="addComp_addMoreGrid">
+          <input type="text" className="addComp_addInput"placeholder="Position:"  onChange={this.handleChange}  data-id={index} id={position} name="position" required/>
+ <input type="number" className="addComp_addInput"placeholder="Number Of Position:"  onChange={this.handleChange} data-id={index} id={noOfPos} name="noOfPos" required min="0" />
+         <input type="text"className="addComp_addInput"placeholder="Interview Date:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={Interviewdate} name="Interviewdate" required />
+         <input type="text"className="addComp_addInput"placeholder="Deadline:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={deadline} name="deadline"  required />
+<input type="text"className="addComp_addInput" placeholder="Package:" onChange={this.handleChange} name="package" data-id={index} id={packages} required/>
 </div>
-<input type="text" className="addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" data-id={index}  id={addDets} required />  
+<input type="text" className="addComp_addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" data-id={index}  id={addDets} required />  
 
 
 </div> 
@@ -106,9 +108,9 @@ onBlur=(e)=>{
           })
         }
   
-<button className="addMoreBtn" onClick={this.handleAddMore}><span className="center" style={{marginBottom:'5px'}}>+</span></button>  </div>
-<input type="text"className="addInput" placeholder="Link:" onChange={this.handleChange} name="link"  required/> 
-        <button className="submit ">ADD</button>
+<button className="addComp_addMoreBtn" onClick={this.handleAddMore}><span className="addComp_center" style={{marginBottom:'5px'}}>+</span></button>  </div>
+<input type="text"className="addComp_addInput" placeholder="Link:" onChange={this.handleChange} name="link"  required/> 
+<button className="addComp_submit "> ADD</button> 
      
        </form>
        </div>
@@ -119,4 +121,4 @@ onBlur=(e)=>{
   }
 }
 
-export default AddCompanies;
+export default withRouter(AddCompanies);

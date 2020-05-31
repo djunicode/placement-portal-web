@@ -22,18 +22,18 @@ class StudentTab extends Component {
     }
     render() {
         return(
-            <div id="main">
+            <div id="main_studentdashboard">
                 {
                     studentDetails.map(p => { 
                         return(
-                            <div id="content">
-                                <img className="student_profile_picture" src={p.student_profile_picture}></img>
-                                <h4>{p.student_name}</h4>
-                                <h4>{p.student_sap}</h4>
-                                <h4>{p.student_department}</h4>
-                                <h4>{p.student_pointer}</h4>
-                                <h4>{p.student_experience}</h4> <br></br>
-                                <button className="student_button btn btn-lg"><img src="https://image.flaticon.com/icons/svg/61/61456.svg" id="edit_icon"></img>EDIT PROFILE</button> <br></br><br></br>
+                            <div id="content_studentdashboard">
+                                <img className="student_profile_picture_studentdashboard" src={p.student_profile_picture}></img>
+                                <h4 className="data_studentdashboard">{p.student_name}</h4>
+                                <h4 className="data_studentdashboard">{p.student_sap}</h4>
+                                <h4 className="data_studentdashboard">{p.student_department}</h4>
+                                <h4 className="data_studentdashboard">{p.student_pointer}</h4>
+                                <h4 className="data_studentdashboard">{p.student_experience}</h4> <br></br>
+                                <button className="student_button_studentdashboard btn btn-lg"><img src="https://image.flaticon.com/icons/svg/61/61456.svg" id="edit_icon_studentdashboard"></img>EDIT PROFILE</button> <br></br><br></br>
                             </div>
                         )
                     })
