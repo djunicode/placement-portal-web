@@ -1,26 +1,26 @@
-#main{
+#main_studentdashboard{
     background-color: #f8f9fa;
     height: 100%;
     text-transform: uppercase;
 }
-#content{
+#content_studentdashboard{
     padding-top: 100px;
 }
-.student_profile_picture{
+.student_profile_picture_studentdashboard{
     height: 150px;
     width: 150px;
     border-radius: 50%;
 }
-h4{
+.data_studentdashboard{
     margin: 20px 0;
 }
-.student_button{
+.student_button_studentdashboard{
     background-color: darkred;
     border-radius: 20px;
     color: white;
     margin-bottom: 10px;
 }
-#edit_icon{
+#edit_icon_studentdashboard{
     height: 20px;
     width: 20px;
     margin-right: 10px;

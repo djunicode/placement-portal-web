@@ -22,17 +22,17 @@ class StudentTab extends Component {
     }
     render() {
         return(
-            <div id="main">
+            <div id="main_companypage">
                 {
                     studentDetails.map(p => { 
                         return(
-                            <div id="content">
-                                <img className="student_profile_picture" src={p.student_profile_picture}></img>
-                                <h4>{p.student_name}</h4>
-                                <h4>{p.student_sap}</h4>
-                                <h4>{p.student_department}</h4>
-                                <h4>{p.student_pointer}</h4>
-                                <h4>{p.student_experience}</h4> <br></br>
+                            <div id="content_companypage">
+                                <img className="student_profile_picture_companypage" src={p.student_profile_picture}></img>
+                                <h4 class="info_companypage">{p.student_name}</h4>
+                                <h4 class="info_companypage">{p.student_sap}</h4>
+                                <h4 class="info_companypage">{p.student_department}</h4>
+                                <h4 class="info_companypage">{p.student_pointer}</h4>
+                                <h4 class="info_companypage">{p.student_experience}</h4> <br></br>
                             </div>
                         )
                     })

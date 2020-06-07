@@ -1,20 +1,20 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import '../css_styling/display.css'
+import '../css_styling/addComp.css';
+import {Link} from 'react-router-dom';
 
 
-function Nav2(){
+function NavR(){
     return(
-        <div className="topnav">
-  <a className="active" href="#home">NAME</a>
-  <a href="#about">APPLICANTS</a>
-  
+        <div className="NavR_topnav">
+   <Link to="/add" className ="NavR_anchor"style={{ textDecoration: 'none' }} >RECRUITERS</Link>
+  <Link to="/Tpo2" className ="NavR_anchor"style={{ textDecoration: 'none' }} >STUDENTS</Link>
   <form>
 
-  <div className="search-container">
+  <div className="NavR_search-container">
   <input type="text"  placeholder="Search"/>
-  <FontAwesomeIcon icon={faSearch} />
+  <FontAwesomeIcon icon={faSearch} className="searchIcon" />
   </div>
   </form>
 
@@ -30,4 +30,5 @@ function Nav2(){
 </div>
 
     )}
-    export default Nav2;
+    export default NavR;
+  

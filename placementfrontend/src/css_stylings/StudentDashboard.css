@@ -1,25 +1,26 @@
-.background{
+.background_studentdashboard{
     background-color: rgb(240, 240, 240);
     height: 100%;
     margin-top: 50px;
 }
-.card{
+#left-card_studentdashboard{
+    margin-right: 30px;
+    margin-left: 50px;
     border-radius: 3%;
     text-transform: uppercase;
     font-weight: bold;
 }
-#left-card{
-    margin-right: 30px;
-    margin-left: 50px;
-}
-#right-card{
+#right-card_studentdashboard{
     margin-left: 30px;
+    border-radius: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
 }
-.profile_pic{
-    width: 150px;
-    height: 150px;
+.profile_pic_studentdashboard{
+    width: 140px;
+    height: 140px;
 }
-#apply{
+#apply_studentdashboard{
     background-color:rgb(102, 204, 0);
     border-radius: 20px;
     color: white;
@@ -27,19 +28,19 @@
     margin-right: 10px;
     margin-left: 25px;
 }
-.select{
+.select_studentdashboard{
     color: rgb(247, 212, 116);
 }
-.interview{
+.interview_studentdashboard{
     color: lightgreen;
 }
-.review{
+.review_studentdashboard{
     color: darkred;
 }
-.reject{
+.reject_studentdashboard{
     color: red;
 }
-.companyProfile{
+.companyProfile_studentdashboard{
     background-color: rgb(247, 212, 116);
     border-radius: 20px;
     color: white;
@@ -49,25 +50,26 @@ a, a:visited, a:hover{
     color: white;
     text-decoration: none;
 }
-.studentCard{
+.studentCard_studentdashboard{
     margin-bottom: 30px;
 }
-.position{
+.position_studentdashboard{
     display: inline;
 }
-.expand{
+.expand_studentdashboard{
     background-color: darkred;
     border-radius: 50%;
     color: white;
     font-weight: bold;
-    margin-left: 15px;
+    margin-left: 17px;
+    margin-right: 3px;
     padding: 1px 8px;
     margin-bottom: 10px;
 }
-.invisible {
+.invisible_studentdashboard {
     display: none;
 }
     
-.visible {
+.visible_studentdashboard {
     display: block;
 }

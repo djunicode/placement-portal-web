@@ -1,22 +1,17 @@
-#main{
+#main_companypage{
     background-color: #f8f9fa;
     height: 100%;
     text-transform: uppercase;
 }
-#content{
+#content_companypage{
     padding-top: 100px;
 }
-.student_profile_picture{
+.student_profile_picture_companypage{
     height: 150px;
     width: 150px;
     border-radius: 50%;
 }
-h4{
+.info_companypage{
     margin: 20px 0;
 }
-.student_button{
-    background-color: darkred;
-    border-radius: 20px;
-    color: white;
-    margin-bottom: 10px;
-}
+
