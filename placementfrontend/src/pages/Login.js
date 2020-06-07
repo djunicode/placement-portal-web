@@ -20,7 +20,7 @@ export class Login extends Component {
                                     <input className="input1" type='email' required placeholder='email-id'></input><br></br>
                                     <input className="input1" type='password' required placeholder='password'></input>
                                     <div>
-                                        <button className="button1" type="submit" title='incorrect password!Try again' >Login</button>
+                                    <Link to="/StudentDashboardMain" style={{ textDecoration: 'none' }} ><button className="button1" type="submit" title='incorrect password!Try again' >Login</button></Link>
                                         <p className="height register1" >
                                             not a registered user?
                                             <p>

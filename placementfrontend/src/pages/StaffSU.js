@@ -49,8 +49,8 @@ export class StaffSU extends Component {
                             <input required className="input2"  type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder='password'></input>
                         </span>
                         <div>
-                            <button className="input3 button3"
-                               type="submit">SIGNUP</button>
+                        <Link to="/add" style={{ textDecoration: 'none' }}  > <button className="input3 button3"
+                               type="submit">SIGNUP</button></Link>
                             <p className="register3">
                                 registered user?<Link to="/" style={{ textDecoration: 'none' }}  ><span className="reg3"> Login</span></Link>
                             </p>

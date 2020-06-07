@@ -1,45 +1,46 @@
-.background{
+.background_companypage{
     background-color: rgb(240, 240, 240);
     height: 100%;
     margin-top: 100px;
 }
-.card{
+#left-card_companypage{
+    margin-right: 20px;
+    margin-left: 50px;
     border-radius: 3%;
     text-transform: uppercase;
     font-weight: bold;
 }
-#left-card{
-    margin-right: 20px;
-    margin-left: 50px;
-}
-#right-card{
+#right-card_companypage{
     margin-left: 20px;
+    border-radius: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
 }
-.profile_pic{
+.profile_pic_companypage{
     width: 150px;
     height: 150px;
 }
-.studentCard{
+.studentCard_companypage{
     margin-bottom: 20px;
 }
-#changeStatus{
-    width: 75%;
+#changeStatus_companypage{
+    width: 80%;
     margin-left: 40px;
     margin-bottom: 10px;
 }
-.select{
+.select_companypage{
     color: rgb(247, 212, 116);
 }
-.interview{
+.interview_companypage{
     color: lightgreen;
 }
-.review{
+.review_companypage{
     color: darkred;
 }
-.reject{
+.reject_companypage{
     color: red;
 }
-.profile{
+.profile_companypage{
     background-color: darkred;
     border-radius: 20px;
     color: white;
@@ -49,33 +50,33 @@ a, a:visited, a:hover{
     color: white;
     text-decoration: none;
 }
-.rejectButton{
+.rejectButton_companypage{
     background-color: darkred;
     border-radius: 20px;
     color: white;
     width: 70%;
     margin: 10px auto;
 }    
-.rejectReview{
+.rejectReview_companypage{
     margin-top: auto;
 }
-#filterStudents{
+#filterStudents_companypage{
     width: 75%;
     margin-left: 0px;
 }
-.filterIcon{
+.filterIcon_companypage{
     width: 30px;
     height: 30px;
     margin-left: 70%;
 }
-.excel-left{
+.excel-left_companypage{
     background-color: green;
     width: 20%;
     border-radius: 20px;
     margin: 10px auto;
     color: white;
 }
-.excel-right{
+.excel-right_companypage{
     background-color: green;
     width: 20%;
     border-radius: 20px;
@@ -83,6 +84,6 @@ a, a:visited, a:hover{
     margin-top: auto;
     color: white;
 }
-#reviewedApps{
+#reviewedApps_companypage{
     margin-bottom: 0px;
 }
