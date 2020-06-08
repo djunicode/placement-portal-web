@@ -21,7 +21,7 @@ SECRET_KEY = "ff+ibs=b0$epdzex48*j@bb+iu_qtrd35r5%u!j@nczp4!sy2%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['kanishkshah.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','kanishkshah.pythonanywhere.com']
 
 AUTH_USER_MODEL = "placementApp.User"
 
@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     "djoser",
     "rest_framework.authtoken",
     "drf_yasg",
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -139,6 +141,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 LOGIN_URL = "/api/auth/token/login/"
 LOGOUT_URL = "/api/auth/token/logout/"
