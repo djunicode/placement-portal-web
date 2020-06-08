@@ -49,10 +49,11 @@ handleChange = (e) => {
       Interviewdate:"",
       deadline:"",
       packages:"",
-      addDets:""}
-  {
+      addDets:""
+    }
+  
   this.setState((prevState) =>({addFields:[...prevState.addFields,addFields]}));
-  }
+  
   //   e.preventDefault();
   //   var text= document.getElementById('wrapper').innerHTML
   // document.getElementById('wrapper').innerHTML += text; 
@@ -80,15 +81,15 @@ handleSave() {
                 </ModalHeader>
                 <ModalBody>
                 <div className="grid-item"><form onSubmit={this.handleSave} >
-         <div className="editGridModal">
-          <input type="text"  defaultValue={company.name}  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
+         <div className="display_editGridModal">
+          <input type="text"className="display_addInput"  defaultValue={company.name}  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
           <select className="form-control"  defaultValue={company.category} id="exampleFormControlSelect1"placeholder="Category:" onChange={this.handleChange} name="category"  required>
             <option disabled selected hidden>Category:</option>
       <option>Super-Dream</option>
       <option>Dream</option>
       <option>Regular</option>
     </select> </div>
-    <div className="editMore" >
+    <div className="display_editMore" >
     {
           this.state.addFields.map((field,index)=>{
             let position = `position-${index}`, addDets = `addDets-${index}` ,packages = `packages-${index}`,deadline = `deadline-${index}`,Interviewdate = `Interviewdate-${index}` , noOfPos = `noOfPos-${index}`  
@@ -96,31 +97,31 @@ handleSave() {
               
               <div key={index}>
                  
-    <div className="editMoreGrid">
-          <input type="text" className="addInput"placeholder="Position:"  defaultValue={field.position} data-id={index} id={position}  onChange={this.handleChange}  name="position" required/>
- <input type="number" className="addInput"placeholder="Number Of Position:"   defaultValue={field.noOfPos}  data-id={index} id={noOfPos} onChange={this.handleChange} name="noOfPos" required min="0" />
-         <input type="text"className="addInput"placeholder="Interview Date:" defaultValue={field.Interviewdate}  data-id={index} id={Interviewdate}  onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="Interviewdate" required />
-         <input type="text"className="addInput"placeholder="Deadline:"  defaultValue={field.deadline} data-id={index} id={deadline}  onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="deadline"  required />
- <input type="text"className="addInput" placeholder="Package:" defaultValue={field.packages}  data-id={index} id={packages}  onChange={this.handleChange} name="packages"  required/>   
+    <div className="display_editMoreGrid">
+          <input type="text" className="display_addInput"placeholder="Position:"  defaultValue={field.position} data-id={index} id={position}  onChange={this.handleChange}  name="position" required/>
+ <input type="number" className="display_addInput"placeholder="Number Of Position:"   defaultValue={field.noOfPos}  data-id={index} id={noOfPos} onChange={this.handleChange} name="noOfPos" required min="0" />
+         <input type="text"className="display_addInput"placeholder="Interview Date:" defaultValue={field.Interviewdate}  data-id={index} id={Interviewdate}  onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="Interviewdate" required />
+         <input type="text"className="display_addInput"placeholder="Deadline:"  defaultValue={field.deadline} data-id={index} id={deadline}  onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} name="deadline"  required />
+ <input type="text"className="display_addInput" placeholder="Package:" defaultValue={field.packages}  data-id={index} id={packages}  onChange={this.handleChange} name="packages"  required/>   
 </div>
-<input type="text" className="addInput"placeholder="Add Details" defaultValue={field.addDets} data-id={index}  id={addDets} onChange={this.handleChange} name="addDets" required />  
+<input type="text" className="display_addInput"placeholder="Add Details" defaultValue={field.addDets} data-id={index}  id={addDets} onChange={this.handleChange} name="addDets" required />  
 </div>          
             )
 
           })
         }
   
-<button className="editMoreBtn" onClick={this.handleAddMore}><span className="center" style={{marginBottom:'5px'}}>+</span></button>  </div>
+<button className="display_editMoreBtn" onClick={this.handleAddMore}><span className="center" style={{marginBottom:'5px'}}>+</span></button>  </div>
 
          
         
-<input type="text" className="addInput" defaultValue={company.link} placeholder="Link" onChange={this.handleChange} name="link"   required="required" />  
+<input type="text" className="display_addInput" defaultValue={company.link} placeholder="Link" onChange={this.handleChange} name="link"   required="required" />  
         
         </form></div>
                 </ModalBody>
                 <ModalFooter>
-                    <button type="submit" className="btnModal"  onClick={() => { this.handleSave()}}>Save</button>
-                    <button className="btnModal" onClick={() => { toggleModalEdit()}} >cancel</button>
+                    <button type="display_submit" className="display_btnModal"  onClick={() => { this.handleSave()}}>Save</button>
+                    <button className="display_btnModal" onClick={() => { toggleModalEdit()}} >cancel</button>
                 </ModalFooter>
             </Modal>
             

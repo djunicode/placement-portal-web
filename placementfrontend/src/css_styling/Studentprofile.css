@@ -1,4 +1,4 @@
-.rectangle{
+.Studentprofile_rectangle{
     position: absolute;
     width: 100%;
     height: 60px;
@@ -7,39 +7,39 @@
     background: #88E7C8;
   }
   
- .align1{
+ .Studentprofile_align1{
    transform: translateX(12px);
  }
- .align2{
+ .Studentprofile_align2{
   transform: translateX(12px);
 }
-.align3{
+.Studentprofile_align3{
   transform: translateX(-3px);
 }
-.align4{
+.Studentprofile_align4{
   transform: translateX(22px);
 }
-.align5{
+.Studentprofile_align5{
   transform: translateX(10px);
 }
 label{
   padding: 2px;
 }
-  .inner_box{
+  .Studentprofile_inner_box{
     background: #88E7C8;
     border-radius: 30px;
     margin: 7%;
     
   }
-  .box{
-    background: #F3F3F3;
+  .Studentprofile_box{
+    background:#F3F3F3;;
     top:-25px;
   }
-  .details{
+  .Studentprofile_details{
     transform: translateY(-20%);
     text-align: center;
   }
-  .studentdisplay{
+  .Studentprofile_studentdisplay{
     margin-top: 3px;
     border: none;
     padding: 10px;
@@ -58,24 +58,24 @@ label{
    img{  
      position: relative;
    }
-   .pic1{
+   .Studentprofile_pic1{
      margin: 30px 10px 30px 20px;
      width: 60%;
      border-radius:50%;
    }
-  .pic2{
+  .Studentprofile_pic2{
     transform: translate(-62px,-65px);
     border-radius:50%;
     width: 115px;
     height: 115px;
   }
-  .head{
+  .Studentprofile_head{
     font-size: 150%;
     padding-top: 5px;
     transform: translate(85px,-150px);
   
   }
-  .edit{
+  .Studentprofile_edit{
     background: #B87575;
     border-radius: 30px; 
     border: none;
@@ -86,6 +86,6 @@ label{
     
   
   }
-  .side{
+  .Studentprofile_side{
     text-align: center;
   }

@@ -5,7 +5,7 @@ const Navbar=() => {
     return(
         <div>
         <div id="bar" className="fixed-top"></div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light top_studentdashboard">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">

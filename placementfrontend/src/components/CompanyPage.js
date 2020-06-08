@@ -24,7 +24,7 @@ const students= [
         id: 3,
         name: 'Neymar',
         profile_link:'www.abcd.com',
-        profilepicture_link:'https://pbs.twimg.com/profile_images/1195070652346241024/TY83Cwxb_400x400.jpg',
+        profilepicture_link:'https://en.as.com/futbol/imagenes/2019/05/07/internacional/1557239971_866699_1557239999_noticia_normal.jpg',
         status: null,
         color: null
     }
@@ -48,7 +48,7 @@ class CompanyPage extends Component {
             let selectValue=(student.target.value);
             if(selectValue!="")
             {
-                studentArray[index].color=selectValue;
+                studentArray[index].color=selectValue+'_companypage';
                 if(selectValue=="select")
                 {
                     studentArray[index].status="ACCEPTED";
@@ -126,52 +126,52 @@ class CompanyPage extends Component {
 
     render() {
         return (
-            <div className="background">
+            <div className="background_companypage">
                 <div className="row">
-                    <div className="col-lg-5 card" id="left-card">
+                    <div className="col-lg-5 card" id="left-card_companypage">
                         <br></br>
                         <h2>APPLICANTS TO BE REVIEWED</h2>
                         <hr></hr>
                         {
                             studentArray.map(p => {
                                 return(
-                                <div className="row studentCard" key={p.id}>
+                                <div className="row studentCard_companypage" key={p.id}>
                                     <div className="col-lg-5">
-                                        <img className="profile_pic" src={p.profilepicture_link}></img>
+                                        <img className="profile_pic_companypage" src={p.profilepicture_link}></img>
                                         <hr></hr>
                                     </div>
                                     <div className="col-lg-7">
                                         <p>{p.name}</p>
-                                        <select className="form-control" id="changeStatus" name={p.name} onChange={this.addElement}>
+                                        <select className="form-control" id="changeStatus_companypage" name={p.name} onChange={this.addElement}>
                                             <option value="">UPDATE STATUS</option>
-                                                <option className="select" value="select">SELECT</option>
-                                                <option className="interview" value="interview">SCHEDULE INTERVIEW</option>
-                                                <option className="review" value="review">PUT UNDER REVIEW</option>
-                                                <option className="reject" value="reject">REJECT</option>
+                                                <option className="select_companypage" value="select">SELECT</option>
+                                                <option className="interview_companypage" value="interview">SCHEDULE INTERVIEW</option>
+                                                <option className="review_companypage" value="review">PUT UNDER REVIEW</option>
+                                                <option className="reject_companypage" value="reject">REJECT</option>
                                         </select> <br></br>
-                                        <button className="profile btn btn-large"><a href= {p.profile_link} target="_blank">profile</a></button>
+                                        <button className="profile_companypage btn btn-large"><a href= {p.profile_link} target="_blank">profile</a></button>
                                         <hr></hr>
                                     </div>
                                 </div>
                                 )})
                         }
-                        <button className="rejectButton rejectReview btn btn-small" onClick={this.rejectUnderReview}>Reject All Under Review</button>
-                        <button className="rejectButton btn btn-small" onClick={this.rejectInterview}>Reject All Scheduled For Interview</button>
-                        <button className="btn btn-large excel-left">EXCEL</button>
+                        <button className="rejectButton_companypage rejectReview_companypage btn btn-small" onClick={this.rejectUnderReview}>Reject All Under Review</button>
+                        <button className="rejectButton_companypage btn btn-small" onClick={this.rejectInterview}>Reject All Scheduled For Interview</button>
+                        <button className="btn btn-large excel-left_companypage">EXCEL</button>
                     </div>
-                    <div className="col-lg-5 card" id="right-card">
+                    <div className="col-lg-5 card" id="right-card_companypage">
                         <br></br>
-                        <h2 id="reviewedApps">ALREADY REVIEWED APPLICATIONS</h2>
+                        <h2 id="reviewedApps_companypage">ALREADY REVIEWED APPLICATIONS</h2> <br></br>
                         <div className="row">
                             <div className="col-lg-3">
-                            <img src="https://image.flaticon.com/icons/svg/1159/1159641.svg" class="filterIcon"></img>
+                            <img src="https://image.flaticon.com/icons/svg/1159/1159641.svg" class="filterIcon_companypage"></img>
                             </div>
                             <div className="col-lg-9">
-                            <select className="form-control" id="filterStudents" onChange={this.filterList} status={this.status}>
+                            <select className="form-control" id="filterStudents_companypage" onChange={this.filterList} status={this.status}>
                                 <option value="ALL">ALL</option>
-                                <option vlaue="ACCEPTED" className="select">ACCEPTED</option>
-                                <option value="INTERVIEW SCHEDULED" className="interview">INTERVIEW SCHEDULED</option>
-                                <option value="PUT UNDER REVIEW" className="review">PUT UNDER REVIEW</option>
+                                <option vlaue="ACCEPTED" className="select_companypage">ACCEPTED</option>
+                                <option value="INTERVIEW SCHEDULED" className="interview_companypage">INTERVIEW SCHEDULED</option>
+                                <option value="PUT UNDER REVIEW" className="review_companypage">PUT UNDER REVIEW</option>
                             </select>
                             </div>
                             </div>
@@ -181,9 +181,9 @@ class CompanyPage extends Component {
                                 return user.status!="REJECTED"
                             }).map(p =>{
                                 return (
-                                    <div className="row studentCard" key={p.id}>
+                                    <div className="row studentCard_companypage" key={p.id}>
                                                 <div className="col-lg-5">
-                                                    <img className="profile_pic" src={p.profilepicture_link}></img>
+                                                    <img className="profile_pic_companypage" src={p.profilepicture_link}></img>
                                                     <hr></hr>
                                                 </div>
                                                 <div className="col-lg-7">
@@ -195,7 +195,7 @@ class CompanyPage extends Component {
                                 )
                             })
                         }
-                        <button className="btn btn-large excel-right">EXCEL</button>
+                        <button className="btn btn-large excel-right_companypage">EXCEL</button>
                     </div>
                 </div>
             </div>

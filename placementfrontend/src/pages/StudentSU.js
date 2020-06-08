@@ -49,8 +49,8 @@ export class StudentSU extends Component {
                             <input required className="input2"  type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder='password'></input>
                         </span><br></br>
                         <div className="bind2">
-                            <button className="input2 button2"
-                              type="submit">SIGNUP</button><br></br>
+                        <Link to="/StudentDashboardMain" style={{ textDecoration: 'none' }} ><button className="input2 button2"
+                              type="submit">SIGNUP</button></Link><br></br>
                             <p className="register2">
                                 registered user?<Link to="/" style={{ textDecoration: 'none' }} ><span className="reg2" > Login</span></Link>
                             </p>
