@@ -1,45 +1,17 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios'
+import Demo from './demo.js'
 
+let token='5e79bdd34d1dbad507c9f20b37e9f9587ed796b0'
 let selectedList=[];
-
-const companies= [
-    {
-        id: 1,
-        name: 'Manchester United',
-        position: 'Web Developer',
-        salary: '123',
-        location: 'Manchester',
-        profile_link:'https://www.manutd.com/',
-        profilepicture_link:'https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png',
-        status: 'Selected',
-        color: null
-    },
-    {
-        id: 2,
-        name: 'Borussia Dortmund',
-        position: 'Software Engineer',
-        salary: '456',
-        location: 'Dortmund',
-        profile_link:'www.abcd.com',        
-        profilepicture_link:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Borussia_Dortmund_logo.svg/1200px-Borussia_Dortmund_logo.svg.png',
-        status: 'Rejected',
-        color: null
-    },
-    {
-        id: 3,
-        name: 'AC Milan',
-        position: 'Data Scientist',
-        salary: '789',
-        location: 'Milan',
-        profile_link:'www.abcd.com',
-        profilepicture_link:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/1200px-Logo_of_AC_Milan.svg.png',
-        status: 'Under Review',
-        color: null
-    }
-]
-
-let companyArray=companies;
+let companyCopy=[];
+let printValue=''
+let categoryValue=''
+let companyArray=[];
+let appID=''
+let outputList=[]
+let outputStatus=[]
 
 class StudentDashboard extends Component {
 
@@ -47,36 +19,106 @@ class StudentDashboard extends Component {
         super()
         this.state={
             companyList: [], 
-            editVisibles: {}
+            editVisibles: {},
+            companyData: [],
+            outputName:'',
+            outputLink:'',
+            outputCategory:'',
+            outputList: []
         }
     }
 
-    addElement=(company) => {
-        let index=companyArray.findIndex(p=> p.name==company.target.name);
-        if(companyArray[index].status=="Selected")
-        {
-            companyArray[index].color="select";
-        }
-        else if(companyArray[index].status=="Rejected")
-        {
-            companyArray[index].color="reject";
-        }
-        else if(companyArray[index].status=="Applied")
-        {
-            companyArray[index].color="interview";
-        }
-        else if(companyArray[index].status=="Under Review")
-        {
-            companyArray[index].color="review";
-        }
+    componentDidMount(){
+        axios.get('http://kanishkshah.pythonanywhere.com/positions/', {
+                headers: {
+                    authorization: 'Token '+token
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    companyData: res.data
+                });
+            })
+
+            axios.get('http://kanishkshah.pythonanywhere.com/applications/', {
+                headers: {
+                    authorization: 'Token '+token
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    companyList: res.data
+                });
+                this.fetchItems()
+            })
+    }
+
+    fetchItems(){
+        outputList=[]
+        outputStatus=[]
+        this.state.companyList.map(p => {
+            axios.get('http://kanishkshah.pythonanywhere.com/company/'+p.id, {
+                headers: {
+                    authorization: 'Token '+token
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                outputList.push(res.data)
+                outputStatus.push(p.status)
+                this.setState({
+                    outputList: outputList,
+                })
+        })
+    })
+    }
+
+    addElement=(e) => {
+        console.log(companyArray)
+        console.log(e)
+        let index=e;
+        let arrayIndex=companyArray[index]
+        console.log(index)
+        console.log(arrayIndex)
+        axios({
+            headers: {
+                authorization: 'Token '+token
+            },
+            method: 'post',
+            url: 'http://kanishkshah.pythonanywhere.com/applications/'+arrayIndex.company.id,
+            data: arrayIndex
+        })
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err.response.data)
+        })
+       
         if(index!=-1)
         {   
-            selectedList.push(companies[index]);
             companyArray.splice(index,1);
         }
+        console.log(arrayIndex)
         this.setState({
-            companyList: selectedList
+            companyData: companyArray
         });
+        axios.get('http://kanishkshah.pythonanywhere.com/applications/', {
+                headers: {
+                    authorization: 'Token '+token
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    companyList: res.data
+                });
+                this.fetchItems()
+            })
+        console.log(companyArray)
+        
     }
 
     showEditDiv = id => {
@@ -88,31 +130,49 @@ class StudentDashboard extends Component {
         }));
       };
 
+      fetchOutput(res) {
+        
+    }
+
     render() {
+        companyArray=this.state.companyData
+        console.log(companyArray)
+        console.log(this.state.companyList)
         return (
-            <div className="background">
+            <div className="background_studentdashboard">
                 <div className="row">
-                    <div className="col-lg-5 card" id="left-card">
+                    <div className="col-lg-5 card" id="left-card_studentdashboard">
                         <br></br>
                         <h2>NEW OPENINGS</h2>
                         <hr></hr>
                         {
-                            companyArray.map((p,index) => {
+                            this.state.companyData.map((p,index) => {
+                                {
+                                    if(p.company.category=='S')
+                                    {
+                                        categoryValue="Super Dream"
+                                    }
+                                    else if(p.company.category=="D")
+                                    {
+                                        categoryValue="Dream"
+                                    }
+                                    else
+                                    {
+                                        categoryValue="Regular"
+                                    }
+                                }
                                 return (
-                                    <div className="row studentCard" key={p.id}>
-                                        <div className="col-lg-5" >
-                                            <img className="profile_pic" src={p.profilepicture_link}></img>
-                                            <hr></hr>
-                                        </div>
-                                        <div className="col-lg-7">
-                                            <p>{p.name}</p>
-                                            <p class="position">{p.position}</p>
-                                            <button className="btn expand" onClick={() => this.showEditDiv(p.id)}>+</button>
-                                            <div className={!this.state.editVisibles[p.id]? "invisible": "visible"}>
-                                                <p>Rs {p.salary}</p>
-                                                <p>{p.location}</p>
-                                                <button className="btn btn-large" name={p.name} id="apply" onClick={this.addElement}>APPLY</button>
-                                                <button className="companyProfile btn btn-large"><a href= {p.profile_link} target="_blank">know more</a></button>
+                                    <div className="row studentCard_studentdashboard" key={index}>
+                                       
+                                        <div className="col">
+                                            <p>{p.title}</p>
+                                            <p class="companyname_studentdashboard">{p.company.name}
+                                            <button className="btn expand_studentdashboard" onClick={() => this.showEditDiv(p.id)}>+</button></p>
+                                            <div className={!this.state.editVisibles[p.id]? "invisible_studentdashboard": "visible_studentdashboard"}>
+                                                <p class="position_studentdashboard">{categoryValue}</p>
+                                                <p>{p.package}</p>
+                                                <button className="btn btn-large" id="apply_studentdashboard" data_index={index} onClick={() => this.addElement(index)}>APPLY</button>
+                                                <button className="companyProfile_studentdashboard btn btn-large"><a href= {'/company/'+p.id} target="_blank">know more</a></button>
                                             </div>
                                             <hr></hr>
                                         </div>
@@ -121,28 +181,50 @@ class StudentDashboard extends Component {
                             })
                         }
                     </div>
-                    <div className="col-lg-5 card" id="right-card">
+                    <div className="col-lg-5 card" id="right-card_studentdashboard">
                         <br></br>
                         <h2>APPLICATIONS</h2>
                         <hr></hr>
                         {
-                            this.state.companyList.map(p => {
+                            this.state.outputList.map((p, index) => {
+                                
+                                    if(outputStatus[index]=="1")
+                                    {
+                                        printValue="PUT UNDER REVIEW"
+                                        p.color="review_studentdashboard"
+                                    }
+                                    else if(outputStatus[index]=="2")
+                                    {
+                                        printValue="INTERVIEW SCHEDULED"
+                                        p.color="interview_studentdashboard"
+                                    }
+                                    else if(outputStatus[index]=="3")
+                                    {
+                                        printValue="SELECTED"
+                                        p.color="select_studentdashboard"
+                                    }
+                                    else if(outputStatus[index]=="4")
+                                    {
+                                        printValue="REJECTED"
+                                        p.color="reject_studentdashboard"
+                                    }
+                                    
                                 return (
-                                    <div className="row studentCard" key={p.id}>
-                                        <div className="col-lg-5">
-                                            <img className="profile_pic" src={p.profilepicture_link}></img>
-                                            <hr></hr>
-                                        </div>
-                                        <div className="col-lg-7">
+                                    
+                                    <div className="row studentCard_studentdashboard" key={p.id}>
+                                        
+                                        <div className="col">
                                             <p>{p.name}</p>
-                                            <p>{p.position}</p>
-                                            <p className={p.color}>{p.status}</p>
+                                            {console.log(p.name)}
+                                            <p className={p.color}>{printValue}</p>
                                             <hr></hr>
                                         </div>
                                     </div>
                                 )
                             })
                         }
+                    
+                        
                     </div>
                 </div>
             </div>
