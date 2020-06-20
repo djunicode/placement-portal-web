@@ -9,7 +9,8 @@ const Companies = ({ companies, showCompanies, handleShowMoreCompanies }) => {
         </div>
         <div className="Tpo2_gridComp">
           <p>Name : {company.name}</p>
-          <p>Position : {company.pos}</p>
+          <p>Category : {company.category}</p>
+          <p>Link : {company.link}</p>
         </div>
       </div>
     )

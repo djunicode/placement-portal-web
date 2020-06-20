@@ -32,7 +32,7 @@ function App() {
             
             {/* Routes yet to be setup*/}
            <Route exact path='/PlacementCoDashboard' component={PlacementCoDashboard}/> 
-           <Route exact path='/Studentprofile' component={Studentprofile}/>
+           <Route exact path='/Studentprofile/:studentId' component={Studentprofile}/>
         
            {/* <Link to="/" style={{ textDecoration: 'none' }}  /> */}
       </div>

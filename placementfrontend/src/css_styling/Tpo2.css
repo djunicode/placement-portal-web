@@ -58,10 +58,10 @@ body {
     padding: 5px;
     display: grid;
     grid-template-columns: auto auto ;
+    cursor:pointer;
   }
   .Tpo2_collection-item p{
     margin: 2px;
-    letter-spacing: 2px;
   }
   .Tpo2_listpic{
     height:50px;
@@ -81,7 +81,7 @@ body {
   }
   .Tpo2_gridComp img
   {
-  height: 70px;
+  height:70px;
   width: 70px;
   }
   .addCompGrid

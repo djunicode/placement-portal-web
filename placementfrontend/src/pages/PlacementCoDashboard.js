@@ -5,6 +5,7 @@ import Sidenav from '../components/Sidenav';
 import Companies from '../components/Companies';
 import Students from '../components/StudentsPC';
 import '../css_styling/Tpo2.css';
+import axios from 'axios';
 
 class App extends Component{
   constructor(props){
@@ -12,27 +13,33 @@ class App extends Component{
     this.handleShowMore=this.handleShowMore.bind(this)
     this.handleShowMoreCompanies=this.handleShowMoreCompanies.bind(this)
     this.state = {
-    students: [
-      {id: 1, name: 'ABC',branch:'comps',contact:'123456789'},
-      {id: 2, name: 'efg',branch:'it',contact:'123456789'},
-      {id: 3, name: 'lmn',branch:'comps',contact:'123456789'},
-      {id: 4, name: 'Amazon',branch:'it',contact:'123456789'},
-      {id: 5, name: 'pqr',branch:'comps',contact:'123456789'},
-      {id: 6, name: 'xyz',branch:'it',contact:'123456789'},
-    ],
-    companies:[
-      {id:1,name:'ABC',pos:'Tech'},
-      {id:2,name:'XYZ',pos:'Tech'},
-      {id:3,name:'LMN',pos:'Tech'},
-      {id:4,name:'ABC',pos:'Tech'},
-      {id:5,name:'XYZ',pos:'Tech'},
-      {id:6,name:'LMN',pos:'Tech'},
-    ],
+    students:[],
+    companies:[],
     showItems:3,
     showCompanies:3,
-
   }
 }
+componentDidMount(){
+  axios.get(`http://kanishkshah.pythonanywhere.com/company/`,{
+    headers: {
+      'Authorization':'Token '+'e49cfa6db88f04cd99020b64ff8f56023dc9869b'}})
+  .then(res => {
+    const companies = res.data
+    console.log(res.data);
+    this.setState({companies : companies})
+    console.log(this.state);
+  }) 
+  axios.get(`http://kanishkshah.pythonanywhere.com/students/`,{
+    headers: {
+      'Authorization':'Token '+'e49cfa6db88f04cd99020b64ff8f56023dc9869b'}})
+      .then(res => {
+        const students = res.data
+        console.log(res.data);
+        this.setState({students:students})
+        console.log(this.state);
+      }) 
+}
+
   handleShowMore(){
     this.setState({
       showItems: 

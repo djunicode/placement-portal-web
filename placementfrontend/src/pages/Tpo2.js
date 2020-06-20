@@ -5,31 +5,44 @@ import Sidenav from '../components/Sidenav';
 import Department from '../components/Department';
 import Students from '../components/Students';
 import '../css_styling/Tpo2.css';
+import axios from 'axios';
 
 class App extends Component{
   constructor(props){
     super(props)
     this.handleShowMore=this.handleShowMore.bind(this)
+    this.selectDepartment=this.selectDepartment.bind(this)
     this.state = {
-    students: [
-      {id: 1, name: 'ABC',branch:'comps',contact:'123456789'},
-      {id: 2, name: 'efg',branch:'it',contact:'123456789'},
-      {id: 3, name: 'lmn',branch:'comps',contact:'123456789'},
-      {id: 4, name: 'Amazon',branch:'it',contact:'123456789'},
-      {id: 5, name: 'pqr',branch:'comps',contact:'123456789'},
-      {id: 6, name: 'xyz',branch:'it',contact:'123456789'},
-    ],
+    students: [],
     departments:[
-      {id:1,name:'ABC'},{id:2,name:'XYZ'},{id:3,name:'LMN'}
+      {id:1,name:'COMPS'},{id:2,name:'IT'},{id:3,name:'EXTC'},{id:4,name:'ELEX'},{id:5,name:'MECH'},{id:6,name:'PROD'},{id:7,name:'BIO'},{id:8,name:'CHEM'}
     ],
-    showItems:3
+    select:'COMPS',
+    showItems:3,
   }
 }
-  handleShowMore(){
+componentDidMount(){
+  axios.get(`http://kanishkshah.pythonanywhere.com/students/`,{
+    headers: {
+      'Authorization':'Token '+'e49cfa6db88f04cd99020b64ff8f56023dc9869b'}})
+  .then(res => {
+    const students = res.data
+    console.log(res.data);
+    this.setState({students})
+  }) 
+}
+
+  handleShowMore=(e)=>{
     this.setState({
       showItems: 
         this.state.showItems >= this.state.students.length ?
-          this.state.showItems : this.state.showItems + this.state.students.length -3
+          this.state.showItems : this.state.showItems + this.state.students.length -3 
+    })
+  }
+  selectDepartment=(department)=>{
+    this.setState({
+      select : department.name ,
+      showItems : 3
     })
   }
  
@@ -50,10 +63,10 @@ class App extends Component{
           <div className="col-12  Tpo2_box2 ">
             <div className="row d-flex">
             <div className=" col-10 col-lg-5  ml-5 my-5 mr-4   Tpo2_inner_box2 ">
-              <Department departments={this.state.departments} />
+              <Department departments={this.state.departments} select={this.state.select} selectDepartment={this.selectDepartment} />
             </div>
             <div className=" col-10 col-lg-5 m-5  Tpo2_inner_box2 ">
-            < Students students={this.state.students}  showItems={this.state.showItems} handleShowMore={this.handleShowMore} />
+            < Students students={this.state.students}  showItems={this.state.showItems} select={this.state.select} handleShowMore={this.handleShowMore} />
             </div>
             </div>      
           </div>
