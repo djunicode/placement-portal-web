@@ -80,7 +80,7 @@ handleSave() {
                     Edit Details
                 </ModalHeader>
                 <ModalBody>
-                <div className="grid-item"><form onSubmit={this.handleSave} >
+                <div className="grid-item"><form >
          <div className="display_editGridModal">
           <input type="text"className="display_addInput"  defaultValue={company.name}  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
           <select className="form-control"  defaultValue={company.category} id="exampleFormControlSelect1"placeholder="Category:" onChange={this.handleChange} name="category"  required>
@@ -120,7 +120,7 @@ handleSave() {
         </form></div>
                 </ModalBody>
                 <ModalFooter>
-                    <button type="display_submit" className="display_btnModal"  onClick={() => { this.handleSave()}}>Save</button>
+                    <button type="display_submit" className="display_btnModal" type="submit" onClick={() => { this.handleSave()}}>Save</button>
                     <button className="display_btnModal" onClick={() => { toggleModalEdit()}} >cancel</button>
                 </ModalFooter>
             </Modal>

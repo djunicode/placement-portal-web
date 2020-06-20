@@ -20,12 +20,14 @@ function App() {
       <div className="App">
 
           <Route exact path='/StudentDashboardMain' component={StudentDashboardMain}/>  
-            <Route exact path='/' component={Login}></Route>
+        <Route exact path='/' component={Login}></Route>
+
         <Route exact path='/studentSignup' component={StudentSU}/>
         <Route path='/staffSignup' component={StaffSU}/>
         
         <Route exact path='/add' component={AddDetails}/> 
-        <Route exact path='/display' component={DisplayDetails}/> 
+
+        <Route exact path='/company/:companyId' component={DisplayDetails}/> 
 
            <Route exact path='/CompanyMain' component={CompanyMain}/>
            <Route exact path='/Tpo2' component={Tpo2}/>
@@ -36,7 +38,6 @@ function App() {
         
            {/* <Link to="/" style={{ textDecoration: 'none' }}  /> */}
       </div>
-
     </BrowserRouter>
 
   );

@@ -280,7 +280,18 @@ html, body {
    align-items: center !important;
    background-color: rgb(147, 213, 201);
  }
- 
+ .addComp_gridComp a 
+ {
+   color : #000;
+ }
+ .addComp_gridComp a:hover{
+  color : #000;
+ }
+ .addComp_gridComp a:visited
+ {
+  color : #000 !important;
+
+ }
 
  .addComp_hello
  {

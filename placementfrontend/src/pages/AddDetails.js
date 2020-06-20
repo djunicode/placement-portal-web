@@ -1,24 +1,37 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import axios from 'axios';
 import NavR from '../components/AddDets_navbar';
 import SidenavR from '../components/AddDets_Sidenav';
 import Companies from '../components/AddComp_Companies';
 import AddCompanies from '../components/AddCompanies';
+
 import '../css_styling/addComp.css'
+
+
+const AUTH_TOKEN='Token 43e81114f13b0e7a2384d95ed0116997babeff30'
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 class AddDetails extends Component{
  
   state = {
     companies: [
-      {id: 1, name: 'Google',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']},
-{id: 2, name: 'Amazon',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']}
+//       {id: 1, name: 'Google',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']},
+// {id: 2, name: 'Amazon',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']}
 
     ],
     showItems:3
-    
   }
  
+  componentDidMount(){
+    axios.get(`http://kanishkshah.pythonanywhere.com/company/`)
+    .then(res=>{
+        this.setState({
+            companies:res.data
+        })
+    })
+    .catch(err => console.log(err));
+  }
  showMore=()=>
  {
    this.setState({
@@ -28,11 +41,48 @@ class AddDetails extends Component{
    })
  }
   addCompanies = (company) => {
-    company.id = Math.random();
-    let companies = [...this.state.companies, company];
-    this.setState({
-      companies:companies
-    });
+    // let companies = [...this.state.companies, company];
+    // this.setState({
+    //   companies:companies
+    // });
+    console.log(company.name,company.category,company.link)
+    const companyDetails = {
+      name : company.name,
+      category : company.category,
+      link : company.link
+    }
+axios.post('http://kanishkshah.pythonanywhere.com/company/',companyDetails)
+.then(res=>{
+        console.log(res.data);
+        company.id=res.data.id
+}).then(res=>
+  {
+    company.addFields.map(addField =>
+     {
+      const positionDetails={
+        title:addField.position,
+        company:company.id,
+        vacancies:Number(addField.noOfPos),
+        interview_date:new Date(addField.Interviewdate).toISOString(),
+        deadline:new Date(addField.deadline).toISOString(),
+        package:addField.packages,
+        details:addField.addDets,
+      }
+      console.log(positionDetails)
+      axios.post('http://kanishkshah.pythonanywhere.com/positions/',positionDetails)
+      .then(res=>{
+        console.log(res.data);
+      }).catch(err => console.log(err)) 
+     
+     } 
+      )
+  })
+  .then(
+    res=>{
+      this.props.history.push(`/company/${company.id}`); 
+    }
+  )
+.catch(err => console.log(err))  
   }
   
   render(){

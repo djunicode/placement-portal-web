@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css_styling/addComp.css';
 import { withRouter} from 'react-router-dom';
+import axios from 'axios';
 class AddCompanies extends Component {
     state = {
       name: null,
@@ -11,7 +12,7 @@ class AddCompanies extends Component {
         noOfPos:"",
         Interviewdate:"",
         deadline:"",
-        package:"",
+        packages:"",
         addDets:""}
       ]
       
@@ -45,10 +46,10 @@ handleAddMore=(e)=>
   
     this.setState((prevState) =>({addFields:[...prevState.addFields,{
       position:"",
-      noOfPos:"",
+      noOfPos:null,
       Interviewdate:"",
       deadline:"",
-      package:"",
+      packages:"",
       addDets:""}]}));
   
 //   e.preventDefault();
@@ -59,7 +60,7 @@ handleAddMore=(e)=>
     e.preventDefault();
     this.props.addCompanies(this.state);
     console.log(this.state);
-    this.props.history.push('/display'); 
+   
   }
   onFocus= (e)=>{
     e.currentTarget.type = "date";
@@ -77,9 +78,9 @@ onBlur=(e)=>{
           <input type="text" className="addComp_addInput"  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
           <select className="form-control" id="exampleFormControlSelect1"placeholder="Category:" onChange={this.handleChange} name="category"  required>
             <option disabled selected hidden>Category:</option>
-      <option>Super-Dream</option>
-      <option>Dream</option>
-      <option>Regular</option>
+      <option value="S">Super-Dream</option>
+      <option value="D">Dream</option>
+      <option value="R">Regular</option>
     </select></div>
     <div className="addComp_addMore" >
     {
@@ -94,7 +95,7 @@ onBlur=(e)=>{
  <input type="number" className="addComp_addInput"placeholder="Number Of Position:"  onChange={this.handleChange} data-id={index} id={noOfPos} name="noOfPos" required min="0" />
          <input type="text"className="addComp_addInput"placeholder="Interview Date:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={Interviewdate} name="Interviewdate" required />
          <input type="text"className="addComp_addInput"placeholder="Deadline:" onFocus = {this.onFocus} onBlur={this.onBlur} onChange={this.handleChange} data-id={index} id={deadline} name="deadline"  required />
-<input type="text"className="addComp_addInput" placeholder="Package:" onChange={this.handleChange} name="package" data-id={index} id={packages} required/>
+<input type="text"className="addComp_addInput" placeholder="Package:" onChange={this.handleChange} name="packages" data-id={index} id={packages} required/>
 </div>
 <input type="text" className="addComp_addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" data-id={index}  id={addDets} required />  
 
