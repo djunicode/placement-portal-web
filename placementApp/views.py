@@ -154,3 +154,11 @@ def get_xls(request, company_id):
     wb = generate_xls(company)
     wb.save(response)
     return response
+
+
+class UserData(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        serializer = UserSerializer(self.request.user)
+        return Response(serializer.data)

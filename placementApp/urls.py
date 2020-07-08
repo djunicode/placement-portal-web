@@ -21,4 +21,5 @@ urlpatterns = [
         views.CoordinatorSignUpView.as_view(),
         name="coordinator_signup",
     ),
+    path('type', views.UserData.as_view(), name="type"),
 ]
