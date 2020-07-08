@@ -1,0 +1,15 @@
+#active-link_studentdashboard{
+    color: darkred;
+}
+.nav-link_studentdashboard{
+    font-size: large;
+    margin-right: 10px;
+    font-weight: bold;
+}
+#bar_studentdashboard{
+    height: 50px;
+    background-color: rgb(128, 255, 204);
+}
+.top_studentdashboard {
+    top: 50px;
+}

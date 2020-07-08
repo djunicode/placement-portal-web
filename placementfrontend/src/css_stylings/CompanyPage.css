@@ -1,0 +1,89 @@
+.background_companypage{
+    background-color: rgb(240, 240, 240);
+    height: 100%;
+    margin-top: 100px;
+}
+#left-card_companypage{
+    margin-right: 20px;
+    margin-left: 50px;
+    border-radius: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#right-card_companypage{
+    margin-left: 20px;
+    border-radius: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.profile_pic_companypage{
+    width: 150px;
+    height: 150px;
+}
+.studentCard_companypage{
+    margin-bottom: 20px;
+}
+#changeStatus_companypage{
+    width: 80%;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+.select_companypage{
+    color: rgb(247, 212, 116);
+}
+.interview_companypage{
+    color: lightgreen;
+}
+.review_companypage{
+    color: darkred;
+}
+.reject_companypage{
+    color: red;
+}
+.profile_companypage{
+    background-color: darkred;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+a, a:visited, a:hover{
+    color: white;
+    text-decoration: none;
+}
+.rejectButton_companypage{
+    background-color: darkred;
+    border-radius: 20px;
+    color: white;
+    width: 70%;
+    margin: 10px auto;
+}    
+.rejectReview_companypage{
+    margin-top: auto;
+}
+#filterStudents_companypage{
+    width: 75%;
+    margin-left: 0px;
+}
+.filterIcon_companypage{
+    width: 30px;
+    height: 30px;
+    margin-left: 70%;
+}
+.excel-left_companypage{
+    background-color: green;
+    width: 20%;
+    border-radius: 20px;
+    margin: 10px auto;
+    color: white;
+}
+.excel-right_companypage{
+    background-color: green;
+    width: 20%;
+    border-radius: 20px;
+    margin: 10px auto;
+    margin-top: auto;
+    color: white;
+}
+#reviewedApps_companypage{
+    margin-bottom: 0px;
+}

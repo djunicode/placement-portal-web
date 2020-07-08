@@ -1,11 +1,26 @@
-import xlwt
+from .models import Student, Position, Company, Application
+from .serializers import (
+    StudentSerializer,
+    PositionReadSerializer,
+    PositionWriteSerializer,
+    CompanySerializer,
+)
 import datetime
-from django.shortcuts import HttpResponse
-from .models import Student, Position, Company
 from .serializers import *
+from .utils import generate_xls, get_curent_year
+from .permissions import (
+    IsStaffOrOwner,
+    IsTPOOrReadOnly,
+    IsStaff,
+    ApplicationPermissions,
+    IsStudentOrReadOnly,
+)
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets, permissions, status,mixins,generics
 from django.contrib.auth.hashers import make_password
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import viewsets, permissions, status, mixins, generics
 from rest_framework.response import Response
 
 
@@ -18,10 +33,34 @@ class StudentSignUpView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["role"] = "STUDENT"
-        hashed_password = make_password(serializer.validated_data["password"])
-        serializer.validated_data["password"] = hashed_password
-        print(self.perform_create(serializer))
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if (
+            serializer.validated_data["password2"]
+            == serializer.validated_data["password"]
+        ):
+            serializer.validated_data.pop("password2")
+            hashed_password = make_password(serializer.validated_data["password"])
+            serializer.validated_data["password"] = hashed_password
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(
+            {"error": "Could not create Student"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+class StudentViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
+):
+    permission_classes = (IsStaffOrOwner,)
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class UpdateStudentViewSet(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = "id"
+    permission_classes = (IsStudentOrReadOnly,)
+    queryset = Student.objects.filter()
+    serializer_class = StudentSerializer
+
 
 class CoordinatorSignUpView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -32,125 +71,86 @@ class CoordinatorSignUpView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["role"] = "CO"
-        hashed_password = make_password(serializer.validated_data["password"])
-        serializer.validated_data["password"] = hashed_password
-        print(self.perform_create(serializer))
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if (
+            serializer.validated_data["password2"]
+            == serializer.validated_data["password"]
+        ):
+            serializer.validated_data.pop("password2")
+            hashed_password = make_password(serializer.validated_data["password"])
+            serializer.validated_data["password"] = hashed_password
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(
+            {"error": "Could not create Coordinator"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
 
-
-
-class StudentViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
+class ApplicationViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
 ):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+    permission_classes = (ApplicationPermissions,)
+    serializer_class = ApplicationSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(student=Student.objects.get(pk=self.request.user.pk))
+        # Create an application using currently authenticated user
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == "PUT" or self.request.method == "PATCH":
+            # Position will also be read-only for Update operations,
+            # Hence a different serializer is required for Update operations
+            serializer_class = ApplicationSerializerPositionReadOnly
+
+        return serializer_class
+
+    def get_queryset(self):
+        if self.request.user.is_student():
+            return Application.objects.filter(student=self.request.user)
+            # Students should only be able to query their applications
+        return Application.objects.all()
+        # TPO / Co-ordinator can query any Application
 
 
-class PositionViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet,
-):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Position.objects.all()
-    serializer_class = PositionSerializer
+class PositionViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsTPOOrReadOnly,)
+
+    def get_serializer_class(self):
+        if self.action in ["list", "retrieve"]:
+            return PositionReadSerializer
+        return PositionWriteSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_student():
+            return Position.objects.filter(deadline__gt=datetime.datetime.now())
+        return Position.objects.all()
 
 
-#############################
-#   EXCEL SHEET GENERATION  #
-#############################
+class CompanyViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsTPOOrReadOnly,)
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
 
 
+@api_view(
+    ["GET",]
+)
+@permission_classes((IsStaff,))
 def get_xls(request, company_id):
     company = Company.objects.get(id=company_id)
 
     name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
     response = HttpResponse(content_type="application/ms-excel")
-    response["Content-Disposition"] = "attachment; filename=" + name_of_workbook
+    response["Content-Disposition"] = (
+        "attachment; filename=" + '"' + name_of_workbook + '"'
+    )
 
     wb = generate_xls(company)
     wb.save(response)
-
     return response
-
-
-def generate_xls(company):
-    wb = xlwt.Workbook(encoding="utf-8")  # Creating Workbook
-
-    positions = company.positions.all()
-    for position in positions:
-        wb = generate_sheet(wb, position)  # Creating separate sheets for each position
-
-    return wb
-
-
-def generate_sheet(wb, position):
-    ws = wb.add_sheet(position.title)  # Creating sheet
-
-    # Writing title of the sheet
-    sheet_title = (
-        "Applications for "
-        + position.title
-        + ", "
-        + position.company.name
-        + " "
-        + str(get_curent_year())
-    ).upper()
-    font_style = xlwt.XFStyle()
-    font_style.font.bold = True
-    font_style.font.height = 300
-    font_style.alignment.horz = 2
-    ws.write_merge(0, 0, 0, 5, sheet_title, font_style)
-
-    # Writing the column names
-    font_style = xlwt.XFStyle()
-    font_style.font.bold = True
-    font_style.alignment.horz = 2
-    columns = [
-        "SAP ID",
-        "Name of canditate",
-        "Email address",
-        "CGPA",
-        "Status",
-        "Submitted at",
-    ]
-    col_width = [
-        13 * 260,
-        26 * 260,
-        30 * 260,
-        7 * 260,
-        23 * 260,
-        18 * 260,
-    ]
-
-    row_num = 2
-    for col_num in range(len(columns)):
-        ws.write(row_num, col_num, columns[col_num].upper(), font_style)
-
-    # Writing data into the columns
-    font_style = xlwt.XFStyle()
-    rows = []
-    applications = position.applications.filter(submitted_at__year=get_curent_year())
-    for application in applications:
-        date_time = application.submitted_at.strftime("%m/%d/%Y, %H:%M:%S")
-        rows.append(
-            [
-                application.student.sap_ID,
-                "First_name Last_name",  # application.student.first_name + " " + application.student.last_name,
-                application.student.email,
-                "9.00",  # application.student.pointer,
-                application.get_status_display(),
-                date_time,
-            ]
-        )
-    for row in rows:
-        row_num += 1
-        for col_num in range(len(row)):
-            ws.write(row_num, col_num, row[col_num], font_style)
-            ws.col(col_num).width = col_width[col_num]
-
-    return wb
-
-
-def get_curent_year():
-    return datetime.date.today().year
