@@ -1,9 +1,10 @@
-from .models import Student, Position, Company, Application
+from .models import Student, Position, Company, Application, Coordinator
 from .serializers import (
     StudentSerializer,
     PositionReadSerializer,
     PositionWriteSerializer,
     CompanySerializer,
+    CoordinatorSerializer,
 )
 import datetime
 from .serializers import *
@@ -136,6 +137,11 @@ class CompanyViewSet(viewsets.ModelViewSet):
     permission_classes = (IsTPOOrReadOnly,)
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
+
+class CoordinatorViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsTPOOrReadOnly,)
+    queryset = Coordinator.objects.all()
+    serializer_class = CoordinatorSerializer
 
 
 @api_view(

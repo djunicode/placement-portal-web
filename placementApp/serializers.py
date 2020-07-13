@@ -66,6 +66,12 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = "__all__"
 
+class CoordinatorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coordinator
+        fields = "__all__"
+
+
 
 class PositionReadSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
