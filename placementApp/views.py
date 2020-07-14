@@ -1,11 +1,4 @@
 from .models import Student, Position, Company, Application, Coordinator
-from .serializers import (
-    StudentSerializer,
-    PositionReadSerializer,
-    PositionWriteSerializer,
-    CompanySerializer,
-    CoordinatorSerializer,
-)
 import datetime
 from .serializers import *
 from .utils import generate_xls, get_curent_year
