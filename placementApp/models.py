@@ -152,3 +152,9 @@ class Application(models.Model):
         return (
             self.student.f_name + " " + self.student.l_name + ", " + self.position.title
         )
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)

@@ -22,4 +22,5 @@ urlpatterns = [
         name="coordinator_signup",
     ),
     path('type', views.UserData.as_view(), name="type"),
+    path('api/auth/login',views.ObtainAuthTokenView.as_view(), name='login'),
 ]
