@@ -100,12 +100,6 @@ class ApplicationSerializerPositionReadOnly(serializers.ModelSerializer):
         model = Application
         fields = "__all__"
 
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ['role']
-
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()

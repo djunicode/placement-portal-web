@@ -157,14 +157,6 @@ def get_xls(request, company_id):
     return response
 
 
-class UserData(generics.GenericAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def get(self, request):
-        serializer = UserSerializer(self.request.user)
-        return Response(serializer.data)
-
-
 class ObtainAuthTokenView(generics.CreateAPIView):
     serializer_class = LoginSerializer
     permission_classes = (permissions.AllowAny,)
