@@ -21,4 +21,5 @@ urlpatterns = [
         views.CoordinatorSignUpView.as_view(),
         name="coordinator_signup",
     ),
+    path('api/auth/login',views.ObtainAuthTokenView.as_view(), name='login'),
 ]

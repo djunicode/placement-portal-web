@@ -99,3 +99,8 @@ class ApplicationSerializerPositionReadOnly(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = "__all__"
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True, required=True, style={"input_type": "password"},)
