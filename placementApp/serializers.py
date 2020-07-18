@@ -47,7 +47,14 @@ class CoordinatorSignupSerializer(serializers.ModelSerializer):
         write_only=True, required=True, style={"input_type": "password"},
     )
     password2 = serializers.CharField(style={"input_type": "password"}, write_only=True)
-
+    
+    def validate(self, data):
+        if data['email'].endswith("@djsce.ac.in") == False:    
+            raise serializers.ValidationError(
+                {"email": "Coordinator emails must end with @djsce.ac.in"}
+            )
+        return data
+    
     class Meta:
         model = Coordinator
         fields = (
@@ -69,7 +76,15 @@ class CompanySerializer(serializers.ModelSerializer):
 class CoordinatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coordinator
-        fields = "__all__"
+        fields = (
+            'profile_image',
+            'f_name',
+            'email',
+            'l_name',
+            'role',
+            'department',
+            'username',
+        )
 
 
 
