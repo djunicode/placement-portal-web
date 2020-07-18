@@ -1,10 +1,4 @@
-from .models import Student, Position, Company, Application
-from .serializers import (
-    StudentSerializer,
-    PositionReadSerializer,
-    PositionWriteSerializer,
-    CompanySerializer,
-)
+from .models import Student, Position, Company, Application, Coordinator
 import datetime
 from .serializers import *
 from .utils import generate_xls, get_curent_year
@@ -137,6 +131,11 @@ class CompanyViewSet(viewsets.ModelViewSet):
     permission_classes = (IsTPOOrReadOnly,)
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
+
+class CoordinatorViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsTPOOrReadOnly,)
+    queryset = Coordinator.objects.all()
+    serializer_class = CoordinatorSerializer
 
 
 @api_view(

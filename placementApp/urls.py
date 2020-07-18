@@ -7,6 +7,7 @@ router.register("students", views.StudentViewSet, basename="Student")
 router.register("applications", views.ApplicationViewSet, basename="Application")
 router.register("positions", views.PositionViewSet, basename="Position")
 router.register("company", views.CompanyViewSet, basename="Company")
+router.register("coordinator", views.CoordinatorViewSet, basename="Coordinator")
 urlpatterns = [
     path("", include(router.urls)),
     path("get_xls/<int:company_id>", views.get_xls, name="get_xls"),
