@@ -21,6 +21,8 @@ SECRET_KEY = "ff+ibs=b0$epdzex48*j@bb+iu_qtrd35r5%u!j@nczp4!sy2%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+#Please set to true for local testing
+
 ALLOWED_HOSTS = ['localhost','127.0.0.1','kanishkshah.pythonanywhere.com']
 
 AUTH_USER_MODEL = "placementApp.User"
