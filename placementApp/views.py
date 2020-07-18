@@ -106,6 +106,8 @@ class ApplicationViewSet(
         return serializer_class
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return Application.objects.none()
         if self.request.user.is_student():
             return Application.objects.filter(student=self.request.user)
             # Students should only be able to query their applications
@@ -122,6 +124,8 @@ class PositionViewSet(viewsets.ModelViewSet):
         return PositionWriteSerializer
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return Position.objects.none()
         if self.request.user.is_student():
             return Position.objects.filter(deadline__gt=datetime.datetime.now())
         return Position.objects.all()
