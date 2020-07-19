@@ -16,8 +16,8 @@ class Login extends Component {
 
   handleChange = event => {
     this.setState({[event.target.name]: event.target.value})
-    // console.log(this.state.email)
-    // console.log(this.state.password)
+    console.log(this.state.email)
+    console.log(this.state.password)
   }
 
   handleSubmit = event => {
@@ -27,17 +27,30 @@ class Login extends Component {
       email: this.state.email ,
     }
     axios
-   .post(`http://kanishkshah.pythonanywhere.com/api/auth/token/login/`,login_user)
+   .post(`http://kanishkshah.pythonanywhere.com/api/auth/login`,login_user)
     .then(response => {
-      // console.log(response)
-      // console.log(response.data.auth_token)
-      localStorage.setItem('token',response.data.auth_token)
-      this.props.history.push('/StudentDashboardMain')
+      console.log(response)
+      console.log(response.data.token)
+      console.log(response.data.role)
+      localStorage.setItem('token',response.data.token)
+      if(response.data.role=="CO"){
+      this.props.history.push('/PlacementCoDashboard')
+      }
+      else if(response.data.role=="STUDENT"){
+        this.props.history.push('/StudentDashboardMain')
+      }
+      else if(response.data.role=="TPO"){
+        this.props.history.push('/Tpo2')
+      }
+      else{
+        this.props.history.push('/Tpo2')
+      }
     })
     .catch(err => {
       this.setState({
         message:err.response.data.non_field_errors[0]
       })
+      // console.log(err)
       // console.log(this.state.message)
     })
   }
