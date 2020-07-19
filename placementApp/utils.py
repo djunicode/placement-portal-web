@@ -90,11 +90,13 @@ def generate_sheet(wb, position):
 
 def get_valid_sheet_name(position_title):
     # Replace invalid characters with _
-    return re.sub('[\\/:?*\[\]\\\\]+', '_', position_title)
+    return re.sub('[/:?*\[\]\\\\]+', '_', position_title)
+
 
 def get_valid_workbook_name(company_name):
     # Replace characters other than alphanumeric, spaces, hyphens and underscores
     return re.sub('[^A-Za-z0-9 _-]+', '_', company_name)
+
 
 def get_curent_year():
     return datetime.date.today().year
