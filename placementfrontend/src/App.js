@@ -14,6 +14,17 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import StudentDashboardMain from './pages/StudentDashboardMain.js';
 import CompanyMain from './pages/CompanyMain.js';
 
+// const token = localStorage.token;
+// axios.interceptors.request.use(
+//   config =>{
+//     config.headers.authorization=`Bearer ${token}`;
+//     return config;
+//   },
+//   error =>{
+//     return Promise.reject(error);
+//   }
+// )
+
 function App() {
   return (
     <BrowserRouter>
