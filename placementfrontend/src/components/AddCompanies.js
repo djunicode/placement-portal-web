@@ -98,11 +98,7 @@ onBlur=(e)=>{
 <input type="text"className="addComp_addInput" placeholder="Package:" onChange={this.handleChange} name="packages" data-id={index} id={packages} required/>
 </div>
 <input type="text" className="addComp_addInput"placeholder="Add Details" onChange={this.handleChange} name="addDets" data-id={index}  id={addDets} required />  
-
-
-</div> 
-
-                
+</div>              
              
             )
 

@@ -45,6 +45,10 @@ class AddDetails extends Component{
     // this.setState({
     //   companies:companies
     // });
+    if(company.link.trim().substring(0,4) !== 'http'){
+      company.link=`http://${company.link.trim()}`;
+    }
+    else company.link=company.link.trim();
     console.log(company.name,company.category,company.link)
     const companyDetails = {
       name : company.name,
