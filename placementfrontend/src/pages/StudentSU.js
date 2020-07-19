@@ -93,21 +93,21 @@ export class StudentSU extends Component {
                     <div style={{color:'red',fontSize:'75%',margin:'0px 30px'}}>{this.state.message}</div>
                     <form className="form2" onSubmit={this.handleSubmit}>
                         <span className = "g1" >
-                            <input required className="input2" onChange={this.handleChange} name="f_name"  placeholder='first name'></input>
-                            <input required className="input2" onChange={this.handleChange} name="l_name"  placeholder='last name'></input>
+                            <input required className="input2" onChange={this.handleChange} name="f_name"  placeholder='First Name'></input>
+                            <input required className="input2" onChange={this.handleChange} name="l_name"  placeholder='Last Name'></input>
                         </span><br></br>
                         <span className = "g2">
-                            <input required className="input2" onChange={this.handleChange} name="sap_ID"  type='number' placeholder='sap-id'></input>
-                            <input required className="input2" onChange={this.handleChange} name="pointer"   type='number' placeholder='pointer ' style={{width:'70%'}}></input>
+                            <input required className="input2" onChange={this.handleChange} name="sap_ID"  type='number' placeholder='Sap-ID'></input>
+                            <input required className="input2" onChange={this.handleChange} name="pointer"   type='number' placeholder='Pointer ' style={{width:'70%'}}></input>
                         </span><br></br>
                         
                         <span className = "g3-2" >
-                            <select onChange={this.handleChange} name="year"  required className="input2" placeholder='year'>
+                            <select onChange={this.handleChange} name="year"  required className="input2" placeholder='Year'>
                                 <option className="dis2" selected disabled hidden value="">year</option>
                                 <option value='TE'>TE</option>
                                 <option value="BE">BE</option>
                             </select>
-                            <select  onChange={this.handleChange} name="department" required className="input2"  placeholder='dept.'>
+                            <select  onChange={this.handleChange} name="department" required className="input2"  placeholder='Dept.'>
                                 <option value="" className="dis2"  selected disabled hidden>dept.</option>
                                 <option value="COMPS">Computers</option>
                                 <option value="IT">IT</option>
@@ -121,10 +121,10 @@ export class StudentSU extends Component {
                         </span> <br></br>
                         
                         <span className="email2">
-                            <input required className="input2" type='email' name="email" onChange={this.handleChange}  placeholder='email-id'></input>
+                            <input required className="input2" type='email' name="email" onChange={this.handleChange}  placeholder='Email-ID'></input>
                         </span>  <br></br>                
                         <span className="pass2">
-                            <input required className="input2" name="password"  type='password' onChange={this.handleChange}  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder='password'></input>
+                            <input required className="input2" name="password"  type='password' onChange={this.handleChange}  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder='Password'></input>
                         </span><br></br>
                         <div className="bind2">
                         <button className="input2 button2"

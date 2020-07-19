@@ -77,12 +77,12 @@ export class StaffSU extends Component {
                     
                     <form className="form2" onSubmit={this.handleSubmit}>
                         <span className="G1" >
-                            <input required className="input3"  onChange={this.handleChange} name="fname" placeholder='first name'></input>
-                            <input required className="input3" onChange={this.handleChange} name="lname" placeholder='last name'></input>
+                            <input required className="input3"  onChange={this.handleChange} name="fname" placeholder='First Name'></input>
+                            <input required className="input3" onChange={this.handleChange} name="lname" placeholder='Last Name'></input>
                         </span>
                         
                         <span className = "g3" >
-                            <select required  onChange={this.handleChange} name="dept" className="input3"  placeholder='dept.'>
+                            <select required  onChange={this.handleChange} name="dept" className="input3"  placeholder='Dept.'>
                                 <option value="" className="dis2" selected disabled hidden>dept.</option>
                                 <option value="COMPS">Computers</option>
                                 <option value="IT">IT</option>  
@@ -98,10 +98,10 @@ export class StaffSU extends Component {
                         </span>
                         
                         <span className="email3">
-                            <input required className="input2" type='email' placeholder='email-id' onChange={this.handleChange} name="email"></input>
+                            <input required className="input2" type='email' placeholder='Email-ID' onChange={this.handleChange} name="email"></input>
                         </span>                  
                         <span className="pass3">
-                            <input required  onChange={this.handleChange} name="pwd" className="input2"  type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder='password'></input>
+                            <input required  onChange={this.handleChange} name="pwd" className="input2"  type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder='Password'></input>
                         </span>
                         <div>
                             <div style={{color:'red',fontSize:'75%',position:'absolute'}}>{this.state.message}</div>

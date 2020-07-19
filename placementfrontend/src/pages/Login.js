@@ -16,8 +16,8 @@ class Login extends Component {
 
   handleChange = event => {
     this.setState({[event.target.name]: event.target.value})
-    console.log(this.state.email)
-    console.log(this.state.password)
+    // console.log(this.state.email)
+    // console.log(this.state.password)
   }
 
   handleSubmit = event => {
@@ -29,9 +29,9 @@ class Login extends Component {
     axios
    .post(`http://kanishkshah.pythonanywhere.com/api/auth/login`,login_user)
     .then(response => {
-      console.log(response)
-      console.log(response.data.token)
-      console.log(response.data.role)
+      // console.log(response)
+      // console.log(response.data.token)
+      // console.log(response.data.role)
       localStorage.setItem('token',response.data.token)
       if(response.data.role=="CO"){
       this.props.history.push('/PlacementCoDashboard')
@@ -69,8 +69,8 @@ class Login extends Component {
                                 
                                 <form onSubmit={this.handleSubmit} className="form1">
 
-                                    <input className="input1" name="email" type='email' onChange={this.handleChange} required placeholder='email-id'></input><br></br>
-                                    <input className="input1" name="password" type='password' onChange={this.handleChange} required placeholder='password'></input>
+                                    <input className="input1" name="email" type='email' onChange={this.handleChange} required placeholder='Email-ID'></input><br></br>
+                                    <input className="input1" name="password" type='password' onChange={this.handleChange} required placeholder='Password'></input>
                                     <div>
                                       <div className="msg">{this.state.message}</div>
 
