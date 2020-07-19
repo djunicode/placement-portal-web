@@ -45,12 +45,12 @@ export class StudentSU extends Component {
         axios
         .post(`http://kanishkshah.pythonanywhere.com/student_signup/`,user)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             axios
             .post(`http://kanishkshah.pythonanywhere.com/api/auth/token/login/`,login_user)
             .then(response => {
-                console.log(response)
-                console.log(response.data.auth_token)
+                // console.log(response)
+                // console.log(response.data.auth_token)
                 localStorage.setItem('token',response.data.auth_token)
                 this.props.history.push('/StudentDashboardMain')
             })
@@ -58,7 +58,7 @@ export class StudentSU extends Component {
                 this.setState({
                     message:err.response.data.email[0]
                 })
-                console.log(this.state.message)
+                // console.log(this.state.message)
             })
         })
         .catch(err => {

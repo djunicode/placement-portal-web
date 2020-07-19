@@ -16,8 +16,8 @@ class Login extends Component {
 
   handleChange = event => {
     this.setState({[event.target.name]: event.target.value})
-    console.log(this.state.email)
-    console.log(this.state.password)
+    // console.log(this.state.email)
+    // console.log(this.state.password)
   }
 
   handleSubmit = event => {
@@ -29,8 +29,8 @@ class Login extends Component {
     axios
    .post(`http://kanishkshah.pythonanywhere.com/api/auth/token/login/`,login_user)
     .then(response => {
-      console.log(response)
-      console.log(response.data.auth_token)
+      // console.log(response)
+      // console.log(response.data.auth_token)
       localStorage.setItem('token',response.data.auth_token)
       this.props.history.push('/StudentDashboardMain')
     })
@@ -38,7 +38,7 @@ class Login extends Component {
       this.setState({
         message:err.response.data.non_field_errors[0]
       })
-      console.log(this.state.message)
+      // console.log(this.state.message)
     })
   }
 
@@ -84,99 +84,6 @@ class Login extends Component {
             
         )
     }
-}
-
-
-const Styles = {
-
-    form1:{
-        zIndex:'5',
-        position: 'fixed',
-        top:'30%',
-        left:'15%',
-        width:'calc((68%))'
-      },
-      
-      nav1:{
-        position: 'absolute' ,
-        left: '0' ,
-        top: '0' ,
-        margin: '0' ,
-        padding: '0' ,
-        background: 'rgba(147,213,201)' ,
-        width: '100%' ,
-        height: '7%' 
-      },
-      green1:{
-        background:  'rgba(147,213,201)' ,
-        width: '550px' ,
-        height: '500px' ,
-        position: 'absolute' ,
-        left: '50%' ,
-        top: '57%' ,
-        transform: 'translate(-50%,-50%)' ,
-        zIndex: '1' ,
-        borderRadius: '20px' 
-      },
-      grey1:{
-        background:  'rgba(153,153,153,0.8)' ,
-        width: '550px' ,
-        height: '500px',
-        position: 'absolute' ,
-        left: '54%' ,
-        top: '50%' ,
-        transform: 'translate(-50%,-50%)' ,
-        zIndex: '2' ,
-        borderRadius: '20px' 
-      },
-      title1:{
-        textAlign: 'center' ,
-        color: 'white' ,
-        textTransform: 'uppercase' ,
-        fontSize: '2em' ,
-        marginTop: '68px' ,
-        fontWeight: '200' 
-      },
-      input1:{
-        height: '45px' ,
-        borderRadius: '20px' ,
-        border: 'none' ,
-        marginTop: '20px' ,
-        fontSize: '1em' ,
-        padding: '0px 10px' ,
-        width: '100%' 
-      },
-      button1:{
-        textAlign: 'center' ,
-        color: 'white' ,
-        fontWeight: 'bold' ,
-        width:'calc((105%))' ,
-        zIndex: '5' ,
-        background:  'rgba(147,213,201)' ,
-        height: '55px' ,
-        borderRadius: '20px' ,
-        border: 'none' ,
-        fontSize: '1.5em' ,
-        textTransform: 'uppercase' ,
-        marginTop: '55px' 
-      },
-      register1:{
-        textAlign: 'center' ,
-        fontSize: '1em' ,
-        marginTop: '15px' ,
-        color: 'white' ,
-        height: '10%' 
-      },
-      reg1:{
-        cursor: 'pointer' ,
-        fontWeight: 'bold' ,
-        textAlign: 'center' ,
-        color: 'white' ,
-        textDecoration: 'none' ,
-        paddingTop: '5px' 
-      }
-      
-     
 }
 
 

@@ -40,11 +40,11 @@ export class StaffSU extends Component {
         axios
         .post(`http://kanishkshah.pythonanywhere.com/coordinator_signup/`,user)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             axios
             .post(`http://kanishkshah.pythonanywhere.com/api/auth/token/login/`,login_user)
             .then(response => {
-                // console.log(response.data.auth_token)
+                console.log(response.data.auth_token)
                 localStorage.setItem('token',response.data.auth_token)
                 this.props.history.push('/add')
             })
@@ -59,7 +59,7 @@ export class StaffSU extends Component {
             this.setState({
                 message:err.response.data.email[0]
             })
-            console.log(this.state.message)
+            // console.log(this.state.message)
         })
     }
     render() {
@@ -120,98 +120,6 @@ export class StaffSU extends Component {
                     
             </div>
         )
-    }
-}
-
-const Styles = {
-   
-    
-    title:{
-        textAlign:'center',
-        color:'rgba(74,74,74)',
-        textTransform:'uppercase',
-        fontSize:'2em',
-        marginTop:'60px',
-        fontWeight:'200'
-    },
-    inputBox:{
-        height:'45px',
-        width:'90%',
-        float:'left',
-        border:'none',
-        borderBottom:'1px solid rgba(153,153,153)',
-        fontSize:'1em',
-        padding:'0px 5px',
-        borderSizing:'borderBox',
-    
-    },
-
-    Button:{
-        textAlign:'center',
-        color:'rgba(74,74,74)',
-        fontWeight:'200',
-        backgroundColor:'',
-        width:'calc((100%))',
-        zIndex:'5',
-        backgroundColor: 'rgba(147,213,201,0.5)',
-        height:'55px',
-        borderRadius:'20px',
-        border:'none',
-        fontSize:'1.5em',
-        textTransform:'uppercase',
-        marginTop:'55px',
-        position:'absolute',
-        top:'45%',
-        letterSpacing:'1px'
-    },
-    register:{
-        textAlign:'center',
-        fontSize:'1em',
-        marginTop:'15px',
-        color:'rgb(153,153,153)',
-        position:'absolute',
-        top:'65%'
-    },
-    reg:{
-        cursor:'pointer',
-        fontWeight:'bold',
-        color:'black'
-    },
-    g1 :{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        height: '10px',
-        position:'absolute',
-        top:'5%'
-      },
- 
-    // g3 :{
-    //     width:'100%'
-    //   },
-    email:{
-        position:'absolute',
-        top:'28%'
-    },
-    pass:{
-        position:'absolute',
-        top:'38%'
-    },
-    dis:{
-        color:'#565656'
-    },
-    // year:{
-    //     position:'relative',
-    //     left:'50%',
-    //     bottom:'30%'
-    // }
-
-    g3 :{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        height: '10px',
-        position: 'fixed',
-        top: '36%',
-        width: '85%'
     }
 }
 
