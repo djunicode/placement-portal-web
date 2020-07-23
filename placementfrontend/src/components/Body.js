@@ -14,13 +14,18 @@ class Body extends Component{
             pointer:'',
             email:'',
             year:'',
-            profile_image:''
+            profile_image:'',
+            file:'',    
+            msg_year:'',  
+            msg_email:'',
+            msg_sap_1:'' ,
+            msg_sap_2:'' ,   
         }   
     } 
     componentDidMount(){ 
-        axios.get(`http://kanishkshah.pythonanywhere.com/students/${this.props.studentId}`,{
+        axios.get(`http://kanishkshah.pythonanywhere.com/student_profile/${this.props.studentId}`,{
           headers: {
-            'Authorization':'Token '+'43e81114f13b0e7a2384d95ed0116997babeff30'}})
+            'Authorization':'Token '+'e4f1d93056d08395bb97cd21b183f8b7492e413a'}})
         .then(res => {
           const student = res.data
           console.log(res.data);
@@ -33,7 +38,6 @@ class Body extends Component{
               email: student.email,
               year: student.year,
               profile_image:student.profile_image,
-
           })
           console.log(this.state)
         }) 
@@ -44,8 +48,42 @@ class Body extends Component{
         });
         console.log(this.state)
     }
+
+
+    handleImageChange=(e)=>{
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0]; 
+        reader.onloadend = () => {
+          this.setState({
+            profile_image: reader.result,
+            file:file
+          });
+          
+        }
+        reader.readAsDataURL(file)
+        
+      }
+      handleSelectChange=(e)=>{
+        this.setState({
+            department : e.target.value
+        });
+      }
     handleSubmit=(e)=>{
-        const studentUpdated = 
+        const pointer = Number(this.state.pointer)
+        let formdata = new FormData()
+        if(this.state.file != ''){
+            formdata.append('profile_image',this.state.file) 
+        }
+        formdata.append('f_name',this.state.f_name)
+        formdata.append('l_name',this.state.l_name)
+        formdata.append('department',this.state.department)
+        formdata.append('sap_ID',this.state.sap_ID)
+        formdata.append('pointer',pointer)
+        formdata.append('email',this.state.email)
+        formdata.append('year',this.state.year)  
+
+/*         const studentUpdated = 
         {   
             f_name:this.state.f_name,
             l_name:this.state.l_name,
@@ -54,14 +92,45 @@ class Body extends Component{
             pointer:this.state.pointer,
             email:this.state.email,
             year:this.state.year,  
+            profile_image:this.state.file
         }
-        console.log(studentUpdated)
-        axios.put(`http://kanishkshah.pythonanywhere.com/student_profile/${this.props.studentId}`,studentUpdated,{
+        console.log(studentUpdated) */
+
+        axios.patch(`http://kanishkshah.pythonanywhere.com/student_profile/${this.props.studentId}`,formdata,{
           headers: {
-            'Authorization':'Token '+'ee4e5da60264eb2d743b7f17b5563c28584482f3'}})      
+            'Authorization':'Token '+'e4f1d93056d08395bb97cd21b183f8b7492e413a'}})      
         .then(res=>{
-            console.log(res.data)
-        })  
+            console.log(res.data);
+            this.setState({
+                msg_year:'',
+                msg_email:'',
+                msg_sap_1:'',
+                msg_sap_2:''
+            })
+        }) 
+        .catch(e => {
+            console.log(e.response);
+            if(e.response.data.year){
+                this.setState({
+                    msg_year:e.response.data.year
+                })
+            }
+            if(e.response.data.email){
+                this.setState({
+                    msg_email:e.response.data.email
+                })
+            }
+            if(e.response.data.sap_ID[0]){
+                this.setState({
+                    msg_sap_1:e.response.data.sap_ID[0]
+                })
+            }
+            if(e.response.data.sap_ID[1]){
+                this.setState({
+                    msg_sap_2:e.response.data.sap_ID[1]
+                })
+            }
+          });
         e.preventDefault();
         console.log(this.state)
     }
@@ -70,8 +139,8 @@ class Body extends Component{
     return(
         <div className="container-fluid">
             <div  className="row d-flex py-5">
-                <Sidenav />
-                <div className="col-lg-10">
+                {/* <Sidenav /> */}
+                <div className="col-lg-10 mx-auto">
                     <div className="row py-4">
                     </div>
                     <div className="row m-3 ">
@@ -90,21 +159,39 @@ class Body extends Component{
                                             <input type="text" name="l_name" className ="Studentprofile_studentdisplay  " defaultValue={this.state.l_name} placeholder="Last Name" onChange={this.handleChange} required/>
                                             <br />
                                             <label className="align1">SAP ID : </label>
-                                            <input type="text" name="sap_ID" pattern="[0-9]{10,12}" title="Sap Id must contain 10 to  12 numbers"  className =" Studentprofile_align1 Studentprofile_studentdisplay " defaultValue={this.state.sap_ID} placeholder="Sap-Id" onChange={this.handleChange} required/>
+                                            <input type="text" name="sap_ID"   className =" Studentprofile_align1 Studentprofile_studentdisplay " defaultValue={this.state.sap_ID} placeholder="Sap-Id" onChange={this.handleChange} required/>
                                             <br />
                                             <label className="align2">Pointer :</label> 
-                                            <input type="text" name="pointer" className ="Studentprofile_align2 Studentprofile_studentdisplay " defaultValue={this.state.pointer} placeholder="Pointer" onChange={this.handleChange} required/>
+                                            <input type="number" step=".01" min="0" max="10" name="pointer" className ="Studentprofile_align2 Studentprofile_studentdisplay " defaultValue={this.state.pointer} placeholder="Pointer" onChange={this.handleChange} required/>
                                             <br />
-                                            <label className="align3">Department :</label>
-                                            <input type="text" name="department" className ="Studentprofile_align3 Studentprofile_studentdisplay " defaultValue={this.state.department} placeholder=" Department" onChange={this.handleChange} required/>
+                                           <label className="align3">Department :</label>
+                                           <select value={this.state.department} name="department" onChange={this.handleSelectChange}  className ="Studentprofile_align3 select Studentprofile_studentdisplay ">                       
+                                            <option value="COMPS">COMPS</option>
+                                            <option value="IT">IT</option>
+                                            <option value="EXTC">EXTC</option>
+                                            <option value="ELEX">ELEX</option>
+                                            <option value="PROD">PROD</option>
+                                            <option value="MECH">MECH</option>
+                                            <option value="CHEM">CHEM</option>
+                                            <option value="BIO">BIO</option>
+                                            </select> 
                                             <br />
                                             <label className="align4">Year : </label>
                                             <input type="text" name="year" className ="Studentprofile_align4 Studentprofile_studentdisplay " defaultValue={this.state.year} placeholder=" Year" onChange={this.handleChange} required/>
                                             <br />
-                                            <label className="align5">Email ID: </label>
+                                            <label className="align5">Email ID : </label>
                                             <input type="email" name="email" className ="Studentprofile_align5 Studentprofile_studentdisplay " defaultValue={this.state.email} placeholder="Email-Id" onChange={this.handleChange} required/>
-                                            
+                                            <br/>
+                                            <label className="align6">Profile Image : </label>
+                                            <input type="file"  accept="image/*" name="profile_image" className ="Studentprofile_align6 Studentprofile_studentdisplay" onChange={this.handleImageChange} />
                                             <br /><br /><button  className="Studentprofile_edit">Update</button>
+                                            <br/> 
+                                            <div className="Studentprofile_message">
+                                                <p>{this.state.msg_sap_1} </p>
+                                                <p>{this.state.msg_sap_2} </p>
+                                                <p>{this.state.msg_year} </p>
+                                                <p>{this.state.msg_email} </p>
+                                            </div>
                                             </div>
                                         </form>
                                         </div>                                 

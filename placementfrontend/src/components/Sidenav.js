@@ -1,12 +1,15 @@
 import React from 'react';
-import profile from "../assets/dummy.png";
-function Sidenav() {
+// import profile from "../assets/dummy.png";
+const Sidenav = (props) => {
     return (
         <div className="col-lg-2  col-sm-6 my-2 Studentprofile_side ">
-            <img src={profile} alt="profile" className="Studentprofile_pic1" />
+            <img src={props.coordinator.profile_image} alt="profile" className="Studentprofile_pic1" />
             <br />
-            <h4>Name</h4>
-            <h4>Other</h4>
+            <h4>{props.coordinator.f_name} {props.coordinator.l_name}</h4>
+            <h4>{props.coordinator.department}</h4>
+            <div className="side_nav_email_container">
+            <h4 className="side_nav_email">{props.coordinator.email}</h4>
+            </div>
         </div>
     );
 }

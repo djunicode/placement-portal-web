@@ -19,7 +19,7 @@ function Nav(){
      <div className="Tpo2_topnav">
      <div className="col-12"><a className="active"  href="#home">HOME</a></div>
      <div className="col-12"><a href="#about" style={{color:"black"}}>RECORDS</a></div>
-     <div className="col-12"><a href="#" onClick={handleClick}>LOG OUT</a></div>  
+     <div className="col-12"><a href="#" className="logout_link" onClick={handleClick}>LOG OUT</a></div>  
         <form className="form-group float-right ">
                 <input className="form-control Tpo2_inp2" type="text" placeholder="Search"/>
                 <button className="btn"><i className="fa fa-search Tpo2_glass2"></i></button>       

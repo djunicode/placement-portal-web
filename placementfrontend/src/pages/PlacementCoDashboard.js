@@ -17,12 +17,26 @@ class App extends Component{
     companies:[],
     showItems:3,
     showCompanies:3,
+    coordinatorId: this.props.match.params.coordinatorId,
+    coordinator:[]
   }
 }
 componentDidMount(){
+  axios.get(`http://kanishkshah.pythonanywhere.com/coordinator/${this.state.coordinatorId}`,{
+    headers: {
+      'Authorization':'Token '+'0b16cad5286c7e673c4f6a7c12516ef480e5be33'}})
+  .then(res => {
+    const coordinator = res.data
+    console.log(res.data);
+    this.setState({
+     coordinator :coordinator,
+     })
+    console.log(this.state);
+  }) 
+
   axios.get(`http://kanishkshah.pythonanywhere.com/company/`,{
     headers: {
-      'Authorization':'Token '+'e49cfa6db88f04cd99020b64ff8f56023dc9869b'}})
+      'Authorization':'Token '+'9ee4446ecca070c8f8d31462cb519bace58fdb33'}})
   .then(res => {
     const companies = res.data
     console.log(res.data);
@@ -31,7 +45,7 @@ componentDidMount(){
   }) 
   axios.get(`http://kanishkshah.pythonanywhere.com/students/`,{
     headers: {
-      'Authorization':'Token '+'e49cfa6db88f04cd99020b64ff8f56023dc9869b'}})
+      'Authorization':'Token '+'9ee4446ecca070c8f8d31462cb519bace58fdb33'}})
       .then(res => {
         const students = res.data
         console.log(res.data);
@@ -64,7 +78,7 @@ componentDidMount(){
        </div>
       < div className="container-fluid">
       <div className="row d-flex py-5">
-        <Sidenav />
+        <Sidenav coordinator={this.state.coordinator} />
       <div className="col-lg-10">
         <div className="row py-4 ">
           <Nav /> 

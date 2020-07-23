@@ -59,9 +59,12 @@ body {
     display: grid;
     grid-template-columns: auto auto ;
     cursor:pointer;
+    overflow-wrap: break-word;
   }
   .Tpo2_collection-item p{
-    margin: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    width: 77%;
   }
   .Tpo2_listpic{
     height:50px;
@@ -73,7 +76,7 @@ body {
     background-color: white;
     margin: 40px 5px 20px 30px;
     border-radius: 10px !important;
-  
+    
   }
   .Tpo2_list
   {
@@ -84,13 +87,11 @@ body {
   height:70px;
   width: 70px;
   }
-  .addCompGrid
-  {
-    display: grid;
-    grid-template-columns: auto auto ;
-    grid-column-gap:8px !important;
-  }
-  
+
+   .Tpo2_gridComp {
+     width: 100%;
+
+   }
   
   .Tpo2_rectangle2{
     position: absolute;
@@ -151,4 +152,7 @@ body {
   .side2{
     text-align: center;
   }
-  
+  .logout_link:hover{
+    opacity: 1 !important;
+    color: black !important;
+  }
