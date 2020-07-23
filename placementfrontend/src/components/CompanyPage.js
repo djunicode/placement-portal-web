@@ -2,97 +2,82 @@ import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
-let token='43e81114f13b0e7a2384d95ed0116997babeff30'
+let auth_token='97bf5d419a6d783a367e7936828be4df45726bd2'
 let selectedList=[];
 let arrayCopy=[];
-let printValue=''
-let list_ids=[]
-let list_ids2=[]
-let list=[]
-let dummyList=[]
-let outputList=[]
-let outputStatus=[]
-let filteredList=[]
-let colorClass=''
+let printValue='';
+let list=[];
+let outputList=[];
+let outputStatus=[];
+let filteredList=[];
+let colorClass='';
+let displayList=[];
+
 class CompanyPage extends Component {
 
     constructor() {
         super()
         this.state={
-            studentList: [], 
             studentArray: [],
             company_id: '',
             studentDisplay: [],
-            dummyDisplay: [],
-            outputImage:'',
-            outputName:'',
-            outputSap:'',
-            outputDep:'',
-            outputYear:'',
             outputList: []
         }
     }
 
     componentDidMount(){
         axios.get('http://kanishkshah.pythonanywhere.com/applications/', {
-                headers: {
-                    authorization: 'Token '+token
-                }
-            })
-            .then(res => {
-                console.log(res.data)
-                this.setState({
-                    studentArray: res.data
-                });
-                this.fetchItems(res.data)
-            })
-               
-                  
-            axios.get('http://kanishkshah.pythonanywhere.com/api/auth/users/me/', {
-                headers: {
-                    authorization: 'Token '+token
-                }
-            })
-            .then(res => {
-                console.log(res.data)
-                console.log(res.data.id)
-                this.setState({
-                    company_id: res.data.id,
-                });
-            })    
+            headers: {
+                authorization: 'Token '+auth_token
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                studentArray: res.data
+            });
+            this.fetchItems(res.data)
+        })        
+        axios.get('http://kanishkshah.pythonanywhere.com/api/auth/users/me/', {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
+        })
+        .then(res => {
+            console.log(res.data.id)
+            this.setState({
+                company_id: res.data.id,
+            });
+        })    
     }
 
     fetchItems(e) {
-        e.map(p => {
-            console.log(p.student)
-            list_ids.push(p.student)
+        axios.get('http://kanishkshah.pythonanywhere.com/students', {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
         })
-        console.log(list_ids)
-        list_ids.map(p => {axios.get('http://kanishkshah.pythonanywhere.com/students/'+p, {
-                headers: {
-                    authorization: 'Token '+token
+        .then(res => {
+            console.log(res.data)
+            list=res.data
+            this.state.studentArray.map(p => {
+                for(var i=0;i<list.length;i++)
+                {
+                    if(p.student==list[i].id)
+                    {
+                        displayList.push(list[i])
+                    }
                 }
             })
-            .then(res => {
-                console.log(res.data)
-                list.push(res.data)
-                this.setState({
-                    studentDisplay: list,
-                });
+            this.setState({
+                studentDisplay: displayList,
             })
-            
-           })
-           console.log(this.state.studentDisplay)
+        })   
     }
 
     addElement= (e) =>{
-        console.log(arrayCopy)
-        console.log(e.target)
         let index=e.target.getAttribute('data_index');
         let arrayIndex=arrayCopy[index]
-        let dummyIndex=dummyList[index]
-        console.log(index)
-        console.log(arrayIndex.status)
         if(index!=-1)
         {
             let selectValue=(e.target.value);
@@ -111,37 +96,29 @@ class CompanyPage extends Component {
                 {
                     arrayCopy[index].status="2";
                 }
-                else
+                else if(selectValue=="review")
                 {
                     arrayCopy[index].status="1";
                 }
             }   
             arrayIndex=arrayCopy[index]
-            console.log(arrayIndex.status)
             selectedList.push(arrayCopy[index]);
             arrayCopy.splice(index,1);
-            list.splice(index, 1)
-            list_ids.splice(index, 1)
-            console.log(arrayCopy)
-            console.log(arrayIndex.id)
+            displayList.splice(index, 1)
+            this.setState({
+                studentArray: arrayCopy,
+                studentDisplay: displayList
+            });
             this.fetchOutput(selectedList)
         }
-        this.setState({
-            studentList: selectedList,
-            studentArray: arrayCopy,
-            studentDisplay: list
-        });
-       
-        console.log(arrayIndex)
         axios({
             headers: {
-                authorization: 'Token '+token
+                authorization: 'Token '+auth_token
             },
             method: 'patch',
             url: 'http://kanishkshah.pythonanywhere.com/applications/'+arrayIndex.id,
             data: {'status': arrayIndex.status,}
         })
-       
         .then(res => {
             console.log(res.data)
         })
@@ -149,8 +126,6 @@ class CompanyPage extends Component {
             console.log(err.response.data)
         })
     }
-
-
 
     rejectUnderReview=(student) =>{
         selectedList.map(p =>{
@@ -160,7 +135,7 @@ class CompanyPage extends Component {
             }
             axios({
                 headers: {
-                    authorization: 'Token '+token
+                    authorization: 'Token '+auth_token
                 },
                 method: 'patch',
                 url: 'http://kanishkshah.pythonanywhere.com/applications/'+p.id,
@@ -174,10 +149,6 @@ class CompanyPage extends Component {
                 console.log(err.response.data)
             })
         })
-       this.setState({
-           studentList: selectedList
-       })
-       outputList=[]
        this.fetchOutput(selectedList)
 
     }
@@ -190,7 +161,7 @@ class CompanyPage extends Component {
             }
             axios({
                 headers: {
-                    authorization: 'Token '+token
+                    authorization: 'Token '+auth_token
                 },
                 method: 'patch',
                 url: 'http://kanishkshah.pythonanywhere.com/applications/'+p.id,
@@ -204,12 +175,7 @@ class CompanyPage extends Component {
                 console.log(err.response.data)
             })
         })
-       this.setState({
-           studentList: selectedList
-       })
-       outputList=[]
        this.fetchOutput(selectedList)
-
     }
 
     filterList=(student) => {
@@ -225,17 +191,9 @@ class CompanyPage extends Component {
         }
         else
         {
-            let reviewedList=selectedList.filter(function(user){
-            return user.status!="4"
-        })
-        console.log(reviewedList)
-        filteredList=selectedList.filter(function(user){
+            filteredList=selectedList.filter(function(user){
                 return user.status==student.target.value
-        })
-        console.log(filteredList)
-        this.setState({
-            studentList: filteredList
-        })
+            })
         }
     }
     this.fetchOutput(filteredList)
@@ -244,7 +202,7 @@ class CompanyPage extends Component {
     getExcel=(e) => {
         axios.get('http://kanishkshah.pythonanywhere.com/get_xls/'+this.state.company_id, {
             headers: {
-                authorization: 'Token '+token
+                authorization: 'Token '+auth_token
             }
         })
         .then(res => {
@@ -255,53 +213,47 @@ class CompanyPage extends Component {
     fetchOutput(e) {
         outputList=[]
         outputStatus=[]
-        console.log(e)
-        e.filter(function(user){
-            return user.status!="4"
-        }).map(p =>{
-            
-                if(p.status=="1")
-                {
-                    printValue="PUT UNDER REVIEW"
-                }
-                else if(p.status=="2")
-                {
-                    printValue="INTERVIEW SCHEDULED"
-                }
-                else
-                {
-                    printValue="ACCEPTED"
-                }
-                outputStatus.push(printValue)
+        axios.get('http://kanishkshah.pythonanywhere.com/students/', {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
         })
-        console.log(selectedList)
-        console.log(outputStatus)
-        console.log(e)
-        e.filter(function(user){
-            return user.status!="4"
-        }).map( p=> {
-        axios.get('http://kanishkshah.pythonanywhere.com/students/'+p.student, {
-                                        headers: {
-                                            authorization: 'Token '+token
-                                        }
-                                    })
-                                    .then(res => {
-                                        console.log(res.data)
-                                        if(p.status!='4'){
-                                        outputList.push(res.data)
-                                        this.setState({
-                                            outputList: outputList
-                                        })}
-                                    });
-                                    console.log(outputList)
-        
-    })
+        .then(res => {
+            console.log(res.data)
+        })
+        e.map(p => {
+            for(var i=0;i<list.length;i++)
+            {
+                if(p.student==list[i].id)
+                {
+                    outputList.push(list[i])
+                }
+            }
+            if(p.status=="1")
+            {
+                printValue="PUT UNDER REVIEW"
+            }
+            if(p.status=="2")
+            {
+                printValue="INTERVIEW SCHEDULED"
+            }
+            if(p.status=="3")
+            {
+                printValue="ACCEPTED"
+            }
+            if(p.status=="4")
+            {
+                printValue="REJECTED"
+            }
+            outputStatus.push(printValue)                                    
+        })
+        this.setState({
+            outputList: outputList
+        });
     }
 
     render() {
         arrayCopy=this.state.studentArray
-        dummyList=this.state.studentDisplay
-        console.log(arrayCopy)
         console.log(this.state.studentDisplay)
         console.log(this.state.outputList)
 
@@ -313,9 +265,9 @@ class CompanyPage extends Component {
                         <h2>APPLICANTS TO BE REVIEWED</h2>
                         <hr></hr>
                         {
-                        this.state.studentDisplay.map((p, index) => {
+                            this.state.studentDisplay.map((p, index) => {
                                 return(
-                                <div className="row studentCard_companypage" key={p.id}>
+                                <div className="row studentCard_companypage">
                                     <div className="col-lg-5">
                                         <img className="profile_pic_companypage" src={p.profile_image}></img>
                                         <hr></hr>
@@ -324,18 +276,19 @@ class CompanyPage extends Component {
                                 <p class="data_companypage">{p.f_name} {p.l_name}</p>
                                         <p class="data_companypage">{p.sap_ID}</p>
                                         <p class="data_companypage">{p.department}   {p.year}</p>
-                                        <select className="form-control" id="changeStatus_companypage" value={this.state.selectValue} data_index={index} position={p.position} onChange={this.addElement}>
+                                        <select className="form-control"  id="changeStatus_companypage" value="" data_index={index} position={p.position} onChange={this.addElement}>
                                             <option value="">UPDATE STATUS</option>
-                                                <option className="select_companypage" value="select">SELECT</option>
-                                                <option className="interview_companypage" value="interview">SCHEDULE INTERVIEW</option>
-                                                <option className="review_companypage" value="review">PUT UNDER REVIEW</option>
-                                                <option className="reject_companypage" value="reject">REJECT</option>
+                                            <option className="select_companypage" value="select">SELECT</option>
+                                            <option className="interview_companypage" value="interview">SCHEDULE INTERVIEW</option>
+                                            <option className="review_companypage" value="review">PUT UNDER REVIEW</option>
+                                            <option className="reject_companypage" value="reject">REJECT</option>
                                         </select> <br></br>
                                         <button className="profile_companypage btn btn-large"><a href= {'/Studentprofile/'+p.id} target="_blank">profile</a></button>
                                         <hr></hr>
                                     </div>
                                 </div>
-                                )})
+                                )
+                            })
                         }
                         <button className="rejectButton_companypage rejectReview_companypage btn btn-small" onClick={this.rejectUnderReview}>Reject All Under Review</button>
                         <button className="rejectButton_companypage btn btn-small" onClick={this.rejectInterview}>Reject All Scheduled For Interview</button>
@@ -373,24 +326,24 @@ class CompanyPage extends Component {
                                     {
                                         colorClass='select_companypage'
                                     }
-
                                 }
+                                if(outputStatus[index]!="REJECTED")
+                                {
                                 return (
-                                    <div className="row studentCard_companypage" key={p.id}>
-                                                <div className="col-lg-5">
-                                                    <img className="profile_pic_companypage" src={p.profile_image}></img>
-                                                    <hr></hr>
-                                                </div>
-                                                <div className="col-lg-7">
-                                                
-                                                    <p class="data_companypage">{p.f_name} {p.l_name}</p>
-                                                    <p class="data_companypage">{p.sap_ID}</p>
-                                                    <p class="data_companypage">{p.department}  {p.year}</p>
-                                                    <p className={colorClass}>{outputStatus[index]}</p>
-                                                    <hr></hr>
-                                                </div>
-                                            </div>
-                                )
+                                    <div className="row studentCard_companypage">
+                                        <div className="col-lg-5">
+                                            <img className="profile_pic_companypage" src={p.profile_image}></img>
+                                            <hr></hr>
+                                        </div>
+                                        <div className="col-lg-7">        
+                                            <p class="data_companypage">{p.f_name} {p.l_name}</p>
+                                            <p class="data_companypage">{p.sap_ID}</p>
+                                            <p class="data_companypage">{p.department}  {p.year}</p>
+                                            <p className={colorClass}>{outputStatus[index]}</p>
+                                            <hr></hr>
+                                        </div>
+                                    </div>
+                                )}
                             })
                         }
                         <button className="btn btn-large excel-right_companypage"
