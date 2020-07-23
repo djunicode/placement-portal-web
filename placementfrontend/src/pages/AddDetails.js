@@ -9,7 +9,7 @@ import AddCompanies from '../components/AddCompanies';
 import '../css_styling/addComp.css'
 
 
-const AUTH_TOKEN='Token 43e81114f13b0e7a2384d95ed0116997babeff30'
+const AUTH_TOKEN='Token 97bf5d419a6d783a367e7936828be4df45726bd2'
 axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 class AddDetails extends Component{
@@ -20,7 +20,8 @@ class AddDetails extends Component{
 // {id: 2, name: 'Amazon',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']}
 
     ],
-    showItems:3
+    showItems:3,
+    errors:null
   }
  
   componentDidMount(){
@@ -76,7 +77,11 @@ axios.post('http://kanishkshah.pythonanywhere.com/company/',companyDetails)
       axios.post('http://kanishkshah.pythonanywhere.com/positions/',positionDetails)
       .then(res=>{
         console.log(res.data);
-      }).catch(err => console.log(err)) 
+      }).catch(err =>
+        // this.setState({
+        //   errors:res
+        // })
+         console.log(err)) 
      
      } 
       )

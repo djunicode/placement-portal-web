@@ -316,7 +316,14 @@ html, body {
    grid-row-gap:10px;
    
  } */
-
+.logoutIcon
+{
+  cursor: pointer;
+  color: black;
+  margin: 16px;
+  font-size: 20px;
+ 
+}
 
  @media screen and (max-width: 995px){
    .NavR_topnav .NavR_search-container {

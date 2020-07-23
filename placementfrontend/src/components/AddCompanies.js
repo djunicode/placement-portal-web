@@ -88,7 +88,7 @@ onBlur=(e)=>{
             let position = `position-${index}`, addDets = `addDets-${index}` ,packages = `packages-${index}`,deadline = `deadline-${index}`,Interviewdate = `Interviewdate-${index}` , noOfPos = `noOfPos-${index}`  
             return(
               
-              <div key={index}>
+              <div key={index}> 
                  
     <div className="addComp_addMoreGrid">
           <input type="text" className="addComp_addInput"placeholder="Position:"  onChange={this.handleChange}  data-id={index} id={position} name="position" required/>
