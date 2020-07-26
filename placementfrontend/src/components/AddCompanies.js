@@ -76,7 +76,7 @@ onBlur=(e)=>{
        <div className="grid-item"><form onSubmit={this.handleSubmit}>
          <div className="addComp_addCompGrid">
           <input type="text" className="addComp_addInput"  placeholder="Name:"   onChange={this.handleChange} name="name"  required/>
-          <select className="form-control" id="exampleFormControlSelect1"placeholder="Category:" onChange={this.handleChange} name="category"  required>
+          <select className="form-control" id="exampleFormControlSelect1" placeholder="Category:" onChange={this.handleChange} name="category"  required>
             <option disabled selected hidden>Category:</option>
       <option value="S">Super-Dream</option>
       <option value="D">Dream</option>

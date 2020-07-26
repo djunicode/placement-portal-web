@@ -25,9 +25,9 @@ function App() {
         <Route exact path='/studentSignup' component={StudentSU}/>
         <Route path='/staffSignup' component={StaffSU}/>
         
-        <Route exact path='/add' component={AddDetails}/> 
+        <Route exact path='/add/:coordinatorId/' component={AddDetails}/> 
 
-        <Route exact path='/company/:companyId' component={DisplayDetails}/> 
+        <Route exact path='/:coordinatorId/company/:companyId' component={DisplayDetails}/> 
 
            <Route exact path='/CompanyMain' component={CompanyMain}/>
            <Route exact path='/Tpo2' component={Tpo2}/>

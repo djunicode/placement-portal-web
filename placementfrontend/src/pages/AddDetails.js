@@ -13,17 +13,18 @@ const AUTH_TOKEN='Token 97bf5d419a6d783a367e7936828be4df45726bd2'
 axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 class AddDetails extends Component{
- 
-  state = {
-    companies: [
-//       {id: 1, name: 'Google',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']},
-// {id: 2, name: 'Amazon',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']}
+ state = {
+      companies: [
+  //       {id: 1, name: 'Google',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']},
+  // {id: 2, name: 'Amazon',category:'super-dream',position:['computer-engineer'],noOfPos:['5'],date:['24/06/2020'],deadline:['24/05/2020'],package:['Rs.24,00,000'],link:'www.googleinfo.com',addDets:['The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview']}
+  
+      ],
+      details:{},
+      showItems:3,
+      errors:null
+    }
+  
 
-    ],
-    showItems:3,
-    errors:null
-  }
- 
   componentDidMount(){
     axios.get(`http://kanishkshah.pythonanywhere.com/company/`)
     .then(res=>{
@@ -33,6 +34,8 @@ class AddDetails extends Component{
     })
     .catch(err => console.log(err));
   }
+
+  
  showMore=()=>
  {
    this.setState({
@@ -88,7 +91,7 @@ axios.post('http://kanishkshah.pythonanywhere.com/company/',companyDetails)
   })
   .then(
     res=>{
-      this.props.history.push(`/company/${company.id}`); 
+      this.props.history.push(`/${this.props.match.params.coordinatorId}/company/${company.id}`); 
     }
   )
 .catch(err => console.log(err))  
@@ -99,7 +102,7 @@ axios.post('http://kanishkshah.pythonanywhere.com/company/',companyDetails)
       <div className="header"></div>
       <div className="addComp_grid-main">
         <div className="SidenavR_grid-1">
-          <SidenavR/>
+          <SidenavR coordinatorId={this.props.match.params.coordinatorId}/>
         </div>
         <div className="grid-2">
           <NavR/>

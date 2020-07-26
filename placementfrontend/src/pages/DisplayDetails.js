@@ -19,7 +19,7 @@ class DisplayDetails extends Component{
       <div className="header"></div>
       <div className="display_grid-main">
         <div className="SidenavR_grid-1">
-          <SidenavR/>
+          <SidenavR coordinatorId={this.props.match.params.coordinatorId}/>
         </div>
         <div className="grid-2">
           <NavR2/>

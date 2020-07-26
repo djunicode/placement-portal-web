@@ -104,6 +104,7 @@ html, body {
 {
   background-color: #fff;
 }
+
 .addComp_grid-main
   {
     display: grid;
@@ -114,9 +115,10 @@ html, body {
   {
     margin: 30px 10px 30px 20px;
     width: 80%;
+    border-radius: 50%;
   }
   
-  .SidenavR_center{
+  .SidenavR_centerH,.SidenavR_centerP{
     display: flex;
     justify-content: center;
   }
