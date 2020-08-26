@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Department = ({departments}) => {
+const Department = ({departments,selectDepartment}) => {
   const list = departments.map(department => {
       return (
-        <div className="Tpo2_collection-item" key={department.id}>
+        <div className="Tpo2_collection-item" key={department.id} onClick={()=>selectDepartment(department)}>
           <div className="Tpo2_gridComp">
             <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg" className="Tpo2_listpic"/>
           </div>

@@ -28,11 +28,11 @@ function App() {
         <Route exact path='/display' component={DisplayDetails}/> 
 
            <Route exact path='/CompanyMain' component={CompanyMain}/>
-           <Route exact path='/Tpo2' component={Tpo2}/>
+           <Route exact path='/Tpo2/:coordinatorId' component={Tpo2}/>
             
             {/* Routes yet to be setup*/}
-           <Route exact path='/PlacementCoDashboard' component={PlacementCoDashboard}/> 
-           <Route exact path='/Studentprofile' component={Studentprofile}/>
+           <Route exact path='/PlacementCoDashboard/:coordinatorId' component={PlacementCoDashboard}/> 
+           <Route exact path='/Studentprofile/:studentId' component={Studentprofile}/>
         
            {/* <Link to="/" style={{ textDecoration: 'none' }}  /> */}
       </div>

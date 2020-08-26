@@ -5,6 +5,7 @@ import Sidenav from '../components/Sidenav';
 import Companies from '../components/Companies';
 import Students from '../components/StudentsPC';
 import '../css_styling/Tpo2.css';
+import axios from 'axios';
 
 class App extends Component{
   constructor(props){
@@ -12,27 +13,47 @@ class App extends Component{
     this.handleShowMore=this.handleShowMore.bind(this)
     this.handleShowMoreCompanies=this.handleShowMoreCompanies.bind(this)
     this.state = {
-    students: [
-      {id: 1, name: 'ABC',branch:'comps',contact:'123456789'},
-      {id: 2, name: 'efg',branch:'it',contact:'123456789'},
-      {id: 3, name: 'lmn',branch:'comps',contact:'123456789'},
-      {id: 4, name: 'Amazon',branch:'it',contact:'123456789'},
-      {id: 5, name: 'pqr',branch:'comps',contact:'123456789'},
-      {id: 6, name: 'xyz',branch:'it',contact:'123456789'},
-    ],
-    companies:[
-      {id:1,name:'ABC',pos:'Tech'},
-      {id:2,name:'XYZ',pos:'Tech'},
-      {id:3,name:'LMN',pos:'Tech'},
-      {id:4,name:'ABC',pos:'Tech'},
-      {id:5,name:'XYZ',pos:'Tech'},
-      {id:6,name:'LMN',pos:'Tech'},
-    ],
+    students:[],
+    companies:[],
     showItems:3,
     showCompanies:3,
-
+    coordinatorId: this.props.match.params.coordinatorId,
+    coordinator:[]
   }
 }
+componentDidMount(){
+  axios.get(`http://kanishkshah.pythonanywhere.com/coordinator/${this.state.coordinatorId}`,{
+    headers: {
+      'Authorization':'Token '+'0b16cad5286c7e673c4f6a7c12516ef480e5be33'}})
+  .then(res => {
+    const coordinator = res.data
+    console.log(res.data);
+    this.setState({
+     coordinator :coordinator,
+     })
+    console.log(this.state);
+  }) 
+
+  axios.get(`http://kanishkshah.pythonanywhere.com/company/`,{
+    headers: {
+      'Authorization':'Token '+'9ee4446ecca070c8f8d31462cb519bace58fdb33'}})
+  .then(res => {
+    const companies = res.data
+    console.log(res.data);
+    this.setState({companies : companies})
+    console.log(this.state);
+  }) 
+  axios.get(`http://kanishkshah.pythonanywhere.com/students/`,{
+    headers: {
+      'Authorization':'Token '+'9ee4446ecca070c8f8d31462cb519bace58fdb33'}})
+      .then(res => {
+        const students = res.data
+        console.log(res.data);
+        this.setState({students:students})
+        console.log(this.state);
+      }) 
+}
+
   handleShowMore(){
     this.setState({
       showItems: 
@@ -57,7 +78,7 @@ class App extends Component{
        </div>
       < div className="container-fluid">
       <div className="row d-flex py-5">
-        <Sidenav />
+        <Sidenav coordinator={this.state.coordinator} />
       <div className="col-lg-10">
         <div className="row py-4 ">
           <Nav /> 
