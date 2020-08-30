@@ -184,3 +184,4 @@ saveModalDetails=(company)=>{
   }  
 }
 export default EditDetail;  
+

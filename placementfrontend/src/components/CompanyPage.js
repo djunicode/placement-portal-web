@@ -348,6 +348,7 @@ class CompanyPage extends Component {
                         }
                         <button className="btn btn-large excel-right_companypage"
                          onClick={this.getExcel}>EXCEL</button>
+
                     </div>
                 </div>
             </div>

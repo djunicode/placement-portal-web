@@ -19,21 +19,21 @@ function App() {
       <div className="App">
 
           <Route exact path='/StudentDashboardMain' component={StudentDashboardMain}/>  
-            <Route exact path='/' component={Login}></Route>
+        <Route exact path='/' component={Login}></Route>
+
         <Route exact path='/studentSignup' component={StudentSU}/>
         <Route path='/staffSignup' component={StaffSU}/>
         
-        <Route exact path='/add' component={AddDetails}/> 
-        <Route exact path='/display' component={DisplayDetails}/> 
-        
+        <Route exact path='/add/:coordinatorId/' component={AddDetails}/> 
+
+        <Route exact path='/:coordinatorId/company/:companyId' component={DisplayDetails}/> 
 
            <Route exact path='/CompanyMain' component={CompanyMain}/>
-           <Route exact path='/Tpo2' component={Tpo2}/>
+           <Route exact path='/Tpo2/:coordinatorId' component={Tpo2}/>
             
             {/* Routes yet to be setup*/}
-           <Route exact path='/PlacementCoDashboard' component={PlacementCoDashboard}/>
-           <Route exact path='/Studentprofile' component={Studentprofile}/>
- 
+           <Route exact path='/PlacementCoDashboard/:coordinatorId' component={PlacementCoDashboard}/> 
+           <Route exact path='/Studentprofile/:studentId' component={Studentprofile}/>
         
            {/* <Link to="/" style={{ textDecoration: 'none' }}  /> */}
       </div>

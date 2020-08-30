@@ -73,6 +73,7 @@ class StudentTab extends Component {
                         <h4 class="info_companypage">{this.state.coordinator_role}</h4>
                         <h4 class="info_companypage">{this.state.coordinator_department}</h4>
                     </div>
+
                 }
             </div>
         )

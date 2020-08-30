@@ -1,27 +1,29 @@
 import React from 'react';
 
-const Companies = ({companies,showCompanies,handleShowMoreCompanies}) => {
-  const list = companies.slice(0,showCompanies).map(company => {
-      return (
-        <div className="collection-item" key={company.id}>
-          <div className="gridComp">
-            <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg" className="listpic"/>
-          </div>
-          <div className="gridComp">
-          <p>Name : {company.name}</p>
-          <p>Position : {company.pos}</p>
-          </div>
+const Companies = ({ companies, showCompanies, handleShowMoreCompanies }) => {
+  const list = companies.slice(0, showCompanies).map(company => {
+    return (
+      <div className="Tpo2_collection-item" key={company.id}>
+        <div className="Tpo2_gridComp">
+          <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg" className="Tpo2_listpic" />
         </div>
-      )})
+        <div className="Tpo2_gridComp">
+          <p>Name : {company.name}</p>
+          <p>Category : {company.category}</p>
+          <p className="Tpo2_link_width">Link : {company.link}</p>
+        </div>
+      </div>
+    )
+  })
   return (
-    <div className="bgw1">
+    <div className="Tpo2_bgw1">
       <div className="grid-item">
         <h4>COMPANIES</h4>
-        <div className="list">
-        {list}
+        <div className="Tpo2_list">
+          {list}
         </div>
-        <div className="show">
-        <button className="button_display" onClick={handleShowMoreCompanies}><i className="fa fa-chevron-down"></i></button>
+        <div className="Tpo2_show">
+          <button className="Tpo2_button_display" onClick={handleShowMoreCompanies}><i className="fa fa-chevron-down"></i></button>
         </div>
       </div>
     </div>

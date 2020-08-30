@@ -121,7 +121,6 @@ class StudentDashboard extends Component {
         console.log(this.state.companyList)
         return (
             <div className="background_studentdashboard">
-                <Demo></Demo>
                 <div className="row">
                     <div className="col-lg-5 card" id="left-card_studentdashboard">
                         <br></br>
