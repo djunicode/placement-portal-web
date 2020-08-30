@@ -2,6 +2,7 @@
     background-color: rgb(240, 240, 240);
     height: 100%;
     margin-top: 50px;
+    text-align: center;
 }
 #left-card_studentdashboard{
     margin-right: 30px;
@@ -54,17 +55,18 @@ a, a:visited, a:hover{
     margin-bottom: 30px;
 }
 .position_studentdashboard{
-    display: inline;
+    margin-bottom: 10px;
 }
 .expand_studentdashboard{
     background-color: darkred;
     border-radius: 50%;
     color: white;
     font-weight: bold;
-    margin-left: 17px;
-    margin-right: 3px;
-    padding: 1px 8px;
-    margin-bottom: 10px;
+    margin-left: 10%;
+    margin-right: 0px;
+    padding: 1px 9px;
+    margin-bottom: 5px;
+
 }
 .invisible_studentdashboard {
     display: none;
@@ -72,4 +74,7 @@ a, a:visited, a:hover{
     
 .visible_studentdashboard {
     display: block;
+}
+.companyname_studentdashboard{
+    margin-left: 22%;
 }

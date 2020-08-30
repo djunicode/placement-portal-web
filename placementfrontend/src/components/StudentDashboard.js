@@ -1,45 +1,14 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios'
+import Demo from './demo.js'
 
-let selectedList=[];
-
-const companies= [
-    {
-        id: 1,
-        name: 'Manchester United',
-        position: 'Web Developer',
-        salary: '123',
-        location: 'Manchester',
-        profile_link:'https://www.manutd.com/',
-        profilepicture_link:'https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png',
-        status: 'Selected',
-        color: null
-    },
-    {
-        id: 2,
-        name: 'Borussia Dortmund',
-        position: 'Software Engineer',
-        salary: '456',
-        location: 'Dortmund',
-        profile_link:'www.abcd.com',        
-        profilepicture_link:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Borussia_Dortmund_logo.svg/1200px-Borussia_Dortmund_logo.svg.png',
-        status: 'Rejected',
-        color: null
-    },
-    {
-        id: 3,
-        name: 'AC Milan',
-        position: 'Data Scientist',
-        salary: '789',
-        location: 'Milan',
-        profile_link:'www.abcd.com',
-        profilepicture_link:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/1200px-Logo_of_AC_Milan.svg.png',
-        status: 'Under Review',
-        color: null
-    }
-]
-
-let companyArray=companies;
+let auth_token=localStorage.getItem('token')
+let printValue=''
+let categoryValue=''
+let companyArray=[];
+let outputList=[]
+let outputStatus=[]
 
 class StudentDashboard extends Component {
 
@@ -47,36 +16,94 @@ class StudentDashboard extends Component {
         super()
         this.state={
             companyList: [], 
-            editVisibles: {}
+            editVisibles: {},
+            companyData: [],
+            outputList: []
         }
     }
 
-    addElement=(company) => {
-        let index=companyArray.findIndex(p=> p.name==company.target.name);
-        if(companyArray[index].status=="Selected")
-        {
-            companyArray[index].color="select_studentdashboard";
-        }
-        else if(companyArray[index].status=="Rejected")
-        {
-            companyArray[index].color="reject_studentdashboard";
-        }
-        else if(companyArray[index].status=="Applied")
-        {
-            companyArray[index].color="interview_studentdashboard";
-        }
-        else if(companyArray[index].status=="Under Review")
-        {
-            companyArray[index].color="review_studentdashboard";
-        }
+    componentDidMount(){
+        axios.get('http://kanishkshah.pythonanywhere.com/positions/', {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                companyData: res.data
+            });
+        })
+        axios.get('http://kanishkshah.pythonanywhere.com/applications/', {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                companyList: res.data
+            });
+            this.fetchItems()
+        })
+    }
+
+    fetchItems(){
+        outputList=[]
+        outputStatus=[]
+        this.state.companyList.map(p => {
+            axios.get('http://kanishkshah.pythonanywhere.com/company/'+p.id, {
+                headers: {
+                    authorization: 'Token '+auth_token
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                outputList.push(res.data)
+                outputStatus.push(p.status)
+                this.setState({
+                    outputList: outputList,
+                })
+            })
+        })
+    }
+
+    addElement=(e) => {
+        let index=e;
+        let arrayIndex=companyArray[index]
+        axios({
+            headers: {
+                authorization: 'Token '+auth_token
+            },
+            method: 'post',
+            url: 'http://kanishkshah.pythonanywhere.com/applications/'+arrayIndex.company.id,
+            data: arrayIndex
+        })
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err.response.data)
+        })
         if(index!=-1)
         {   
-            selectedList.push(companies[index]);
             companyArray.splice(index,1);
         }
         this.setState({
-            companyList: selectedList
+            companyData: companyArray
         });
+        axios.get('http://kanishkshah.pythonanywhere.com/applications/', {
+                headers: {
+                    authorization: 'Token '+auth_token
+                }
+        })
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                companyList: res.data
+            });
+            this.fetchItems()
+        })
     }
 
     showEditDiv = id => {
@@ -89,6 +116,9 @@ class StudentDashboard extends Component {
       };
 
     render() {
+        companyArray=this.state.companyData
+        console.log(companyArray)
+        console.log(this.state.companyList)
         return (
             <div className="background_studentdashboard">
                 <div className="row">
@@ -97,22 +127,32 @@ class StudentDashboard extends Component {
                         <h2>NEW OPENINGS</h2>
                         <hr></hr>
                         {
-                            companyArray.map((p,index) => {
+                            this.state.companyData.map((p,index) => {
+                                {
+                                    if(p.company.category=='S')
+                                    {
+                                        categoryValue="Super Dream"
+                                    }
+                                    else if(p.company.category=="D")
+                                    {
+                                        categoryValue="Dream"
+                                    }
+                                    else
+                                    {
+                                        categoryValue="Regular"
+                                    }
+                                }
                                 return (
-                                    <div className="row studentCard_studentdashboard" key={p.id}>
-                                        <div className="col-lg-4" >
-                                            <img className="profile_pic_studentdashboard" src={p.profilepicture_link}></img>
-                                            <hr></hr>
-                                        </div>
-                                        <div className="col-lg-8">
-                                            <p>{p.name}</p>
-                                            <p class="position_studentdashboard">{p.position}</p>
-                                            <button className="btn expand_studentdashboard" onClick={() => this.showEditDiv(p.id)}>+</button>
+                                    <div className="row studentCard_studentdashboard" key={index}>                          
+                                        <div className="col">
+                                            <p>{p.title}</p>
+                                            <p class="companyname_studentdashboard">{p.company.name}
+                                            <button className="btn expand_studentdashboard" onClick={() => this.showEditDiv(p.id)}>+</button></p>
                                             <div className={!this.state.editVisibles[p.id]? "invisible_studentdashboard": "visible_studentdashboard"}>
-                                                <p>Rs {p.salary}</p>
-                                                <p>{p.location}</p>
-                                                <button className="btn btn-large" name={p.name} id="apply_studentdashboard" onClick={this.addElement}>APPLY</button>
-                                                <button className="companyProfile_studentdashboard btn btn-large"><a href= {p.profile_link} target="_blank">know more</a></button>
+                                                <p class="position_studentdashboard">{categoryValue}</p>
+                                                <p>{p.package}</p>
+                                                <button className="btn btn-large" id="apply_studentdashboard" data_index={index} onClick={() => this.addElement(index)}>APPLY</button>
+                                                <button className="companyProfile_studentdashboard btn btn-large"><a href= {'/company/'+p.id} target="_blank">know more</a></button>
                                             </div>
                                             <hr></hr>
                                         </div>
@@ -126,23 +166,38 @@ class StudentDashboard extends Component {
                         <h2>APPLICATIONS</h2>
                         <hr></hr>
                         {
-                            this.state.companyList.map(p => {
-                                return (
-                                    <div className="row studentCard_studentdashboard" key={p.id}>
-                                        <div className="col-lg-5">
-                                            <img className="profile_pic_studentdashboard" src={p.profilepicture_link}></img>
-                                            <hr></hr>
-                                        </div>
-                                        <div className="col-lg-7">
+                            this.state.outputList.map((p, index) => {
+                                if(outputStatus[index]=="1")
+                                {
+                                    printValue="PUT UNDER REVIEW"
+                                    p.color="review_studentdashboard"
+                                }
+                                else if(outputStatus[index]=="2")
+                                {
+                                    printValue="INTERVIEW SCHEDULED"
+                                    p.color="interview_studentdashboard"
+                                }
+                                else if(outputStatus[index]=="3")
+                                {
+                                    printValue="SELECTED"
+                                    p.color="select_studentdashboard"
+                                }
+                                else if(outputStatus[index]=="4")
+                                {
+                                    printValue="REJECTED"
+                                    p.color="reject_studentdashboard"
+                                }
+                                return (           
+                                    <div className="row studentCard_studentdashboard" key={p.id}>        
+                                        <div className="col">
                                             <p>{p.name}</p>
-                                            <p>{p.position}</p>
-                                            <p className={p.color}>{p.status}</p>
+                                            <p className={p.color}>{printValue}</p>
                                             <hr></hr>
                                         </div>
                                     </div>
                                 )
                             })
-                        }
+                        }                        
                     </div>
                 </div>
             </div>

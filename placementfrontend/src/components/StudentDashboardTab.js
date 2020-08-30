@@ -1,43 +1,95 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link} from 'react-router-dom';
+import axios from 'axios'
 
-const studentDetails=[
-    {
-        student_name: 'David de Gea',
-        student_sap: '6000418',
-        student_department: 'Computer',
-        student_pointer: '9.05',
-        student_experience: '2 Years',
-        student_profile_picture: 'https://i.dailymail.co.uk/1s/2019/09/13/22/18459506-0-image-a-44_1568410040843.jpg'
-    }
-]
+
+let auth_token=localStorage.getItem('token')
 
 class StudentTab extends Component {
 
     constructor() {
         super()
         this.state={
-            studentDetails: studentDetails
+            studentDetails: [],
+            studentApp: [],
+            student_name: '',
+            student_profile_picture: '',
+            student_pointer: '',
+            student_department: '',
+            student_sap: '',
+            student_year: '',
+            student_email: ''
         }
+    }
+
+    componentDidMount(){
+        axios.get('http://kanishkshah.pythonanywhere.com/api/auth/users/me/', {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
+        })
+        .then(res => {
+            console.log(res.data.id)
+            this.fetchItems(res.data.id)
+            this.setState({
+                studentApp: res.data
+            });
+        })                   
+    }
+
+    fetchItems(e){
+        console.log(e)
+        axios.get('http://kanishkshah.pythonanywhere.com/student_profile/'+e, {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+            this.setItems(res.data)
+        })
+        .catch(err => {
+            console.log(err.response)
+        }) 
+    }
+
+    setItems(p){
+        this.setState({
+            student_name: p.f_name+" "+p.l_name,
+            student_profile_picture: p.profile_image,
+            student_pointer: p.pointer,
+            student_department: p.department,
+            student_sap: p.sapID,
+            student_year: p.year,
+            student_email: p.email
+        })
+    }
+
+    handleClick= (e) => {
+        axios('http://kanishkshah.pythonanywhere.com/api/auth/token/logout/', {
+            headers: {
+                authorization: 'Token '+auth_token
+            }
+        })
+        .then(res =>{
+            localStorage.removeItem('token')
+        })
     }
     render() {
         return(
             <div id="main_studentdashboard">
                 {
-                    studentDetails.map(p => { 
-                        return(
-                            <div id="content_studentdashboard">
-                                <img className="student_profile_picture_studentdashboard" src={p.student_profile_picture}></img>
-                                <h4 className="data_studentdashboard">{p.student_name}</h4>
-                                <h4 className="data_studentdashboard">{p.student_sap}</h4>
-                                <h4 className="data_studentdashboard">{p.student_department}</h4>
-                                <h4 className="data_studentdashboard">{p.student_pointer}</h4>
-                                <h4 className="data_studentdashboard">{p.student_experience}</h4> <br></br>
-                               <Link to ='/Studentprofile'> <button className="student_button_studentdashboard btn btn-lg"><img src="https://image.flaticon.com/icons/svg/61/61456.svg" id="edit_icon_studentdashboard"></img>EDIT PROFILE</button></Link> <br></br><br></br>
-                            </div>
-                        )
-                    })
+                    <div id="content_studentdashboard">
+                        <img className="student_profile_picture_studentdashboard" src={this.state.student_profile_picture}></img>
+                        <h4 className="data_studentdashboard">{this.state.student_name}</h4>
+                        <h6 className="data_studentdashboard" id="email_studentdashboard">{this.state.student_email}</h6>
+                        <h4 className="data_studentdashboard">{this.state.student_sap}</h4>
+                        <h4 className="data_studentdashboard">{this.state.student_department}</h4>
+                        <h4 className="data_studentdashboard">{this.state.student_pointer}</h4>
+                        <h4 className="data_studentdashboard">{this.state.student_year}</h4> <br></br>
+                        <button className="student_button_studentdashboard btn btn-lg"><img src="https://image.flaticon.com/icons/svg/61/61456.svg" id="edit_icon_studentdashboard"></img>EDIT PROFILE</button> <br></br><br></br>
+                        <button className="student_button_studentdashboard btn btn-lg" onClick={this.handleClick}>LOGOUT</button>
+                    </div>
                 }
             </div>
         )

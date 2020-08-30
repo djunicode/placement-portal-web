@@ -2,6 +2,7 @@
     background-color: rgb(240, 240, 240);
     height: 100%;
     margin-top: 100px;
+    text-align: center;
 }
 #left-card_companypage{
     margin-right: 20px;
@@ -24,8 +25,8 @@
     margin-bottom: 20px;
 }
 #changeStatus_companypage{
-    width: 80%;
-    margin-left: 40px;
+    width: 95%;
+    margin-left: 20px;
     margin-bottom: 10px;
 }
 .select_companypage{
@@ -45,6 +46,7 @@
     border-radius: 20px;
     color: white;
     margin-bottom: 10px;
+    margin-left: 40px;
 }
 a, a:visited, a:hover{
     color: white;
@@ -54,14 +56,14 @@ a, a:visited, a:hover{
     background-color: darkred;
     border-radius: 20px;
     color: white;
-    width: 70%;
+    width: 80%;
     margin: 10px auto;
 }    
 .rejectReview_companypage{
     margin-top: auto;
 }
 #filterStudents_companypage{
-    width: 75%;
+    width: 95%;
     margin-left: 0px;
 }
 .filterIcon_companypage{
@@ -71,14 +73,14 @@ a, a:visited, a:hover{
 }
 .excel-left_companypage{
     background-color: green;
-    width: 20%;
+    width: 25%;
     border-radius: 20px;
     margin: 10px auto;
     color: white;
 }
 .excel-right_companypage{
     background-color: green;
-    width: 20%;
+    width: 25%;
     border-radius: 20px;
     margin: 10px auto;
     margin-top: auto;

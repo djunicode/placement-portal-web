@@ -35,7 +35,6 @@ class AddDetails extends Component{
     .catch(err => console.log(err));
   }
 
-  
  showMore=()=>
  {
    this.setState({
@@ -122,5 +121,4 @@ axios.post('http://kanishkshah.pythonanywhere.com/company/',companyDetails)
   }
 }
 export default AddDetails;
-
 

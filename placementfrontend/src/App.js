@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './Login_Signup.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -38,6 +37,7 @@ function App() {
         
            {/* <Link to="/" style={{ textDecoration: 'none' }}  /> */}
       </div>
+
     </BrowserRouter>
 
   );

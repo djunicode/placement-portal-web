@@ -2,6 +2,7 @@
     background-color: #f8f9fa;
     height: 100%;
     text-transform: uppercase;
+    text-align: center;
 }
 #content_companypage{
     padding-top: 100px;
@@ -13,5 +14,12 @@
 }
 .info_companypage{
     margin: 20px 0;
+}
+#link_companypage{
+    font-weight: 500;
+    color: black;
+}
+#companylink_companypage{
+    color: black;
 }
 

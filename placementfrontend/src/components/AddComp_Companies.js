@@ -45,3 +45,4 @@ const Companies = ({companies, showMore,showItems}) => {
 }
 
 export default Companies;
+

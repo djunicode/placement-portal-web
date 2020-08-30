@@ -45,3 +45,16 @@
     border-radius: 20px;
     border: 1px solid gray;
 }
+#logout_companynavbar{
+    margin-right: 30px;
+    background-color: darkred;
+    color: white;
+    border-radius: 20px;
+}
+.search_button_companynav{
+    border-radius: 0;
+    background-color: white;
+    border-color: white;
+    border-width: 0;
+    margin-right: 5px;
+}
