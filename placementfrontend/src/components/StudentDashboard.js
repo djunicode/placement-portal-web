@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
 import Demo from './demo.js'
 
-let auth_token='cd4b3201678988b3f44a18ed75d47f8cf60baa67'
+let auth_token=localStorage.getItem('token')
 let printValue=''
 let categoryValue=''
 let companyArray=[];

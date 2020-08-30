@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
 
-let auth_token='cd4b3201678988b3f44a18ed75d47f8cf60baa67'
+let auth_token=localStorage.getItem('token')
 
 class StudentTab extends Component {
 

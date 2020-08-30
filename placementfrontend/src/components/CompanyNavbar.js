@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
 
-let auth_token='97bf5d419a6d783a367e7936828be4df45726bd2'
+let auth_token=localStorage.getItem('token')
 let list=[]
 
 class Navbar extends Component {
