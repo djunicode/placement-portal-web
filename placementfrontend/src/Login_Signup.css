@@ -111,7 +111,7 @@ body{
   border: none ;
   font-size: 1.5em ;
   text-transform: uppercase ;
-  margin-top: 55px 
+  margin-top: 5px 
 }
 .register1{
   text-align: center ;
@@ -231,7 +231,7 @@ body{
 .g1{
   display:   grid    ;
   grid-template-columns:   1fr 1fr    ;
-  height:   10px    ;
+  /* height:   10px    ; */
 
 }
 .g2{
@@ -242,14 +242,21 @@ body{
   top: 30%;
   margin-right: -5px;;
 }
-.g3{
-  
-  display:   grid    ;
-  grid-template-columns:   1fr 1fr    ;
-  height:   10px  ;
-  position: fixed;
-  top: 40%;
-  width: 80%;
+.g3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 10px;
+  position: absolute;
+  top: 22%;
+  width: 92%;
+}
+.g3-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 10px;
+  position: absolute;
+  top: 27%;
+  width: 96%;
 }
 .email2{
   position:  absolute    ;
@@ -353,7 +360,13 @@ body{
   width: 100%; 
 }
 
-
+.msg {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: red;
+  font-size: 85%;
+}
 
 
 @media(max-width:600px){
@@ -434,7 +447,7 @@ body{
     border: none ;
     font-size: 1.5em ;
     text-transform: uppercase ;
-    margin-top: 55px 
+    margin-top: 5px 
   }
   .register1{
     text-align: center ;
@@ -553,7 +566,7 @@ body{
 .g1{
   display:   grid    ;
   grid-template-columns:   1fr 1fr    ;
-  height:   10px    ;
+  /* height:   10px    ; */
   
 
 }
@@ -566,14 +579,20 @@ body{
   margin-right: -5px;
   
 }
-.g3{
-  
-  display:   grid    ;
-  grid-template-columns:   1fr 1fr    ;
-  height:   10px  ;
-  position: fixed;
-  top: 38%;
-  width: 80%;
+.g3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 10px;
+  position: absolute;
+  width: 95%;
+}
+.g3-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 10px;
+  position: absolute;
+  width: 95%;
+  top: 31%;
 }
 .email2{
   position:  absolute    ;
@@ -683,15 +702,12 @@ body{
   font-size: 1.2em;
 }
 
-
-
-
-
-
-
-
-
-
-
+.msg {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: red;
+  font-size: 85%;
+}
 
 }
