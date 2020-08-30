@@ -4,10 +4,13 @@ const Students = ({students,showItems,handleShowMore}) => {
       return (
         <div className="Tpo2_collection-item" key={student.id}>
           <div className="Tpo2_gridComp">
-            <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg" className="Tpo2_listpic"/>
+            <img src={student.profile_image} className="Tpo2_listpic"/>
           </div>
           <div className="Tpo2_gridComp">
-          <p>Name : {student.name}</p>
+            <p>Name : {student.f_name} {student.l_name}</p>
+            <p> SAP ID: {student.sap_ID}</p>
+            <p> Year:  {student.year}</p>
+            <p> Department:  {student.department}</p>
           </div>
         </div>
       )})

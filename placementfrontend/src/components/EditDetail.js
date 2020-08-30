@@ -3,47 +3,135 @@ import Modals from './Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import '../css_styling/display.css';
-
+import axios from 'axios';
 
 class EditDetail extends Component{
   constructor(props)
   {
     super(props);
     this.saveModalDetails = this.saveModalDetails.bind(this);
-
+    console.log(props)
     this.state={
-      
       modalIsOpen : false,
-      name: 'Google',
-    category:'Super-Dream',
-    link:'www.googleinfo.com',
-  
+      name: '',
+    category:'',
+    link:'',
     addFields:[{
-      position:'Computer-engineer',
-       noOfPos:5,
-       Interviewdate:'24-06-2020',
-    deadline:'24-05-2020',
-    packages:'Rs.24,00,000',
-    addDets:'The criteria as mentioned on the website needs to be fulfilled so as to apply for the interview'}, 
+      id:'',
+      position:'',
+       noOfPos:null,
+       Interviewdate:'',
+    deadline:'',
+    packages:'',
+    addDets:''}, 
   ]
   }
   }
+   componentDidMount(){
+    const companyId =this.props.companyId
+    console.log(companyId)
+    axios.get(`http://kanishkshah.pythonanywhere.com/positions/`)
+    .then(res=>{
+      console.log(res.data)
+      const data = res.data
+      const companyDetails = data.filter(comp=> comp.company.id == companyId)
+      this.handleData(companyDetails)
+      console.log(companyDetails)
+    })
+    .catch(err => console.log(err));
+   }
+   handleData=(companyDetails)=>{
+    let addPos =[]
+    companyDetails.map(position=>{
+      addPos = [...addPos,{
+        id:position.id,
+         position:position.title,
+         packages:position.package,
+         deadline:new Date(position.deadline).toLocaleDateString('en-GB'),
+         Interviewdate:new Date(position.interview_date).toLocaleDateString('en-GB'),
+         addDets:position.details,
+         noOfPos:Number(position.vacancies)
+     }]
+     })
+     this.setState({
+      name:companyDetails[0].company.name,
+      category:companyDetails[0].company.category,
+      link:companyDetails[0].company.link,
+       addFields:addPos
+    })
+    console.log(this.state)
+   }
+   toggleModalEdit=()=>{
+    this.setState({
+        modalIsOpen : !this.state.modalIsOpen,  
+    });
+  console.log(this.state)
+  }
+   
 saveModalDetails=(company)=>{
- this.setState({
-    addFields:company.addFields,
+  const companyMain={
     name:company.name,
-    link:company.link,
     category:company.category,
-    modalIsOpen: !company.modalIsOpen
+    link:company.link
+  }
+  axios.put(`http://kanishkshah.pythonanywhere.com/company/${this.props.companyId}`,companyMain)
+.then(res=>{
+        console.log(res.data);
+        company.id=res.data.id
  })
- // console.log(this.state)
-}
-toggleModalEdit=()=>{
+ .then(data=>
+   {
+     company.addFields.map(addField =>
+      {
+       const positionDetails={
+         id:addField.id,
+         title:addField.position,
+         company:company.id,
+         vacancies:Number(addField.noOfPos),
+         interview_date:new Date(addField.Interviewdate).toISOString(),
+         deadline:new Date(addField.deadline).toISOString(),
+         package:addField.packages,
+         details:addField.addDets,
+       }
+       console.log(positionDetails)
+       if(addField.id != undefined){
+       axios.put(`http://kanishkshah.pythonanywhere.com/positions/${addField.id}`,positionDetails)
+       .then(res=>{
+        console.log(res.data);
+      })
+      }
+      else {
+        const newPositionDetails={
+          title:addField.position,
+          company:company.id,
+          vacancies:Number(addField.noOfPos),
+          interview_date:new Date(addField.Interviewdate).toISOString(),
+          deadline:new Date(addField.deadline).toISOString(),
+          package:addField.packages,
+          details:addField.addDets,
+        }
+        axios.post(`http://kanishkshah.pythonanywhere.com/positions/`,newPositionDetails)
+        .then(res=>{
+         console.log(res.data);
+       })
+      }
+
+      
+      } 
+       )
+   })
+.catch(err => console.log(err)) 
+
   this.setState({
-      modalIsOpen : ! this.state.modalIsOpen,  
-  });
-console.log(this.state)
+     addFields:company.addFields,
+     name:company.name,
+     link:company.link,
+     category:company.category,
+     modalIsOpen: !company.modalIsOpen
+  })
+  console.log(this.state)
 }
+
   render(){
     const company=this.state
       return(

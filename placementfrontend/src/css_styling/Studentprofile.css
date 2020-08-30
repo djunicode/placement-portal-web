@@ -6,7 +6,31 @@
     top: 0px;
     background: #88E7C8;
   }
-  
+.align1{
+  position: relative;
+  left: 11px;
+}
+.align2{
+  position: relative;
+  left: 12px;
+}
+.align3{
+  position: relative;
+  left:-4px;
+}
+.align4{
+  position: relative;
+  left: 20px;
+}
+.align5{
+  position: relative;
+  left:7px;
+}
+.align6{
+  position: relative;
+  left:-10px;
+}
+
  .Studentprofile_align1{
    transform: translateX(12px);
  }
@@ -20,7 +44,10 @@
   transform: translateX(22px);
 }
 .Studentprofile_align5{
-  transform: translateX(10px);
+  transform: translateX(9px);
+}
+.Studentprofile_align6{
+  transform: translateX(-8px);
 }
 label{
   padding: 2px;
@@ -45,8 +72,25 @@ label{
     padding: 10px;
     width:60%;
     background:#FAFAFA;  
+    padding-right: 35px;
   }
-  
+  .Studentprofile_studentdisplay:focus{
+    outline: none;
+  }
+  .select{
+    -webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	 -o-appearance: none;
+		appearance: none;
+  }
+  .select option{
+    font-size:15px;
+    margin: 2px;
+    padding: 5px;
+    
+  }
+
   .glass{
     position: absolute;
     left: 92%;
@@ -86,6 +130,30 @@ label{
     
   
   }
-  .Studentprofile_side{
+
+
+  .Studentprofile_side>h4,.side_nav_email_container>h4{
+    font-size: 18px;
+    font-family: Helvetica;
+    width: 150px;
     text-align: center;
+    margin-right: 5px;
+    /* transform:translateX(-5px) ; */
+  }
+
+  .side_nav_email_container{
+    width: 150px;
+    margin-left: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-family: Helvetica;
+  }
+
+  .Studentprofile_message{
+    color: red;
+    font-family:Helvetica;
+  }
+
+   .Studentprofile_message>p{
+    margin-bottom:7px
   }

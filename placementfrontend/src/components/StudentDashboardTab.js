@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
 
 const studentDetails=[
     {
@@ -33,7 +34,7 @@ class StudentTab extends Component {
                                 <h4 className="data_studentdashboard">{p.student_department}</h4>
                                 <h4 className="data_studentdashboard">{p.student_pointer}</h4>
                                 <h4 className="data_studentdashboard">{p.student_experience}</h4> <br></br>
-                                <button className="student_button_studentdashboard btn btn-lg"><img src="https://image.flaticon.com/icons/svg/61/61456.svg" id="edit_icon_studentdashboard"></img>EDIT PROFILE</button> <br></br><br></br>
+                               <Link to ='/Studentprofile'> <button className="student_button_studentdashboard btn btn-lg"><img src="https://image.flaticon.com/icons/svg/61/61456.svg" id="edit_icon_studentdashboard"></img>EDIT PROFILE</button></Link> <br></br><br></br>
                             </div>
                         )
                     })
