@@ -25,13 +25,15 @@ function App() {
         
         <Route exact path='/add' component={AddDetails}/> 
         <Route exact path='/display' component={DisplayDetails}/> 
+        
 
            <Route exact path='/CompanyMain' component={CompanyMain}/>
            <Route exact path='/Tpo2' component={Tpo2}/>
             
             {/* Routes yet to be setup*/}
-           <Route exact path='/PlacementCoDashboard' component={PlacementCoDashboard}/> 
+           <Route exact path='/PlacementCoDashboard' component={PlacementCoDashboard}/>
            <Route exact path='/Studentprofile' component={Studentprofile}/>
+ 
         
            {/* <Link to="/" style={{ textDecoration: 'none' }}  /> */}
       </div>
