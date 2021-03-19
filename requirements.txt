@@ -20,7 +20,7 @@ Jinja2==2.11.1
 MarkupSafe==1.1.1
 packaging==20.3
 pathspec==0.7.0
-Pillow==7.0.0
+Pillow==8.1.1
 pyparsing==2.4.6
 pytz==2019.3
 regex==2020.2.20
