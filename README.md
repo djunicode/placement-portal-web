@@ -49,6 +49,9 @@
   npm start
 ```
 
+## Documentation
+All the endpoints are documented [here](https://docs.google.com/document/d/1jYPTkKw2T3uLke8iwExXQmmSogSbLJR0Fo48bOJsmoU/edit?usp=drivesdk).
+
 ## Development Instructions
 
 1. Before adding or commiting to git, please run `black .` inside this directory. This is important because we are using Black code formatter for this project
