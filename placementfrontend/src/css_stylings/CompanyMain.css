@@ -1,0 +1,9 @@
+
+  .CompanyApp {
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    height: 100%;
+  }
+  .CompanyRow{
+    margin-top: 50px;
+  }

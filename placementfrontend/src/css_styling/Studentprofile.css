@@ -1,0 +1,159 @@
+.Studentprofile_rectangle{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    left: 0px;
+    top: 0px;
+    background: #88E7C8;
+  }
+.align1{
+  position: relative;
+  left: 11px;
+}
+.align2{
+  position: relative;
+  left: 12px;
+}
+.align3{
+  position: relative;
+  left:-4px;
+}
+.align4{
+  position: relative;
+  left: 20px;
+}
+.align5{
+  position: relative;
+  left:7px;
+}
+.align6{
+  position: relative;
+  left:-10px;
+}
+
+ .Studentprofile_align1{
+   transform: translateX(12px);
+ }
+ .Studentprofile_align2{
+  transform: translateX(12px);
+}
+.Studentprofile_align3{
+  transform: translateX(-3px);
+}
+.Studentprofile_align4{
+  transform: translateX(22px);
+}
+.Studentprofile_align5{
+  transform: translateX(9px);
+}
+.Studentprofile_align6{
+  transform: translateX(-8px);
+}
+label{
+  padding: 2px;
+}
+  .Studentprofile_inner_box{
+    background: #88E7C8;
+    border-radius: 30px;
+    margin: 7%;
+    
+  }
+  .Studentprofile_box{
+    background:#F3F3F3;;
+    top:-25px;
+  }
+  .Studentprofile_details{
+    transform: translateY(-20%);
+    text-align: center;
+  }
+  .Studentprofile_studentdisplay{
+    margin-top: 3px;
+    border: none;
+    padding: 10px;
+    width:60%;
+    background:#FAFAFA;  
+    padding-right: 35px;
+  }
+  .Studentprofile_studentdisplay:focus{
+    outline: none;
+  }
+  .select{
+    -webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	 -o-appearance: none;
+		appearance: none;
+  }
+  .select option{
+    font-size:15px;
+    margin: 2px;
+    padding: 5px;
+    
+  }
+
+  .glass{
+    position: absolute;
+    left: 92%;
+    top:4.5%;
+    font-size: 18px;
+    color: #DADADA;
+    padding: 5px;
+  }
+   img{  
+     position: relative;
+   }
+   .Studentprofile_pic1{
+     margin: 30px 10px 30px 20px;
+     width: 60%;
+     border-radius:50%;
+   }
+  .Studentprofile_pic2{
+    transform: translate(-62px,-65px);
+    border-radius:50%;
+    width: 115px;
+    height: 115px;
+  }
+  .Studentprofile_head{
+    font-size: 150%;
+    padding-top: 5px;
+    transform: translate(85px,-150px);
+  
+  }
+  .Studentprofile_edit{
+    background: #B87575;
+    border-radius: 30px; 
+    border: none;
+    padding: 10px;
+    color: #FAFAFA;
+    font-size: 16px;
+    width: 85px;
+    
+  
+  }
+
+
+  .Studentprofile_side>h4,.side_nav_email_container>h4{
+    font-size: 18px;
+    font-family: Helvetica;
+    width: 150px;
+    text-align: center;
+    margin-right: 5px;
+    /* transform:translateX(-5px) ; */
+  }
+
+  .side_nav_email_container{
+    width: 150px;
+    margin-left: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-family: Helvetica;
+  }
+
+  .Studentprofile_message{
+    color: red;
+    font-family:Helvetica;
+  }
+
+   .Studentprofile_message>p{
+    margin-bottom:7px
+  }

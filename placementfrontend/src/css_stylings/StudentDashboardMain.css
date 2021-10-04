@@ -1,0 +1,13 @@
+
+  .App_studentdashboard {
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+  }
+  .top-nav_studentdashboard{
+    height: 50px;
+    background-color: rgb(128, 255, 204);
+  }
+  .actual_studentdashboard{
+    margin-top: 50px;
+  }
+  

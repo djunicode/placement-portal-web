@@ -36,7 +36,7 @@ class SignUpTestCase(APITestCase):
         data = {
             "f_name": "Sakshi",
             "l_name": "Uppoor",
-            "email": "sakshiuppoor@gmail.com",
+            "email": "sakshiuppoor@djsce.ac.in",
             "department": "COMPS",
             "password": "pass@123",
             "password2": "pass@123",
@@ -82,7 +82,7 @@ class StudentProfileViewSetTestCase(APITestCase):
 
         self.student_token = Token.objects.create(user=self.student)
         self.co_token = Token.objects.create(user=self.co)
-        self.tpo_token = Token.objects.create(user=self.tpo)
+        self.tpo_token = Token.objects.get(user=self.tpo)
 
         """Defining endpoints:
         List & Detail
@@ -170,7 +170,7 @@ class CompanyViewSetTestCase(APITestCase):
 
         self.student_token = Token.objects.create(user=self.student)
         self.co_token = Token.objects.create(user=self.co)
-        self.tpo_token = Token.objects.create(user=self.tpo)
+        self.tpo_token = Token.objects.get(user=self.tpo)
 
         self.company = Company.objects.create(**self.data)
 
@@ -274,7 +274,7 @@ class PositionViewSetTestCase(APITestCase):
 
         self.student_token = Token.objects.create(user=self.student)
         self.co_token = Token.objects.create(user=self.co)
-        self.tpo_token = Token.objects.create(user=self.tpo)
+        self.tpo_token = Token.objects.get(user=self.tpo)
 
         self.company = Company.objects.create(**self.company_data)
 
@@ -390,7 +390,7 @@ class ApplicationViewSetTestCase(APITestCase):
 
         self.student_token = Token.objects.create(user=self.student)
         self.co_token = Token.objects.create(user=self.co)
-        self.tpo_token = Token.objects.create(user=self.tpo)
+        self.tpo_token = Token.objects.get(user=self.tpo)
 
         self.company = Company.objects.create(**self.company_data)
 

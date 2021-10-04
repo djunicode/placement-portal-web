@@ -1,0 +1,47 @@
+#left-space_companypage{
+    margin-left: 23%;
+}
+#active-link_companypage{
+    color: darkred;
+}
+.company_link{
+    font-size: large;
+    margin-right: 10px;
+    font-weight: bold;
+}
+#search_companypage{
+    border-radius: 20px;
+    border: none;
+    outline-color: transparent;
+    outline-style: none;
+    height: 40px;
+    padding-left: 20px;
+}
+#search_companypage:focus, #search_companypage:active:focus{
+    border: none;
+    outline-color: transparent;
+    outline-style: none;
+    outline: none;
+}
+#search-icon_companypage{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+#search-text_companypage{
+    font-weight: 500;
+}
+#bar_companypage{
+    height: 50px;
+    background-color: rgb(128, 255, 204);
+}
+.top_companypage {
+    top: 50px;
+}
+#search-bar_companypage{
+    background-color: white;
+    margin-left: 10px;
+    border-radius: 20px;
+    border: 1px solid gray;
+}
