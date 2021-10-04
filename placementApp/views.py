@@ -1,7 +1,7 @@
 from .models import Student, Position, Company, Application, Coordinator
 import datetime
 from .serializers import *
-from .utils import generate_xls, get_curent_year
+from .utils import generate_xls, get_valid_workbook_name, get_curent_year
 from .permissions import (
     IsStaffOrOwner,
     IsTPOOrReadOnly,
@@ -149,7 +149,7 @@ class CoordinatorViewSet(viewsets.ModelViewSet):
 def get_xls(request, company_id):
     company = Company.objects.get(id=company_id)
 
-    name_of_workbook = company.name + "-" + str(get_curent_year()) + ".xls"
+    name_of_workbook = get_valid_workbook_name(company.name) + "-" + str(get_curent_year()) + ".xls"
     response = HttpResponse(content_type="application/ms-excel")
     response["Content-Disposition"] = (
         "attachment; filename=" + '"' + name_of_workbook + '"'

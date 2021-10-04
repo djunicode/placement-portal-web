@@ -1,5 +1,6 @@
 import xlwt
 import datetime
+import re
 
 #############################
 #   EXCEL SHEET GENERATION  #
@@ -11,13 +12,15 @@ def generate_xls(company):
 
     positions = company.positions.all()
     for position in positions:
-        wb = generate_sheet(wb, position)  # Creating separate sheets for each position
+        # Creating separate sheets for each position
+        wb = generate_sheet(wb, position)
 
     return wb
 
 
 def generate_sheet(wb, position):
-    ws = wb.add_sheet(position.title)  # Creating sheet
+    sheet_title = get_valid_sheet_name(position.title)
+    ws = wb.add_sheet(sheet_title)  # Creating sheet
 
     # Writing title of the sheet
     sheet_title = (
@@ -63,7 +66,8 @@ def generate_sheet(wb, position):
     # Writing data into the columns
     font_style = xlwt.XFStyle()
     rows = []
-    applications = position.applications.filter(submitted_at__year=get_curent_year())
+    applications = position.applications.filter(
+        submitted_at__year=get_curent_year())
     for application in applications:
         date_time = application.submitted_at.strftime("%m/%d/%Y, %H:%M:%S")
         rows.append(
@@ -82,6 +86,16 @@ def generate_sheet(wb, position):
             ws.write(row_num, col_num, row[col_num], font_style)
 
     return wb
+
+
+def get_valid_sheet_name(position_title):
+    # Replace invalid characters with _
+    return re.sub('[/:?*\[\]\\\\]+', '_', position_title)
+
+
+def get_valid_workbook_name(company_name):
+    # Replace characters other than alphanumeric, spaces, hyphens and underscores
+    return re.sub('[^A-Za-z0-9 _-]+', '_', company_name)
 
 
 def get_curent_year():
